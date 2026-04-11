@@ -1,7 +1,7 @@
 :root {
     ---color-black: #111111;
     ---color-white: #ffffff;
-    ---color-header: rgb(34, 133, 77);
+    ---color-header: #22854d;
     ---color-footer: rgb(23, 30, 39);
     ---font-header: 'Times New Roman', Times, serif;
     ---font-main: 'Montserrat', sans-serif;
@@ -11,6 +11,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+i {
+  color: #22854d;
+  font-size: 16px;
 }
 
 body {
@@ -63,10 +68,14 @@ header {
 
 footer {
     background-color: var(---color-footer);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
+    color: #ffffff;
+    Font-size: 14px;
+    padding: 15px 15px;
     top: 0;
+}
+
+.libro-reclamaciones img{
+    width: 100px;
+    height: auto;
 }
