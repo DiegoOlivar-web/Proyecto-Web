@@ -1,7 +1,8 @@
 :root {
     ---color-black: #111111;
     ---color-white: #ffffff;
-    ---color-yellow: #ffff00;
+    ---color-header: rgb(34, 133, 77);
+    ---color-footer: rgb(23, 30, 39);
     ---font-header: 'Times New Roman', Times, serif;
     ---font-main: 'Montserrat', sans-serif;
 }
@@ -26,8 +27,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
-    background-color: var(---color-yellow);
+    padding: 15px 30px;
+    background-color: var(---color-header);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -42,7 +43,7 @@ header {
 }
 
 .logo img {
-    height: 75px;
+    height: 80px;
     width: auto;
     margin-bottom: 0;
 }
@@ -54,8 +55,18 @@ header {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--color-black);
-    margin: 0 45px;
+    color: var(---color-white);
+    margin: 0 35px;
     font-size: 1rem;
     font-weight: bold;
+}
+
+footer {
+    background-color: var(---color-footer);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    top: 0;
 }
