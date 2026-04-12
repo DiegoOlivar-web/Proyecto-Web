@@ -13,9 +13,26 @@
     box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'FuenteLogo';
+  src: url('fonts/GaMaamli-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.escritura-logo {
+  font-family: 'FuenteLogo', serif;
+  color: #e0e0e0;
+  font-size: 43px;
+}
+
 i {
   color: #22854d;
   font-size: 16px;
+}
+
+button i {
+    font-size: 25px;
 }
 
 body {
@@ -26,13 +43,14 @@ body {
 
 header {
     font-family: var(---font-header);
+    z-index: 1030;
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
+    padding: 5px 50px;
     background-color: var(---color-header);
     position: sticky;
     top: 0;
@@ -48,21 +66,22 @@ header {
 }
 
 .logo img {
-    height: 80px;
+    height: 90px;
     width: auto;
     margin-bottom: 0;
 }
 
 .logo h1 {
-    font-size: 20px;
+    font-size: 28px;
     margin: 0;
+    color: yellow;
 }
 
 .nav-links a {
     text-decoration: none;
     color: var(---color-white);
     margin: 0 35px;
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: bold;
 }
 
@@ -73,6 +92,10 @@ footer {
     Font-size: 14px;
     padding: 15px 15px;
     top: 0;
+}
+
+.col-3 h6 {
+    font-weight: 700;
 }
 
 .libro-reclamaciones img{
