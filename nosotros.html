@@ -1,55 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pollos y Parrillas Tío Rico's</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+        <script src="script.js" defer></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pollos y Parrillas Tío Rico's</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<link rel="stylesheet" type="text/css" href="styles.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-<script src="script.js" defer></script>
-</head>
+    <body>
+        <header class="navbar">
+            <div class="logo">
+                <img src="img/logo_Tio-Ricos.png" alt="Logo Tori">
+                <h1 class="escritura-logo">Tio Rico's</h1>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">INICIO</a>
+                <a href="menu.html">MENÚ</a>
+                <a href="nosotros.html">NOSOTROS</a>
+            </nav>
+            <div class="nav-actions">
 
-<body>
-    <header>
-
-    </header>
-    <main>
-
-    </main>
-    <footer>
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-3 text-center">
-                    <h1 class="escritura-logo">Tio Rico's</h1>
-                    <p><i class="fas fa-phone"></i> (01) 528-7351</p>
-                    <p><i class="fas fa-location-dot"></i> Urb. San Elias, Mz. P, Lt. 47, Los Olivos, Lima, Lima</p>
-                    <p><i class="fas fa-envelope"></i> tioricos@hotmail.com</p>
+                <!--Trigger hamburguesa-->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="menu.html">Menú</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="nosotros.html">Nosotros</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-3 text-center">
-                    <h6>NOSOTROS</h6>
-                    <p>Misión, Visión y Valores</p>
-                    <p>Escríbenos</p>
-                    <p>Trabaja con nosotros</p>
-                </div>
-                <div class="col-3 text-center">
-                    <h6>NUESTRA CARTA</h6>
-                    <p>Menú</p>
-                </div>
-                <div class="col-3 libro-reclamaciones text-center">
-                    <h6>POLÍTICAS Y TÉRMINOS</h6>
-                    <P>Terminos y condiciones</P>
-                    <P>Políticas de privacidad</P>
-                    <img src="img/libro-reclamaciones.png" href="..." alt="Libro de Reclamaciones" />
+
+                <!--Trigger sidebar compra-->
+                <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                    aria-controls="offcanvasCart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="ms-1"></span>
+                </button>
+                
+                <!--Trigger modal login-->
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    <i class="fa-solid fa-right-to-bracket me-2"></i>
+                </button>
+            </div>
+        </header>
+        <main>
+
+        </main>
+        <footer>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-3 text-center">
+                        <h1 class="escritura-logo">Tio Rico's</h1>
+                        <p><i class="fas fa-phone"></i> (01) 528-7351</p>
+                        <p><i class="fas fa-location-dot"></i> Urb. San Elias, Mz. P, Lt. 47, Los Olivos, Lima, Lima</p>
+                        <p><i class="fas fa-envelope"></i> tioricos@hotmail.com</p>
+                    </div>
+                    <div class="col-3 text-center">
+                        <h6>NOSOTROS</h6>
+                        <p>Misión, Visión y Valores</p>
+                        <p>Escríbenos</p>
+                        <p>Trabaja con nosotros</p>
+                    </div>
+                    <div class="col-3 text-center">
+                        <h6>NUESTRA CARTA</h6>
+                        <p>Menú</p>
+                    </div>
+                    <div class="col-3 libro-reclamaciones text-center">
+                        <h6>POLÍTICAS Y TÉRMINOS</h6>
+                        <P>Terminos y condiciones</P>
+                        <P>Políticas de privacidad</P>
+                        <img src="img/libro-reclamaciones.png" href="..." alt="Libro de Reclamaciones" />
+                    </div>
                 </div>
             </div>
-        </div>
-        <hr />
-        <h6 style="text-align: center; font-size: 15px;">© 2026 Tío Rico's. Todos los derechos reservados.</h6>
-    </footer>
-</body>
-
+            <hr/>
+            <h6 style="text-align: center; font-size: 15px;">© 2026 Tío Rico's. Todos los derechos reservados.</h6>
+        </footer>
+    </body>
 </html>

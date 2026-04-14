@@ -98,6 +98,19 @@ footer {
     top: 0;
 }
 
+.producto-caja {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .precio-destacado {
+            color: #dc3545; /* Rojo de Bootstrap para resaltar el precio */
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
 .col-3 h6 {
     font-weight: 700;
 }
