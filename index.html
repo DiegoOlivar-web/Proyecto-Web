@@ -1,207 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pollos y Parrillas Tío Rico's</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pollos y Parrillas Tío Rico's</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   <script src="script.js" defer></script>
-  </head>
+</head>
 
-  <body>
-    <header class="navbar">
-      <div class="logo">
-        <img src="img/logo_tio-ricos.png" alt="Logo Tori">
-        <h1 class="escritura-logo">Tio Rico's</h1>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="img/logo_tio-ricos.png" alt="Logo Tori">
+      <h1 class="escritura-logo">Tio Rico's</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">INICIO</a>
+      <a href="menu.html">MENÚ</a>
+      <a href="nosotros.html">NOSOTROS</a>
+    </nav>
+    <div class="nav-actions">
+
+      <!--Trigger hamburguesa-->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="menu.html">Menú</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="nosotros.html">Nosotros</a>
+          </li>
+        </ul>
       </div>
-      <nav class="nav-links">
-        <a href="index.html">INICIO</a>
-        <a href="menu.html">MENÚ</a>
-        <a href="nosotros.html">NOSOTROS</a>
-      </nav>
-      <div class="nav-actions">
 
-        <!--Trigger hamburguesa-->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <!--Trigger sidebar compra-->
+      <button class="btn btn-outline-dark position-relative" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="badge bg-danger ms-1">0</span>
+      </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" href="index.html">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="menu.html">Menú</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="nosotros.html">Nosotros</a>
-            </li>
-          </ul>
+      <!--Trigger modal login-->
+      <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+        <i class="fa-solid fa-right-to-bracket me-2"></i>
+      </button>
+    </div>
+  </header>
+  <main>
+
+    <!--Ver Menú-->
+    <section class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h1 class="display-4">¡Bienvenido a Tío Rico's!</h1>
+          <p class="lead">Disfruta del mejor pollo a la brasa y parrillas en Lima. Calidad, sabor y tradición en cada
+            bocado.</p>
+          <a href="menu.html" class="btn btn-primary btn-lg">Ver Menú</a>
         </div>
-
-        <!--Trigger sidebar compra-->
-        <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-          aria-controls="offcanvasCart">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="ms-1"></span>
-        </button>
-
-        <!--Trigger modal login-->
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-          <i class="fa-solid fa-right-to-bracket me-2"></i>
-        </button>
+        <div class="col-md-6 text-center">
+          <img src="img/portada_menu.webp" alt="Pollo a la Brasa" class="img-fluid rounded">
+        </div>
       </div>
-    </header>
-    <main>
+    </section>
 
-      <!--Ver Menú-->
-      <section class="container-fluid">
+    <!--Sobre nosotros-->
+    <section>
+      <div class="container my-5">
+        <h2 class="text-center mb-4">Sobre Nosotros</h2>
         <div class="row align-items-center">
           <div class="col-md-6">
-            <h1 class="display-4">¡Bienvenido a Tío Rico's!</h1>
-            <p class="lead">Disfruta del mejor pollo a la brasa y parrillas en Lima. Calidad, sabor y tradición en cada
-              bocado.</p>
-            <a href="#" class="btn btn-primary btn-lg">Ver Menú</a>
+            <p>En Tío Rico's, somos apasionados por ofrecerte el mejor pollo a la brasa y parrillas de Lima. Con
+              años de experiencia, nos enorgullece servir platos llenos de sabor, preparados con ingredientes
+              frescos y de alta calidad. Nuestra misión es brindar una experiencia culinaria única que combine
+              tradición y sabor en cada bocado.</p>
+            <a href="nosotros.html" class="btn btn-primary btn-lg">Conócenos</a>
           </div>
           <div class="col-md-6 text-center">
-            <img src="img/portada_menu.webp" alt="Pollo a la Brasa" class="img-fluid rounded">
-          </div>
-        </div>
-      </section>
-
-      <!--Sobre nosotros-->
-      <section>
-        <div class="container my-5">
-          <h2 class="text-center mb-4">Sobre Nosotros</h2>
-          <div class="row align-items-center">
-            <div class="col-md-6">
-              <p>En Tío Rico's, somos apasionados por ofrecerte el mejor pollo a la brasa y parrillas de Lima. Con
-                años de experiencia, nos enorgullece servir platos llenos de sabor, preparados con ingredientes
-                frescos y de alta calidad. Nuestra misión es brindar una experiencia culinaria única que combine
-                tradición y sabor en cada bocado.</p>
-            </div>
-            <div class="col-md-6 text-center">
-              <img src="img/local_tio-rico.png" alt="Sobre Nosotros" class="img-fluid rounded">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!--Nuestros locales-->
-      <section>
-        <section class="container-fluid">
-          <div class="row align-items-center">
-            <div class="col-md-6">
-              <h1 class="display-4">¡Bienvenido a Tío Rico's!</h1>
-              <p class="lead">Disfruta del mejor pollo a la brasa y parrillas en Lima. Calidad, sabor y tradición en cada
-                bocado.</p>
-              <a href="#" class="btn btn-primary btn-lg">Ver Menú</a>
-            </div>
-            <div class="col-md-6 text-center">
-              <img src="img/portada_menu.webp" alt="Pollo a la Brasa" class="img-fluid rounded">
-            </div>
-          </div>
-        </section>
-      </section>
-    </main>
-    <footer>
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div class="col-3 text-center">
-            <h1 class="escritura-logo">Tio Rico's</h1>
-            <p><i class="fas fa-phone"></i> (01) 528-7351</p>
-            <p><i class="fas fa-location-dot"></i> Urb. San Elias, Mz. P, Lt. 47, Los Olivos, Lima, Lima</p>
-            <p><i class="fas fa-envelope"></i> tioricos@hotmail.com</p>
-          </div>
-          <div class="col-3 text-center">
-            <h6>NOSOTROS</h6>
-            <p>Misión, Visión y Valores</p>
-            <p>Escríbenos</p>
-            <p>Trabaja con nosotros</p>
-          </div>
-          <div class="col-3 text-center">
-            <h6>NUESTRA CARTA</h6>
-            <p>Menú</p>
-          </div>
-          <div class="col-3 libro-reclamaciones text-center">
-            <h6>POLÍTICAS Y TÉRMINOS</h6>
-            <P>Terminos y condiciones</P>
-            <P>Políticas de privacidad</P>
-            <img src="img/libro-reclamaciones.png" href="..." alt="Libro de Reclamaciones" />
+            <img src="img/local_tio-rico.png" alt="Sobre Nosotros" class="img-fluid rounded">
           </div>
         </div>
       </div>
-      <hr />
-      <h6 style="text-align: center; font-size: 15px;">© 2026 Tío Rico's. Todos los derechos reservados.</h6>
-    </footer>
+    </section>
 
-    <!--Modal login-->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <h5 class="modal-title" id="loginModalLabel">Bienvenido de nuevo</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Horario de Atención (tabla centrada y responsiva) -->
+    <section class="container my-4">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="text-center mb-3">Horarios de Atención</h4>
+          <div class="table-responsive d-flex justify-content-center">
+            <table class="table table-striped table-bordered hours-table">
+              <thead class="table-dark">
+                <tr>
+                  <th>Día</th>
+                  <th>Horario</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Lunes</td>
+                  <td>11:00 AM - 10:00 PM</td>
+                </tr>
+                <tr>
+                  <td>Martes</td>
+                  <td>11:00 AM - 10:00 PM</td>
+                </tr>
+                <tr>
+                  <td>Miércoles</td>
+                  <td>11:00 AM - 10:00 PM</td>
+                </tr>
+                <tr>
+                  <td>Jueves</td>
+                  <td>11:00 AM - 10:00 PM</td>
+                </tr>
+                <tr>
+                  <td>Viernes</td>
+                  <td>11:00 AM - 10:00 PM</td>
+                </tr>
+                <tr>
+                  <td>Sábado</td>
+                  <td>11:00 AM - 10:00 PM</td>
+                </tr>
+                <tr>
+                  <td>Domingo</td>
+                  <td>11:00 AM - 10:00 PM</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label class="form-label">Usuario o Email</label>
-                <div class="input-group">
-                  <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-                  <input type="email" class="form-control" placeholder="nombre@ejemplo.com">
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Contraseña</label>
-                <div class="input-group">
-                  <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-                  <input type="password" class="form-control" placeholder="••••••••">
-                </div>
-              </div>
-              <button type="submit" class="btn btn-primary w-100">Ingresar</button>
-            </form>
-          </div>
-
-          <div class="modal-footer justify-content-center">
-            <p class="small">¿No tienes cuenta? <a href="#">Regístrate aquí</a></p>
-          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-3 text-center">
+          <h1 class="escritura-logo">Tio Rico's</h1>
+          <a href="tel:5287351"><i class="fas fa-phone"></i> (01) 528-7351</a><br />
+          <a href="nosotros.html#ubicacion"><i class="fas fa-location-dot"></i> Urb. San Elias, Mz. P, La. 47, Los
+            Olivos, Lima, Lima</a><br />
+          <a href="mailto:tioricos@hotmail.com"><i class="fas fa-envelope"></i> tioricos@hotmail.com</a>
+        </div>
+        <div class="col-3 text-center">
+          <h6>NOSOTROS</h6>
+          <a href="nosotros.html#mision-vision">Misión, Visión y Valores</a><br />
+          <a href="nosotros.html#formulario">Escríbenos</a><br />
+          <a href="nosotros.html">Trabaja con nosotros</a>
+        </div>
+        <div class="col-3 text-center">
+          <h6>NUESTRA CARTA</h6>
+          <a href="menu.html">Menú</a>
+        </div>
+        <div class="col-3 libro-reclamaciones text-center">
+          <h6>POLÍTICAS Y TÉRMINOS</h6>
+          <a href="terminos.html">Términos y condiciones</a><br />
+          <a href="privacidad.html">Políticas de privacidad</a><br />
+          <a href="quejas.html">
+            <img src="img/libro-reclamaciones.png" alt="Libro de Reclamaciones" />
+          </a>
         </div>
       </div>
     </div>
+    <hr />
+    <h6 style="text-align: center; font-size: 15px;">© 2026 Tío Rico's. Todos los derechos reservados.</h6>
+  </footer>
 
-    <!--Sidebar carrito-->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+  <!--Modal login-->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
 
-      <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title" id="offcanvasCartLabel">
-          <i class="fa-solid fa-cart-shopping me-2"></i>Tu Pedido
-        </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-
-      <div class="offcanvas-body">
-        <div class="text-center py-5">
-          <i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
-          <p>Tu carrito está vacío.</p>
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Bienvenido de nuevo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      </div>
 
-      <div class="offcanvas-footer p-3 border-top">
-        <div class="d-flex justify-content-between mb-3">
-          <strong>Total:</strong>
-          <strong>S/. 0.00</strong>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Usuario o Email</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="nombre@ejemplo.com">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Contraseña</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                <input type="password" class="form-control" placeholder="••••••••">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+          </form>
         </div>
-        <button class="btn btn-primary w-100 mb-2">Finalizar Compra</button>
-        <button class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">Seguir Comprando</button>
+
+        <div class="modal-footer justify-content-center">
+          <p class="small">¿No tienes cuenta? <a href="#">Regístrate aquí</a></p>
+        </div>
       </div>
     </div>
-  </body>
+  </div>
+
+  <!--Sidebar carrito-->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title" id="offcanvasCartLabel">
+        <i class="fa-solid fa-cart-shopping me-2"></i>Tu Pedido
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <div class="text-center py-5">
+        <i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
+        <p>Tu carrito está vacío.</p>
+      </div>
+    </div>
+
+    <div class="offcanvas-footer p-3 border-top">
+      <div class="d-flex justify-content-between mb-3">
+        <strong>Total:</strong>
+        <strong>S/. 0.00</strong>
+      </div>
+      <button class="btn btn-primary w-100 mb-2">Finalizar Compra</button>
+      <button class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">Seguir Comprando</button>
+    </div>
+  </div>
+</body>
+
 </html>

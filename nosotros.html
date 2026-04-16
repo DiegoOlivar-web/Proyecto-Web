@@ -1,93 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pollos y Parrillas Tío Rico's</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-        <link rel="stylesheet" type="text/css" href="styles.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-        <script src="script.js" defer></script>
-    </head>
 
-    <body>
-        <header class="navbar">
-            <div class="logo">
-                <img src="img/logo_Tio-Ricos.png" alt="Logo Tori">
-                <h1 class="escritura-logo">Tio Rico's</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pollos y Parrillas Tío Rico's</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="img/logo_tio-ricos.png" alt="Logo Tori">
+            <h1 class="escritura-logo">Tio Rico's</h1>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">INICIO</a>
+            <a href="menu.html">MENÚ</a>
+            <a href="nosotros.html">NOSOTROS</a>
+        </nav>
+        <div class="nav-actions">
+
+            <!--Trigger hamburguesa-->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.html">Menú</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="nosotros.html">Nosotros</a>
+                    </li>
+                </ul>
             </div>
-            <nav class="nav-links">
-                <a href="index.html">INICIO</a>
-                <a href="menu.html">MENÚ</a>
-                <a href="nosotros.html">NOSOTROS</a>
-            </nav>
-            <div class="nav-actions">
 
-                <!--Trigger hamburguesa-->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="index.html">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="menu.html">Menú</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="nosotros.html">Nosotros</a>
-                        </li>
-                    </ul>
+            <!--Trigger sidebar compra-->
+            <button class="btn btn-outline-dark position-relative" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="badge bg-danger ms-1">0</span>
+            </button>
+
+            <!--Trigger modal login-->
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <i class="fa-solid fa-right-to-bracket me-2"></i>
+            </button>
+        </div>
+    </header>
+    <main>
+        <!-- Hero / About -->
+        <section class="container my-5">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2>Sobre Tío Rico's</h2>
+                    <p class="lead">En Tío Rico's llevamos décadas ofreciendo el mejor pollo a la brasa y parrillas de
+                        Lima. Combinamos recetas tradicionales con ingredientes frescos para entregar un sabor auténtico
+                        en cada plato.</p>
+                    <p>Nuestra prioridad es la calidad, la seguridad alimentaria y la satisfacción del cliente.
+                        Trabajamos con proveedores locales y mantenemos altos estándares en preparación y servicio.</p>
                 </div>
-
-                <!--Trigger sidebar compra-->
-                <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                    aria-controls="offcanvasCart">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span class="ms-1"></span>
-                </button>
-                
-                <!--Trigger modal login-->
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-                    <i class="fa-solid fa-right-to-bracket me-2"></i>
-                </button>
-            </div>
-        </header>
-        <main>
-
-        </main>
-        <footer>
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-3 text-center">
-                        <h1 class="escritura-logo">Tio Rico's</h1>
-                        <p><i class="fas fa-phone"></i> (01) 528-7351</p>
-                        <p><i class="fas fa-location-dot"></i> Urb. San Elias, Mz. P, Lt. 47, Los Olivos, Lima, Lima</p>
-                        <p><i class="fas fa-envelope"></i> tioricos@hotmail.com</p>
-                    </div>
-                    <div class="col-3 text-center">
-                        <h6>NOSOTROS</h6>
-                        <p>Misión, Visión y Valores</p>
-                        <p>Escríbenos</p>
-                        <p>Trabaja con nosotros</p>
-                    </div>
-                    <div class="col-3 text-center">
-                        <h6>NUESTRA CARTA</h6>
-                        <p>Menú</p>
-                    </div>
-                    <div class="col-3 libro-reclamaciones text-center">
-                        <h6>POLÍTICAS Y TÉRMINOS</h6>
-                        <P>Terminos y condiciones</P>
-                        <P>Políticas de privacidad</P>
-                        <img src="img/libro-reclamaciones.png" href="..." alt="Libro de Reclamaciones" />
-                    </div>
+                <div class="col-md-6 text-center">
+                    <img src="img/local_tio-rico.png" alt="Local Tío Rico's" class="img-fluid rounded shadow-sm">
                 </div>
             </div>
-            <hr/>
-            <h6 style="text-align: center; font-size: 15px;">© 2026 Tío Rico's. Todos los derechos reservados.</h6>
-        </footer>
-    </body>
+        </section>
+
+        <!-- Misión / Visión / Valores -->
+        <section class="container my-4" id="mision-vision">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="p-4 bg-light rounded h-100">
+                        <h5 class="text-primary">Misión</h5>
+                        <p>Brindar a nuestras comunidades alimentos sabrosos y nutritivos, hechos con ingredientes
+                            frescos y un servicio cálido, que generen experiencias memorables.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="p-4 bg-light rounded h-100">
+                        <h5 class="text-success">Visión</h5>
+                        <p>Ser reconocidos como la cadena local líder en pollo a la brasa y parrillas, innovando en
+                            nuestro menú y expandiendo presencia cuidando la tradición.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="p-4 bg-light rounded h-100">
+                        <h5 class="text-warning">Valores</h5>
+                        <ul class="mb-0">
+                            <li>Calidad</li>
+                            <li>Honestidad</li>
+                            <li>Servicio</li>
+                            <li>Respeto por el cliente</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Google Maps-->
+        <section class="container my-4" id="ubicacion">
+            <h4 class="text-center mb-4">¡Ubícanos!</h4>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="ratio ratio-16x9">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243.95160853959334!2d-77.07464687351215!3d-11.958866982099309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105ce23e4a4984d%3A0x60ab2ac6f93fd87d!2sTio%20Ricos!5e0!3m2!1sen!2spe!4v1776333366200!5m2!1sen!2spe"
+                            style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Equipo y contacto-->
+        <section class="container my-4">
+            <div class="row">
+                <div class="col-lg-6 mb-3">
+                    <h4>Nuestro Equipo</h4>
+                    <p>Un equipo comprometido con la cocina tradicional y la atención cercana al cliente. Desde
+                        cocineros hasta repartidores, todos alineados con la misión de ofrecer productos de alta
+                        calidad.</p>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <img src="img/personal/gerente.png" class="card-img-top img-fluid" alt="Empleado">
+                                <div class="card-body">
+                                    <h6 class="card-title">Alberto Martinez - Gerente</h6>
+                                    <p class="small text-muted mb-0">Gestión y operaciones</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <img src="img/personal/jefe-cocina.png" class="card-img-top img-fluid" alt="Empleado">
+                                <div class="card-body">
+                                    <h6 class="card-title">Carlos Zegarra - Jefe de Cocina</h6>
+                                    <p class="small text-muted mb-0">15 años de experiencia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-3" id="formulario">
+                    <h4>Contacto</h4>
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" placeholder="Tu nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" placeholder="correo@ejemplo.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mensaje</label>
+                            <textarea class="form-control" rows="4" placeholder="Escribe tu consulta"></textarea>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input class="form-check-input" type="checkbox" id="subscribe">
+                            <label class="form-check-label" for="subscribe">Deseo recibir promociones</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-3 text-center">
+                    <h1 class="escritura-logo">Tio Rico's</h1>
+                    <a href="tel:5287351"><i class="fas fa-phone"></i> (01) 528-7351</a><br />
+                    <a href="nosotros.html#ubicacion"><i class="fas fa-location-dot"></i> Urb. San Elias, Mz. P, La. 47,
+                        Los Olivos, Lima, Lima</a><br />
+                    <a href="mailto:tioricos@hotmail.com"><i class="fas fa-envelope"></i> tioricos@hotmail.com</a>
+                </div>
+                <div class="col-3 text-center">
+                    <h6>NOSOTROS</h6>
+                    <a href="nosotros.html#mision-vision">Misión, Visión y Valores</a><br />
+                    <a href="nosotros.html#formulario">Escríbenos</a><br />
+                    <a href="nosotros.html">Trabaja con nosotros</a>
+                </div>
+                <div class="col-3 text-center">
+                    <h6>NUESTRA CARTA</h6>
+                    <a href="menu.html">Menú</a>
+                </div>
+                <div class="col-3 libro-reclamaciones text-center">
+                    <h6>POLÍTICAS Y TÉRMINOS</h6>
+                    <a href="terminos.html">Términos y condiciones</a><br />
+                    <a href="privacidad.html">Políticas de privacidad</a><br />
+                    <a href="quejas.html">
+                        <img src="img/libro-reclamaciones.png" alt="Libro de Reclamaciones" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <h6 style="text-align: center; font-size: 15px;">© 2026 Tío Rico's. Todos los derechos reservados.</h6>
+    </footer>
+
+    <!--Modal login-->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Bienvenido de nuevo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Usuario o Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                <input type="email" class="form-control" placeholder="nombre@ejemplo.com">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Contraseña</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                <input type="password" class="form-control" placeholder="••••••••">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                    </form>
+                </div>
+
+                <div class="modal-footer justify-content-center">
+                    <p class="small">¿No tienes cuenta? <a href="#">Regístrate aquí</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Sidebar carrito-->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title" id="offcanvasCartLabel">
+                <i class="fa-solid fa-cart-shopping me-2"></i>Tu Pedido
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body">
+            <div class="text-center py-5">
+                <i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
+                <p>Tu carrito está vacío.</p>
+            </div>
+        </div>
+
+        <div class="offcanvas-footer p-3 border-top">
+            <div class="d-flex justify-content-between mb-3">
+                <strong>Total:</strong>
+                <strong>S/. 0.00</strong>
+            </div>
+            <button class="btn btn-primary w-100 mb-2">Finalizar Compra</button>
+            <button class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">Seguir Comprando</button>
+        </div>
+    </div>
+</body>
+
 </html>
