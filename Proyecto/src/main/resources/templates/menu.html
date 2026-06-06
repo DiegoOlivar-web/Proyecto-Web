@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TORI Pollería - Menú completo de platillos a la brasa" />
+  <title>TORI POLLERIA - Menú</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+/* Offcanvas personalizado */
+.offcanvas-header {
+    background-color: #ffd000;
+    border-bottom: 2px solid #ffaa00;
+}
+
+.offcanvas-header .offcanvas-title {
+    color: #111;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.offcanvas-header .btn-close {
+    color: #111;
+}
+
+.cart-item {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #ffd000;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 0.25rem;
+}
+
+.cart-item-quantity {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.cart-item-price {
+    color: #d90429;
+    font-weight: 700;
+}
+
+.cart-item-remove {
+    background: none;
+    border: none;
+    color: #d90429;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6c757d;
+}
+
+.cart-empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.cart-footer {
+    border-top: 2px solid #e9ecef;
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.cart-total-label {
+    font-weight: 600;
+    color: #111;
+}
+
+.cart-total-amount {
+    color: #d90429;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.checkout-btn {
+    width: 100%;
+    background-color: #d90429;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkout-btn:hover {
+    background-color: #b00321;
+}
+
+.checkout-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Cards del menú */
+.menu-card {
+    border: none;
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.28s cubic-bezier(.2, .9, .2, 1), box-shadow 0.28s;
+    box-shadow: var(--card-shadow);
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12);
+}
+
+.menu-card-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.menu-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.menu-card:hover .menu-card-image img {
+    transform: scale(1.06);
+}
+
+.menu-card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.menu-card-title {
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+}
+
+.menu-card-price {
+    color: #d90429;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.menu-card-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: auto;
+}
+
+.quantity-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.quantity-btn:hover {
+    background-color: #ffd000;
+    border-color: #ffd000;
+}
+
+.quantity-display {
+    min-width: 30px;
+    text-align: center;
+    font-weight: 600;
+    color: #111;
+}
+
+.add-to-cart-btn {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    background-color: #ffd000;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #111;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #ffaa00;
+}
+
+.add-to-cart-btn:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+    color: #999;
+}
+
+/* Secciones del menú */
+.menu-section {
+    margin-bottom: 3rem;
+}
+
+.menu-section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #d90429;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.menu-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+    .cart-sidebar {
+    width: 100%;
+    right: -100%;
+    }
+
+    .menu-cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 0 0.75rem;
+    }
+
+    .menu-card-body {
+    padding: 1rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .menu-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1025px) {
+    .menu-cards-container {
+    grid-template-columns: repeat(3, 1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg" style="background-color: #ffd000;" data-bs-theme="light">
+<div class="container-fluid">
+    <a class="navbar-brand" href="/">
+    <img src="/img/LOGO+2+ROJO.png" alt="Logo TORI Pollería" width="90" height="auto" />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0 list-unstyled">
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/menu">
+            <span class="LetraNegrita">MENÚ</span>
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link active" href="#" data-bs-toggle="modal" data-bs-target="#ultimasPromosModal">
+            <span class="LetraNegrita">PROMOS</span>
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#nosotrosModal">
+            <span class="LetraNegrita">SOBRE NOSOTROS</span>
+        </a>
+        </li>
+    </ul>
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+        <li class="nav-item">
+        <a class="nav-link" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" role="button" aria-controls="cartOffcanvas" title="Carrito">
+            <span class="LetraNegrita">🛒</span>
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" aria-label="Abrir login" title="Login">
+            <span class="LetraNegrita">🔐</span>
+        </a>
+        </li>
+        <p class="mb-0 me-3"><b>¡BUSCANOS EN NUESTRAS REDES!</b></p>
+        <a href="#" class="social-link" aria-label="Facebook - Tori Pollería" target="_blank" rel="noopener noreferrer">
+        <img src="IMG/ICONO-FACEBOOK.png" alt="Facebook" width="24" height="24" />
+        </a>
+        <a href="#" class="social-link" aria-label="Instagram - Tori Pollería" target="_blank" rel="noopener noreferrer">
+        <img src="IMG/ICONO-INSTAGRAM.png" alt="Instagram" width="24" height="24" />
+        </a>
+        <a href="#" class="social-link" aria-label="TikTok - Tori Pollería" target="_blank" rel="noopener noreferrer">
+        <img src="IMG/ICONO-TIKTOK.png" alt="TikTok" width="24" height="24" />
+        </a>
+        <a href="#" class="social-link" aria-label="YouTube - Tori Pollería" target="_blank" rel="noopener noreferrer">
+        <img src="IMG/youGpng.png" alt="YouTube" width="24" height="24" />
+        </a>
+    </div>
+    </div>
+</div>
+</nav>
+
+<!-- Main Content -->
+<main class="container py-5">
+<div class="text-center mb-5">
+    <h1 class="text-danger fw-bold" style="font-size: 2.5rem; margin-bottom: 1rem;">
+    🍗 NUESTRO MENÚ 🍗
+    </h1>
+    <p class="lead text-muted">Disfruta de los mejores platillos a la brasa preparados con dedicación</p>
+</div>
+
+<!-- SECCIÓN: ENTRADAS -->
+<section class="menu-section">
+    <h2 class="menu-section-title">🍟 Entradas</h2>
+    <div class="menu-cards-container">
+    <!-- Entrada 1 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card1.webp" alt="Papas a la Huancaína" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Papas a la Huancaína</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Papas con salsa cremosa y queso fresco</p>
+        <div class="menu-card-price">S/. 18.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Papas a la Huancaína', 18.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Entrada 2 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card2.webp" alt="Tabla de Quesos y Embutidos" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Tabla de Quesos</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Selección de quesos variados y embutidos</p>
+        <div class="menu-card-price">S/. 25.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Tabla de Quesos y Embutidos', 25.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Entrada 3 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card1.webp" alt="Bruschettas" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Bruschettas Mixtas</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Pan tostado con tomate, queso y orégano</p>
+        <div class="menu-card-price">S/. 16.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Bruschettas Mixtas', 16.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- SECCIÓN: PLATILLOS DE POLLO -->
+<section class="menu-section">
+    <h2 class="menu-section-title">🍗 Platillos de Pollo</h2>
+    <div class="menu-cards-container">
+    <!-- Pollo 1 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card2.webp" alt="Pollo a la Brasa (1/2)" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Pollo a la Brasa 1/2</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Medio pollo jugoso con papas y ensalada</p>
+        <div class="menu-card-price">S/. 32.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Pollo a la Brasa 1/2', 32.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Pollo 2 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card1.webp" alt="Pollo a la Brasa (1)" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Pollo a la Brasa Entero</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Pollo completo para 2-3 personas</p>
+        <div class="menu-card-price">S/. 58.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Pollo a la Brasa Entero', 58.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Pollo 3 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card2.webp" alt="Pechuga a la Brasa" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Pechuga a la Brasa</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Pechuga jugosa con acompañamientos frescos</p>
+        <div class="menu-card-price">S/. 28.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Pechuga a la Brasa', 28.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Pollo 4 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card1.webp" alt="Chaufa de Pollo" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Chaufa de Pollo</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Arroz chaufa con pollo y vegetales</p>
+        <div class="menu-card-price">S/. 22.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Chaufa de Pollo', 22.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Pollo 5 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card2.webp" alt="Alitas Crujientes" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Alitas Crujientes (6 piezas)</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Alitas doradas con salsa de la casa</p>
+        <div class="menu-card-price">S/. 20.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Alitas Crujientes (6)', 20.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Pollo 6 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card1.webp" alt="Tiras de Pollo Empanizado" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Tiras de Pollo Empanizado</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Strips crujientes con papas y dip</p>
+        <div class="menu-card-price">S/. 19.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Tiras Empanizadas', 19.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- SECCIÓN: BEBIDAS -->
+<section class="menu-section">
+    <h2 class="menu-section-title">🥤 Bebidas</h2>
+    <div class="menu-cards-container">
+    <!-- Bebida 1 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card2.webp" alt="Gaseosa" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Gaseosa (1.5L)</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Refrescos variados - Coca, Fanta, Sprite</p>
+        <div class="menu-card-price">S/. 8.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Gaseosa (1.5L)', 8.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Bebida 2 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card1.webp" alt="Chicha Morada" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Chicha Morada (1L)</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Bebida tradicional peruana refrescante</p>
+        <div class="menu-card-price">S/. 6.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Chicha Morada (1L)', 6.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Bebida 3 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card2.webp" alt="Jugo Natural" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Jugo Natural (250ml)</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Naranja, limón, fresa o durazno</p>
+        <div class="menu-card-price">S/. 5.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Jugo Natural', 5.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Bebida 4 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card1.webp" alt="Agua Mineral" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Agua Mineral (500ml)</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Agua embotellada - Pura y refrescante</p>
+        <div class="menu-card-price">S/. 2.50</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Agua Mineral', 2.50)">Agregar</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Bebida 5 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card2.webp" alt="Café" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Café (250ml)</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Café caliente o frío - Perfecto para terminar</p>
+        <div class="menu-card-price">S/. 4.00</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Café', 4.00)">Agregar</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Bebida 6 -->
+    <div class="card menu-card">
+        <div class="menu-card-image">
+        <img src="/img/card1.webp" alt="Limonada" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+        <h5 class="menu-card-title">Limonada (1L)</h5>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Limonada casera con azúcar y hielo</p>
+        <div class="menu-card-price">S/. 5.50</div>
+        <div class="menu-card-controls">
+            <button class="quantity-btn minus-btn" onclick="decreaseQuantity(this)">−</button>
+            <div class="quantity-display">0</div>
+            <button class="quantity-btn plus-btn" onclick="increaseQuantity(this)">+</button>
+            <button class="add-to-cart-btn" onclick="addToCart(this, 'Limonada', 5.50)">Agregar</button>
+        </div>
+        </div>
+    </div>
+    </div>
+</section>
+</main>
+
+<!-- Carrito Offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="cartLabel">Mi Carrito 🛒</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body p-0 d-flex flex-column">
+    <div id="cartBody" class="flex-grow-1 p-3">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛒</div>
+        <p>Tu carrito está vacío</p>
+        <p style="font-size: 0.875rem;">¡Agrega platillos deliciosos!</p>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total:</span>
+        <span class="cart-total-amount" id="cartTotal">S/. 0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn" disabled>Procesar Pedido</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-body-tertiary py-5">
+<div class="container">
+    <div class="footer-flex-container d-flex flex-column flex-md-row justify-content-between align-items-start gap-4">
+    <div class="footer-section flex-fill">
+        <h5 class="text-danger fw-bold mb-3">📋 INFORMACIÓN LEGAL</h5>
+        <div class="d-flex flex-column gap-2">
+        <a href="#" class="text-decoration-none">🔒 Política de Privacidad</a>
+        <a href="#" class="text-decoration-none">🍪 Política de Cookies</a>
+        <a href="tel:986592177" class="text-decoration-none">📞 TEL. 986 592 177</a>
+        </div>
+    </div>
+    </div>
+    <hr class="my-4">
+    <div class="d-flex justify-content-center">
+    <p class="text-center fs-6 mb-0">
+        © 2025 TORI POLLERIA. Todos los derechos reservados.
+    </p>
+    </div>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+let cart = [];
+
+// Controles de cantidad
+function increaseQuantity(btn) {
+    const display = btn.parentElement.querySelector('.quantity-display');
+    display.textContent = parseInt(display.textContent) + 1;
+}
+
+function decreaseQuantity(btn) {
+    const display = btn.parentElement.querySelector('.quantity-display');
+    const qty = parseInt(display.textContent);
+    if (qty > 0) display.textContent = qty - 1;
+}
+
+// Agregar al carrito
+function addToCart(btn, itemName, itemPrice) {
+    const card = btn.closest('.menu-card');
+    const qty = parseInt(card.querySelector('.quantity-display').textContent);
+    
+    if (qty === 0) {
+        alert('Selecciona una cantidad');
+        return;
+    }
+
+    let item = cart.find(i => i.name === itemName);
+    if (item) {
+        item.quantity += qty;
+    } else {
+        cart.push({ name: itemName, price: itemPrice, quantity: qty, id: Date.now() });
+    }
+
+    card.querySelector('.quantity-display').textContent = '0';
+    updateCart();
+    showNotification(`${itemName} agregado`);
+}
+
+// Actualizar carrito
+function updateCart() {
+    const cartBody = document.getElementById('cartBody');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    if (cart.length === 0) {
+        cartBody.innerHTML = `
+            <div class="cart-empty">
+                <div class="cart-empty-icon">🛒</div>
+                <p>Tu carrito está vacío</p>
+                <p style="font-size: 0.875rem;">¡Agrega platillos deliciosos!</p>
+            </div>
+        `;
+        checkoutBtn.disabled = true;
+        document.getElementById('cartTotal').textContent = 'S/. 0.00';
+        return;
+    }
+
+    let total = 0;
+    let html = '';
+
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        html += `
+            <div class="cart-item">
+                <div>
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-quantity">Cantidad: <strong>${item.quantity}</strong></div>
+                    <div class="cart-item-price">S/. ${itemTotal.toFixed(2)}</div>
+                </div>
+                <button class="cart-item-remove" onclick="removeFromCart(${item.id})">🗑️</button>
+            </div>
+        `;
+    });
+
+    cartBody.innerHTML = html;
+    document.getElementById('cartTotal').textContent = `S/. ${total.toFixed(2)}`;
+    checkoutBtn.disabled = false;
+}
+
+// Eliminar del carrito
+function removeFromCart(id) {
+    cart = cart.filter(item => item.id !== id);
+    updateCart();
+}
+
+// Notificación
+function showNotification(msg) {
+    const notif = document.createElement('div');
+    notif.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #28a745; color: white; padding: 1rem; border-radius: 6px; z-index: 1060;';
+    notif.textContent = `✓ ${msg}`;
+    document.body.appendChild(notif);
+    setTimeout(() => notif.remove(), 3000);
+}
+
+// Procesar pedido
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+    if (cart.length > 0) {
+        const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+        alert(`Pedido confirmado!\n\nTotal: S/. ${total.toFixed(2)}\n\nGracias por tu compra.`);
+        cart = [];
+        updateCart();
+        bootstrap.Offcanvas.getInstance(document.getElementById('cartOffcanvas')).hide();
+    }
+});
+</script>
+</body>
+
+</html>

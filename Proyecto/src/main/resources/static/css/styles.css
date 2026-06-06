@@ -40,6 +40,10 @@ body {
     color: #111;
 }
 
+li .nav-link {
+    text-decoration: none;
+}
+
 .navbar .nav-link:hover {
     opacity: 0.92;
 }

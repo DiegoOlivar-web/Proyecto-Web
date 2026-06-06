@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.Proyecto.model.Usuario;
 
-@CrossOrigin(origins = "*") // importante si usas frontend separado
+@CrossOrigin(origins = "*") // si se usa frontend separado
 @RestController
 @RequestMapping("/api")
 public class logincontroller {
