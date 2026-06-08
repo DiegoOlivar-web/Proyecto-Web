@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosotros — TORI POLLERÍA</title>
+  <!-- Bootstrap 5 & Fuentes -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+  <!-- Navbar Unificada (Igual a index y menú) -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">
+        <img src="IMG/LOGO+2+ROJO.png" alt="Logo TORI Pollería" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link fw-bold" href="index.html">🏠 INICIO</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="menu.html">🍗 MENÚ</a></li>
+          <li class="nav-item"><a class="nav-link active fw-bold" href="nosotros.html">👥 NOSOTROS</a></li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">🔐 INICIAR SESIÓN</a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <button class="btn btn-outline-dark position-relative me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="badge bg-danger ms-1">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero / About -->
+    <section class="container my-5">
+      <div class="row align-items-center gy-4">
+        <div class="col-md-6">
+          <h2 class="mb-3">Sobre TORI POLLERÍA</h2>
+          <p class="lead fw-normal text-muted">Nacida como una propuesta innovadora en el año 2020, TORI Pollería se ha consolidado rápidamente en el mercado limeño ofreciendo un pollo a la brasa único que combina la receta tradicional con la alta herencia culinaria de sus fundadores.</p>
+          <p>Nuestra prioridad es la calidad, la seguridad alimentaria y la satisfacción del cliente. Trabajamos con proveedores locales y mantenemos altos estándares en preparación y servicio al carbón.</p>
+        </div>
+        <div class="col-md-6 text-center">
+          <img src="img/personal/NosotroTORI.png" alt="Local TORI Pollería" class="img-fluid rounded shadow-sm" style="max-height: 380px; width: 100%; object-fit: cover;">
+        </div>
+      </div>
+    </section>
+
+    <!-- Misión / Visión / Valores -->
+    <section class="container my-5" id="mision-vision">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card card-mvv p-4 bg-light h-100">
+            <div class="card-body">
+              <h5 class="text-danger fw-bold mb-3"><i class="fa-solid fa-bullseye me-2"></i>Misión</h5>
+              <p class="card-text">Brindar a nuestras comunidades alimentos sabrosos y nutritivos, hechos con ingredientes frescos y un servicio cálido, que generen experiencias memorables.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-mvv p-4 bg-light h-100">
+            <div class="card-body">
+              <h5 class="text-success fw-bold mb-3"><i class="fa-solid fa-eye me-2"></i>Visión</h5>
+              <p class="card-text">Ser reconocidos como la cadena local líder en pollo a la brasa y parrillas, innovando en nuestro menú y expandiendo presencia cuidando la tradición de sabor.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-mvv p-4 bg-light h-100">
+            <div class="card-body">
+              <h5 class="text-warning fw-bold mb-3"><i class="fa-solid fa-heart me-2"></i>Valores</h5>
+              <ul class="mb-0 ps-3">
+                <li class="mb-1">Calidad Premium</li>
+                <li class="mb-1">Honestidad</li>
+                <li class="mb-1">Servicio Cálido</li>
+                <li>Respeto por el cliente</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Google Maps -->
+    <section class="container my-5" id="ubicacion">
+      <h4 class="text-center mb-4">📍 ¡Ubícanos!</h4>
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-9">
+          <div class="ratio ratio-16x9 rounded shadow-sm overflow-hidden">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16852.4420795159!2d-77.04332138714398!3d-12.12498842237303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c91d54b83363%3A0xc3b9d9e5d76e0fe2!2sTori%20Poller%C3%ADa!5e0!3m2!1ses-419!2spe!4v1780784748743!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Equipo y contacto -->
+    <section class="container my-5">
+      <div class="row g-5">
+        <!-- Equipo -->
+        <div class="col-lg-6">
+          <h4 class="mb-3">NUESTRO EQUIPO</h4>
+          <p class="text-muted">Detrás de la propuesta de Tori Pollería se encuentra un equipo interdisciplinario que fusiona la alta cocina con la eficiencia operativa. Liderados por la visión culinaria de Mitsuharu Tsumura y la gestión estratégica de César Choy, el equipo humano de la marca trabaja bajo rigurosos estándares de calidad.</p>
+          <div class="row g-3 mt-2">
+            <div class="col-sm-6">
+              <div class="card h-100 border-0 shadow-sm">
+                <img src="img/personal/cofundador-gerente.jpg" class="card-img-top" alt="Gerente" style="height: 180px; object-fit: cover;" onerror="this.src='https://placehold.co/300x180?text=Gerente'">
+                <div class="card-body p-3">
+                  <h6 class="fw-bold mb-1">César Choy</h6>
+                  <p class="small text-danger mb-0 fw-semibold">Cofundador y Gerente de Operaciones Gastronómicas</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card h-100 border-0 shadow-sm">
+                <img src="img/personal/cofundador-chef.jpg" class="card-img-top" alt="Jefe de Cocina" style="height: 180px; object-fit: cover;" onerror="this.src='https://placehold.co/300x180?text=Chef'">
+                <div class="card-body p-3">
+                  <h6 class="fw-bold mb-1">Mitsuharu "Micha" Tsumura</h6>
+                  <p class="small text-danger mb-0 fw-semibold">Cofundador y Director Culinario</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Contacto -->
+        <div class="col-lg-6" id="formulario">
+          <h4 class="mb-3">✉️ Escríbenos</h4>
+          <div class="p-4 bg-light rounded shadow-sm">
+            <form>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Nombre Completo</label>
+                <input type="text" class="form-control" placeholder="Tu nombre">
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Correo Electrónico</label>
+                <input type="email" class="form-control" placeholder="correo@ejemplo.com">
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Mensaje o Consulta</label>
+                <textarea class="form-control" rows="4" placeholder="Escribe tu consulta aquí..."></textarea>
+              </div>
+              <div class="mb-3 form-check">
+                <input class="form-check-input" type="checkbox" id="subscribe">
+                <label class="form-check-label small" for="subscribe">Deseo recibir promociones y novedades por correo</label>
+              </div>
+              <button type="submit" class="btn btn-danger btn-submit w-100 py-2">Enviar Mensaje</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Unificado (CORREGIDO CON CONTRASTE CLARO) -->
+  <footer>
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-12 col-md-4">
+          <h5>📋 Información Legal</h5>
+          <a href="privacidad.html">🔒 Política de Privacidad</a>
+          <a href="terminos.html">📋 Términos y Condiciones</a>
+          <a href="tel:986592177" class="fw-bold mt-2 d-block text-white text-decoration-none">📞 TEL. 986 592 177</a>
+          <span class="small text-light d-block mt-1">📍 Ca. José Gálvez 390, Lima 15074</span>
+        </div>
+        <div class="col-6 col-md-4">
+          <h5>Navegación</h5>
+          <a href="index.html">Inicio</a>
+          <a href="menu.html">Menú</a>
+          <a href="nosotros.html">Nosotros</a>
+          <a href="quejas.html" class="mt-2 d-inline-block"><img src="img/libro-reclamaciones.png" alt="Libro de Reclamaciones" width="120" onerror="this.style.display='none'" /></a>
+        </div>
+        <div class="col-6 col-md-4">
+          <h5>Síguenos</h5>
+          <a href="#"><i class="fab fa-facebook me-1"></i> Facebook</a>
+          <a href="#"><i class="fab fa-instagram me-1"></i> Instagram</a>
+          <a href="#"><i class="fab fa-tiktok me-1"></i> TikTok</a>
+          <a href="#"><i class="fab fa-youtube me-1"></i> YouTube</a>
+        </div>
+      </div>
+      <hr style="border-color: rgba(255,255,255,0.15);">
+      <p class="text-center mb-0 text-white-50" style="font-size:0.82rem;">© 2026 TORI POLLERÍA. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Modal Login Reutilizable -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">🔐 Iniciar Sesión</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Correo Electrónico</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+              <input type="email" class="form-control" placeholder="nombre@ejemplo.com">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Contraseña</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+              <input type="password" class="form-control" placeholder="••••••••">
+            </div>
+          </div>
+          <button type="button" class="btn btn-danger w-100 fw-bold py-2">Iniciar Sesión</button>
+        </div>
+        <div class="modal-footer justify-content-center bg-light">
+          <p class="small mb-0">¿No tienes cuenta? <a href="#" class="text-danger fw-bold text-decoration-none">Regístrate aquí</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar Carrito Nivel Global -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title" id="offcanvasCartLabel">
+        <i class="fa-solid fa-cart-shopping me-2"></i>Tu Pedido
+      </h5>
+      <button type="button" class="btn-close" data-bs-canvas="offcanvas" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="text-center py-5">
+        <i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
+        <p class="mb-0 text-muted">Tu carrito está vacío por ahora.</p>
+      </div>
+    </div>
+    <div class="offcanvas-footer p-3 border-top">
+      <div class="d-flex justify-content-between mb-3">
+        <strong>Total:</strong>
+        <strong class="text-danger">S/. 0.00</strong>
+      </div>
+      <button class="btn btn-danger w-100 mb-2 fw-bold py-2">Finalizar Compra</button>
+      <button class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">Seguir Comprando</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
