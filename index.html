@@ -278,38 +278,93 @@
     </div>
   </footer>
 
-  <!-- Modal Login -->
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title">🔐 Iniciar Sesión</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Correo Electrónico</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-              <input type="email" class="form-control" placeholder="nombre@ejemplo.com">
-            </div>
+<!-- Modal Login -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">🔐 Iniciar Sesión</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body px-4 py-4">
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Correo Electrónico</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+            <input type="email" class="form-control" placeholder="nombre@ejemplo.com">
           </div>
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Contraseña</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-              <input type="password" class="form-control" placeholder="••••••••">
-            </div>
+        </div>
+        <div class="mb-4">
+          <label class="form-label fw-semibold">Contraseña</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+            <input type="password" class="form-control" placeholder="••••••••">
           </div>
-          <button type="button" class="btn btn-danger w-100 fw-bold py-2">Iniciar Sesión</button>
         </div>
-        <div class="modal-footer justify-content-center bg-light">
-          <p class="small mb-0">¿No tienes cuenta? <a href="#" class="text-danger fw-bold text-decoration-none">Regístrate aquí</a></p>
-        </div>
+        <button type="button" class="btn btn-danger w-100 fw-bold py-2">Iniciar Sesión</button>
+      </div>
+      <div class="modal-footer justify-content-center bg-light">
+        <p class="small mb-0">¿No tienes cuenta?
+          <a href="#" class="text-danger fw-bold text-decoration-none"
+             data-bs-dismiss="modal"
+             data-bs-toggle="modal"
+             data-bs-target="#registerModal">Regístrate aquí</a>
+        </p>
       </div>
     </div>
   </div>
+</div>
 
+<!-- Modal Registro -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">📝 Crear Cuenta</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body px-4 py-4">
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Nombre completo</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+            <input type="text" class="form-control" placeholder="Tu nombre completo">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Correo Electrónico</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+            <input type="email" class="form-control" placeholder="nombre@ejemplo.com">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Teléfono</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+            <input type="tel" class="form-control" placeholder="987 654 321">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="form-label fw-semibold">Contraseña</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+            <input type="password" class="form-control" placeholder="••••••••">
+          </div>
+        </div>
+        <button type="button" class="btn btn-danger w-100 fw-bold py-2">Crear cuenta</button>
+      </div>
+      <div class="modal-footer justify-content-center bg-light">
+        <p class="small mb-0">¿Ya tienes cuenta?
+          <a href="#" class="text-danger fw-bold text-decoration-none"
+             data-bs-dismiss="modal"
+             data-bs-toggle="modal"
+             data-bs-target="#loginModal">Inicia sesión aquí</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- ========================================== -->
   <!--        MODALES DE LAS PROMOCIONES          -->
   <!-- ========================================== -->
