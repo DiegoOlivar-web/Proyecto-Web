@@ -13,7 +13,6 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script th:src="@{/js/main.js}" defer></script>
 </head>
 
 
@@ -1144,15 +1143,15 @@
                 <div class="modal-body">
                     <div class="mb-3"><label class="form-label">Usuario o Email</label>
                         <div class="input-group"><span class="input-group-text"><i
-                                    class="fa-solid fa-envelope"></i></span><input type="email" class="form-control"
+                                    class="fa-solid fa-envelope"></i></span><input id="email" type="email" class="form-control"
                                 placeholder="nombre@ejemplo.com"></div>
                     </div>
                     <div class="mb-3"><label class="form-label">Contraseña</label>
                         <div class="input-group"><span class="input-group-text"><i
-                                    class="fa-solid fa-lock"></i></span><input type="password" class="form-control"
+                                    class="fa-solid fa-lock"></i></span><input id="password" type="password" class="form-control"
                                 placeholder="••••••••"></div>
                     </div>
-                    <button type="button" class="btn btn-primary w-100">Ingresar</button>
+                    <button id="loginButton" type="button" class="btn btn-primary w-100" onclick="login()">Ingresar</button>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <p class="small mb-0">¿No tienes cuenta? <a href="#">Regístrate aquí</a></p>
@@ -1168,13 +1167,15 @@
             </h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body">
-            <div class="text-center py-5"><i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
+            <div id="cartEmpty" class="text-center py-5"><i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
                 <p>Tu carrito está vacío.</p>
             </div>
+            <div id="cartItemsContainer" class="list-group d-none"></div>
+            <div id="cartErrorMessage" class="alert alert-warning d-none" role="alert"></div>
         </div>
         <div class="offcanvas-footer p-3 border-top">
-            <div class="d-flex justify-content-between mb-3"><strong>Total:</strong><strong>S/. 0.00</strong></div>
-            <button class="btn btn-primary w-100 mb-2">Finalizar Compra</button><button
+            <div class="d-flex justify-content-between mb-3"><strong>Total:</strong><strong id="cartTotalValue">S/. 0.00</strong></div>
+            <button id="checkoutButton" class="btn btn-primary w-100 mb-2" type="button">Finalizar Compra</button><button
                 class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">Seguir Comprando</button>
         </div>
     </div>
