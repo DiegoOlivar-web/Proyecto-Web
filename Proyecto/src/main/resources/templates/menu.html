@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -11,9 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
         rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="script.js" defer></script>
+    <script th:src="@{/js/main.js}" defer></script>
 </head>
 
 
@@ -23,8 +23,8 @@
     <!-- Navbar Clonada -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
-                <img src="IMG/LOGO+2+ROJO.png" alt="Logo TORI Pollería" />
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{/img/LOGO+2+ROJO.png}" alt="Logo TORI Pollería" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
                 aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,9 +32,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarMain">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link fw-bold" href="index.html">🏠 INICIO</a></li>
-                    <li class="nav-item"><a class="nav-link active fw-bold" href="menu.html">🍗 MENÚ</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold" href="nosotros.html">👥 NOSOTROS</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" th:href="@{/}">🏠 INICIO</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold" th:href="@{/menu}">🍗 MENÚ</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" th:href="@{/nosotros}">👥 NOSOTROS</a></li>
                     <li class="nav-item">
                         <a class="nav-link fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">🔐
                             INICIAR SESIÓN</a>
@@ -80,7 +80,7 @@
             <div class="producto-card" data-cat="pollo">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
-                    <img src="img/menu/combo1.webp" alt="1/4 Pollo a la Brasa">
+                    <img th:src="@{/img/menu/combo1.webp}" alt="1/4 Pollo a la Brasa">
                 </div>
                 <div class="card-info">
                     <h5>1/4 Pollo a la Brasa</h5>
@@ -94,7 +94,7 @@
 
             <div class="producto-card" data-cat="pollo">
                 <div class="card-img-wrap">
-                    <img src="img/menu/combo2.webp" alt="Salchipollo">
+                    <img th:src="@{/img/menu/combo2.webp}" alt="Salchipollo">
                 </div>
                 <div class="card-info">
                     <h5>Salchipollo</h5>
@@ -109,7 +109,7 @@
             <div class="producto-card" data-cat="pollo">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
-                    <img src="img/menu/combo3.webp" alt="Pocho">
+                    <img th:src="@{/img/menu/combo3.webp}" alt="Pocho">
                 </div>
                 <div class="card-info">
                     <h5>Pocho (Pollo + Anticucho)</h5>
@@ -124,7 +124,7 @@
             <div class="producto-card" data-cat="pollo">
                 <div class="card-img-wrap">
                     <span class="badge-card nuevo">Nuevo</span>
-                    <img src="img/menu/combo4.webp" alt="Pechuga a la Parrilla">
+                    <img th:src="@{/img/menu/combo4.webp}" alt="Pechuga a la Parrilla">
                 </div>
                 <div class="card-info">
                     <h5>Pechuga a la Parrilla</h5>
@@ -141,7 +141,7 @@
             <div class="producto-card" data-cat="pollo">
                 <div class="card-img-wrap">
                     <span class="badge-card nuevo">Nuevo</span>
-                    <img src="img/menu/combo5.png" alt="1/2 Pollo a la Brasa">
+                    <img th:src="@{/img/menu/combo5.png}" alt="1/2 Pollo a la Brasa">
                 </div>
                 <div class="card-info">
                     <h5>1/2 Pollo a la Brasa</h5>
@@ -156,7 +156,7 @@
 
             <div class="producto-card" data-cat="pollo">
                 <div class="card-img-wrap">
-                    <img src="img/menu/combo6.jpg" alt="Pollo Entero">
+                    <img th:src="@{/img/menu/combo6.jpg}" alt="Pollo Entero">
                 </div>
                 <div class="card-info">
                     <h5>Pollo Entero a la Brasa</h5>
@@ -181,7 +181,7 @@
 
             <div class="producto-card" data-cat="parrilla">
                 <div class="card-img-wrap">
-                    <img src="img/menu/combo7.webp" alt="Chuleta de Cerdo">
+                    <img th:src="@{/img/menu/combo7.webp}" alt="Chuleta de Cerdo">
                 </div>
                 <div class="card-info">
                     <h5>Chuleta de Cerdo</h5>
@@ -196,7 +196,7 @@
 
             <div class="producto-card" data-cat="parrilla">
                 <div class="card-img-wrap">
-                    <img src="img/menu/combo8.jpg" alt="Churrasco">
+                    <img th:src="@{/img/menu/combo8.jpg}" alt="Churrasco">
                 </div>
                 <div class="card-info">
                     <h5>Churrasco</h5>
@@ -211,7 +211,7 @@
 
             <div class="producto-card" data-cat="parrilla">
                 <div class="card-img-wrap">
-                    <img src="img/menu/combo9.jpg" alt="Marucha">
+                    <img th:src="@{/img/menu/combo9.jpg}" alt="Marucha">
                 </div>
                 <div class="card-info">
                     <h5>Marucha</h5>
@@ -227,7 +227,7 @@
             <div class="producto-card" data-cat="parrilla">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
-                    <img src="img/menu/combo10.webp" alt="1/2 Parrilla Especial">
+                    <img th:src="@{/img/menu/combo10.webp}" alt="1/2 Parrilla Especial">
                 </div>
                 <div class="card-info">
                     <h5>1/2 Parrilla Especial</h5>
@@ -242,7 +242,7 @@
             <div class="producto-card" data-cat="parrilla">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
-                    <img src="img/menu/combo11.webp" alt="Parrilla TORI">
+                    <img th:src="@{/img/menu/combo11.webp}" alt="Parrilla TORI">
                 </div>
                 <div class="card-info">
                     <h5>Parrilla TORI</h5>
@@ -258,7 +258,7 @@
             <div class="producto-card" data-cat="parrilla">
                 <div class="card-img-wrap">
                     <span class="badge-card nuevo">Nuevo</span>
-                    <img src="img/menu/combo12.jpg" alt="Anticuchos">
+                    <img th:src="@{/img/menu/combo12.jpg}" alt="Anticuchos">
                 </div>
                 <div class="card-info">
                     <h5>Anticuchos</h5>
@@ -284,7 +284,7 @@
             <div class="producto-card" data-cat="combo">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
-                    <img src="img/menu/combo13.webp" alt="Combo Familiar">
+                    <img th:src="@{/img/menu/combo13.webp}" alt="Combo Familiar">
                 </div>
                 <div class="card-info">
                     <h5>Combo Familiar</h5>
@@ -300,7 +300,7 @@
             <div class="producto-card" data-cat="combo">
                 <div class="card-img-wrap">
                     <span class="badge-card nuevo">Nuevo</span>
-                    <img src="img/card3.webp" alt="Combo Pareja">
+                    <img th:src="@{/img/card3.webp}" alt="Combo Pareja">
                 </div>
                 <div class="card-info">
                     <h5>Combo Pareja</h5>
@@ -315,7 +315,7 @@
 
             <div class="producto-card" data-cat="combo">
                 <div class="card-img-wrap">
-                    <img src="img/card4.png" alt="Combo TORI">
+                    <img th:src="@{/img/card4.png}" alt="Combo TORI">
                 </div>
                 <div class="card-info">
                     <h5>Combo TORI</h5>
@@ -341,7 +341,7 @@
             <div class="producto-card" data-cat="acompanamiento">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
-                    <img src="img/menu/combo14.jpg" alt="Salchipapa">
+                    <img th:src="@{/img/menu/combo14.jpg}" alt="Salchipapa">
                 </div>
                 <div class="card-info">
                     <h5>Salchipapa</h5>
@@ -356,7 +356,7 @@
 
             <div class="producto-card" data-cat="acompanamiento">
                 <div class="card-img-wrap">
-                    <img src="img/menu/combo15.jpg" alt="Papas Fritas">
+                    <img th:src="@{/img/menu/combo15.jpg}" alt="Papas Fritas">
                 </div>
                 <div class="card-info">
                     <h5>Papas Fritas</h5>
@@ -372,7 +372,7 @@
             <div class="producto-card" data-cat="acompanamiento">
                 <div class="card-img-wrap">
                     <span class="badge-card nuevo">Nuevo</span>
-                    <img src="img/menu/combo16.webp" alt="Ensalada Fresca">
+                    <img th:src="@{/img/menu/combo16.webp}" alt="Ensalada Fresca">
                 </div>
                 <div class="card-info">
                     <h5>Ensalada Fresca</h5>
@@ -387,7 +387,7 @@
 
             <div class="producto-card" data-cat="acompanamiento">
                 <div class="card-img-wrap">
-                    <img src="img/menu/combo17.png" alt="Chaufa de Pollo">
+                    <img th:src="@{/img/menu/combo17.png}" alt="Chaufa de Pollo">
                 </div>
                 <div class="card-info">
                     <h5>Chaufa de Pollo</h5>
@@ -412,7 +412,7 @@
 
             <div class="producto-card" data-cat="bebida">
                 <div class="card-img-wrap">
-                    <img src="img/menu/bebdidas1.jpg" alt="Gaseosa">
+                    <img th:src="@{/img/menu/bebdidas1.jpg}" alt="Gaseosa">
                 </div>
                 <div class="card-info">
                     <h5>Gaseosa (350ml)</h5>
@@ -427,7 +427,7 @@
             <div class="producto-card" data-cat="bebida">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
-                    <img src="img/menu/bebidas2.jpg" alt="Chicha Morada">
+                    <img th:src="@{/img/menu/bebidas2.jpg}" alt="Chicha Morada">
                 </div>
                 <div class="card-info">
                     <h5>Chicha Morada</h5>
@@ -442,7 +442,7 @@
             <div class="producto-card" data-cat="bebida">
                 <div class="card-img-wrap">
                     <span class="badge-card nuevo">Nuevo</span>
-                    <img src="img/menu/bebidas3.webp" alt="Limonada Frozen">
+                    <img th:src="@{/img/menu/bebidas3.webp}" alt="Limonada Frozen">
                 </div>
                 <div class="card-info">
                     <h5>Limonada Frozen</h5>
@@ -1111,9 +1111,9 @@
                 </div>
                 <div class="col-6 col-md-4">
                     <h6>Navegación</h6>
-                    <a href="index.html">Inicio</a>
-                    <a href="menu.html">Menú</a>
-                    <a href="nosotros.html">Nosotros</a>
+                    <a th:href="@{/}">Inicio</a>
+                    <a th:href="@{/menu}">Menú</a>
+                    <a th:href="@{/nosotros}">Nosotros</a>
                 </div>
                 <div class="col-6 col-md-4">
                     <h6>Síguenos</h6>
