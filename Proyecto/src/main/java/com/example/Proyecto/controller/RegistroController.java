@@ -9,17 +9,18 @@ import com.example.Proyecto.repository.ClienteRepository;
 
 @Controller
 @RequestMapping("/api")
-public class logincontroller {
+public class RegistroController {
 
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute ClienteEntity cliente) {
+    @PostMapping("/registro")
+    public String registro(@ModelAttribute ClienteEntity cliente) {
         ClienteEntity existente = clienteRepository.findByCorreo(cliente.getCorreo());
-        if (existente != null && existente.getContrasena().equals(cliente.getContrasena())) {
-            return "redirect:/?login=exitoso&nombre=" + existente.getNombre();
+        if (existente != null) {
+            return "redirect:/?registro=error";
         }
-        return "redirect:/?login=error";
+        clienteRepository.save(cliente);
+        return "redirect:/?registro=exitoso";
     }
 }
