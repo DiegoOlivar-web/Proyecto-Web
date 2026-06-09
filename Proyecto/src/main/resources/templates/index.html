@@ -33,8 +33,31 @@
               <li><a class="dropdown-item fw-bold" href="#promociones">Ver Promociones</a></li>
             </ul>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" th:if="${!sesionActiva}">
             <a class="nav-link fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">🔐 INICIAR SESIÓN</a>
+          </li>
+          <li class="nav-item dropdown user-session-item" th:if="${sesionActiva}">
+            <a class="nav-link dropdown-toggle fw-bold user-session-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="user-session-avatar"><i class="fa-solid fa-user"></i></span>
+              <span th:text="${usuarioLogueado.nombre}">Usuario</span>
+            </a>
+            <div class="dropdown-menu user-session-menu dropdown-menu-lg-end p-0">
+              <div class="user-session-header">
+                <span class="user-session-avatar user-session-avatar-lg"><i class="fa-solid fa-user"></i></span>
+                <div>
+                  <strong th:text="${usuarioLogueado.nombre}">Usuario</strong>
+                  <small th:text="${usuarioLogueado.correo}">correo@ejemplo.com</small>
+                </div>
+              </div>
+              <div class="user-session-status">
+                <i class="fa-solid fa-circle-check text-success"></i>
+                <span>Sesión iniciada</span>
+              </div>
+              <a class="dropdown-item user-session-action" th:href="@{/api/logout}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Cerrar sesión
+              </a>
+            </div>
           </li>
         </ul>
         <div class="d-flex align-items-center gap-2 flex-wrap">
@@ -355,6 +378,26 @@
     </div>
   </div>
 </div>
+<!-- Modal Logout Exitoso -->
+<div class="modal fade" id="modalLogoutExitoso" tabindex="-1" aria-hidden="true"
+     th:classappend="${logoutEstado == 'exitoso'} ? 'show' : ''"
+     th:style="${logoutEstado == 'exitoso'} ? 'display:block;' : ''">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">Sesión cerrada</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <i class="fa-solid fa-right-from-bracket text-danger mb-3" style="font-size:2.4rem;"></i>
+        <p class="fs-5 mb-0">Has cerrado sesión correctamente.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-danger fw-bold px-4" data-bs-dismiss="modal">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- Modal Login -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -658,6 +701,7 @@
       var error = document.getElementById('modalLoginError');
       var regExitoso = document.getElementById('modalRegistroExitoso');
       var regError = document.getElementById('modalRegistroError');
+      var logoutExitoso = document.getElementById('modalLogoutExitoso');
 
       if (exitoso && exitoso.classList.contains('show')) {
         new bootstrap.Modal(exitoso).show();
@@ -670,6 +714,9 @@
       }
       if (regError && regError.classList.contains('show')) {
         new bootstrap.Modal(regError).show();
+      }
+      if (logoutExitoso && logoutExitoso.classList.contains('show')) {
+        new bootstrap.Modal(logoutExitoso).show();
       }
     });
   </script>

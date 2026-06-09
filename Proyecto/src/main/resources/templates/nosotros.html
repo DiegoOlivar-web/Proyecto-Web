@@ -192,37 +192,177 @@
     </div>
   </footer>
 
-  <!-- Modal Login Reutilizable -->
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title">🔐 Iniciar Sesión</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
+  <!-- Modal Login Exitoso -->
+<div class="modal fade" id="modalLoginExitoso" tabindex="-1" aria-hidden="true"
+     th:classappend="${loginEstado == 'exitoso'} ? 'show' : ''"
+     th:style="${loginEstado == 'exitoso'} ? 'display:block;' : ''">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title fw-bold">✅ Bienvenido</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <p class="fs-5">¡Hola, <strong th:text="${loginNombre}"></strong>! Has iniciado sesión correctamente.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-success fw-bold px-4" data-bs-dismiss="modal">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Login Error -->
+<div class="modal fade" id="modalLoginError" tabindex="-1" aria-hidden="true"
+     th:classappend="${loginEstado == 'error'} ? 'show' : ''"
+     th:style="${loginEstado == 'error'} ? 'display:block;' : ''">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">❌ Error</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <p class="fs-5">Correo o contraseña incorrectos. Intenta de nuevo.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-danger fw-bold px-4" data-bs-dismiss="modal">Intentar de nuevo</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Registro Exitoso -->
+<div class="modal fade" id="modalRegistroExitoso" tabindex="-1" aria-hidden="true"
+     th:classappend="${registroEstado == 'exitoso'} ? 'show' : ''"
+     th:style="${registroEstado == 'exitoso'} ? 'display:block;' : ''">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title fw-bold">✅ Registro exitoso</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <p class="fs-5">¡Tu cuenta fue creada correctamente! Ya puedes iniciar sesión.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-success fw-bold px-4" data-bs-dismiss="modal">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Registro Error -->
+<div class="modal fade" id="modalRegistroError" tabindex="-1" aria-hidden="true"
+     th:classappend="${registroEstado == 'error'} ? 'show' : ''"
+     th:style="${registroEstado == 'error'} ? 'display:block;' : ''">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">❌ Correo ya registrado</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <p class="fs-5">El correo ingresado ya está registrado. Intenta con otro.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-danger fw-bold px-4" data-bs-dismiss="modal">Intentar de nuevo</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Modal Login -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">🔐 Iniciar Sesión</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/api/login}" method="post">
           <div class="mb-3">
             <label class="form-label fw-semibold">Correo Electrónico</label>
             <div class="input-group">
               <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-              <input type="email" class="form-control" placeholder="nombre@ejemplo.com">
+              <input type="email" name="correo" class="form-control" placeholder="nombre@ejemplo.com" required>
             </div>
           </div>
           <div class="mb-3">
             <label class="form-label fw-semibold">Contraseña</label>
             <div class="input-group">
               <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-              <input type="password" class="form-control" placeholder="••••••••">
+              <input type="password" name="contrasena" class="form-control" placeholder="••••••••" required>
             </div>
           </div>
-          <button type="button" class="btn btn-danger w-100 fw-bold py-2">Iniciar Sesión</button>
-        </div>
-        <div class="modal-footer justify-content-center bg-light">
-          <p class="small mb-0">¿No tienes cuenta? <a href="#" class="text-danger fw-bold text-decoration-none">Regístrate aquí</a></p>
-        </div>
+          <button type="submit" class="btn btn-danger w-100 fw-bold py-2">Iniciar Sesión</button>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-center bg-light">
+        <p class="small mb-0">¿No tienes cuenta? <a href="#" class="text-danger fw-bold text-decoration-none" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#registerModal">Regístrate aquí</a></p>
       </div>
     </div>
   </div>
+</div>
+
+<!-- Modal Registro -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">📝 Crear Cuenta</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body px-4 py-4">
+        <form th:action="@{/api/registro}" method="post">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Nombre completo</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+              <input type="text" name="nombre" class="form-control" placeholder="Tu nombre completo" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Correo Electrónico</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+              <input type="email" name="correo" class="form-control" placeholder="nombre@ejemplo.com" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Teléfono</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+              <input type="tel" name="telefono" class="form-control" placeholder="987 654 321" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Dirección</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
+              <input type="text" name="direccion" class="form-control" placeholder="Tu dirección" required>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Contraseña</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+              <input type="password" name="contrasena" class="form-control" placeholder="••••••••" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-danger w-100 fw-bold py-2">Crear cuenta</button>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-center bg-light">
+        <p class="small mb-0">¿Ya tienes cuenta?
+          <a href="#" class="text-danger fw-bold text-decoration-none"
+             data-bs-dismiss="modal"
+             data-bs-toggle="modal"
+             data-bs-target="#loginModal">Inicia sesión aquí</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- Sidebar Carrito Nivel Global -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
