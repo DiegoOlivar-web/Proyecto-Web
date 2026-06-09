@@ -33,7 +33,7 @@
         <div class="d-flex align-items-center gap-2 flex-wrap">
           <button class="btn btn-outline-dark position-relative me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
             <i class="fa-solid fa-cart-shopping"></i>
-            <span class="badge bg-danger ms-1">0</span>
+            <span class="badge bg-danger ms-1" th:text="${cartCount}">0</span>
           </button>
         </div>
       </div>
@@ -373,17 +373,28 @@
       <button type="button" class="btn-close" data-bs-canvas="offcanvas" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body">
-      <div class="text-center py-5">
+      <div th:if="${cartCount == 0}" class="text-center py-5">
         <i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
         <p class="mb-0 text-muted">Tu carrito está vacío por ahora.</p>
+      </div>
+      <div th:if="${cartCount > 0}">
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between align-items-start" th:each="item : ${cart}">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold" th:text="${item.nombre}">Producto</div>
+              <small th:text="${'Cantidad: ' + item.cantidad}">Cantidad</small>
+            </div>
+            <span th:text="${#numbers.formatDecimal(item.total, 1, 'POINT', 2, 'NONE')}">S/. 0.00</span>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="offcanvas-footer p-3 border-top">
       <div class="d-flex justify-content-between mb-3">
         <strong>Total:</strong>
-        <strong class="text-danger">S/. 0.00</strong>
+        <strong class="text-danger" th:text="${#numbers.formatDecimal(cartTotal, 1, 'POINT', 2, 'NONE')}">S/. 0.00</strong>
       </div>
-      <button class="btn btn-danger w-100 mb-2 fw-bold py-2">Finalizar Compra</button>
+      <button class="btn btn-danger w-100 mb-2 fw-bold py-2" type="button">Finalizar Compra</button>
       <button class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">Seguir Comprando</button>
     </div>
   </div>

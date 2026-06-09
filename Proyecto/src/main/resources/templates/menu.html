@@ -43,7 +43,7 @@
                     <button class="btn btn-outline-dark position-relative me-2" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasCart">
                         <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="badge bg-danger ms-1">0</span>
+                        <span class="badge bg-danger ms-1" th:text="${cartCount}">0</span>
                     </button>
                 </div>
             </div>
@@ -58,25 +58,25 @@
 
     <!-- Filtros -->
     <div class="filtros" id="filtros">
-        <button class="activo" onclick="filtrar('todos', this)">Todos</button>
-        <button onclick="filtrar('pollo', this)">Pollos</button>
-        <button onclick="filtrar('parrilla', this)">Parrillas</button>
-        <button onclick="filtrar('combo', this)">Combos</button>
-        <button onclick="filtrar('acompanamiento', this)">Acompañamientos</button>
-        <button onclick="filtrar('bebida', this)">Bebidas</button>
+        <a th:href="@{/menu(categoria='todos')}" th:classappend="${categoria == 'todos'} ? ' activo' : ''">Todos</a>
+        <a th:href="@{/menu(categoria='pollo')}" th:classappend="${categoria == 'pollo'} ? ' activo' : ''">Pollos</a>
+        <a th:href="@{/menu(categoria='parrilla')}" th:classappend="${categoria == 'parrilla'} ? ' activo' : ''">Parrillas</a>
+        <a th:href="@{/menu(categoria='combo')}" th:classappend="${categoria == 'combo'} ? ' activo' : ''">Combos</a>
+        <a th:href="@{/menu(categoria='acompanamiento')}" th:classappend="${categoria == 'acompanamiento'} ? ' activo' : ''">Acompañamientos</a>
+        <a th:href="@{/menu(categoria='bebida')}" th:classappend="${categoria == 'bebida'} ? ' activo' : ''">Bebidas</a>
     </div>
 
     <main class="container py-3">
 
         <!-- ══ POLLOS ══ -->
-        <div class="categoria-titulo" id="cat-pollo">
+        <div class="categoria-titulo" id="cat-pollo" th:if="${categoria == 'todos' or categoria == 'pollo'}">
             <div class="icono-cat"><i class="fas fa-drumstick-bite"></i></div>
             <h3>Pollos a la Brasa</h3>
             <div class="linea"></div>
         </div>
-        <div class="productos-grid">
+        <div class="productos-grid" th:if="${categoria == 'todos' or categoria == 'pollo'}">
 
-            <div class="producto-card" data-cat="pollo">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
                     <img th:src="@{/img/menu/combo1.webp}" alt="1/4 Pollo a la Brasa">
@@ -87,11 +87,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 18.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal1">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal1">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="pollo1" /><input type="hidden" name="categoria" value="pollo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="pollo">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <img th:src="@{/img/menu/combo2.webp}" alt="Salchipollo">
                 </div>
@@ -101,11 +101,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 20.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal3">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal3">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="pollo2" /><input type="hidden" name="categoria" value="pollo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="pollo">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
                     <img th:src="@{/img/menu/combo3.webp}" alt="Pocho">
@@ -116,11 +116,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 20.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal7">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal7">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="pollo3" /><input type="hidden" name="categoria" value="pollo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="pollo">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card nuevo">Nuevo</span>
                     <img th:src="@{/img/menu/combo4.webp}" alt="Pechuga a la Parrilla">
@@ -132,12 +132,12 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 19.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal6">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal6">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="pollo4" /><input type="hidden" name="categoria" value="pollo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
             <!-- Nuevos productos de pollo -->
-            <div class="producto-card" data-cat="pollo">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card nuevo">Nuevo</span>
                     <img th:src="@{/img/menu/combo5.png}" alt="1/2 Pollo a la Brasa">
@@ -149,11 +149,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 32.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalMedioPollo">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalMedioPollo">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="pollo5" /><input type="hidden" name="categoria" value="pollo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="pollo">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <img th:src="@{/img/menu/combo6.jpg}" alt="Pollo Entero">
                 </div>
@@ -164,21 +164,21 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 58.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalPolloEntero">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalPolloEntero">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="pollo6" /><input type="hidden" name="categoria" value="pollo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
         </div>
 
         <!-- ══ PARRILLAS ══ -->
-        <div class="categoria-titulo" id="cat-parrilla">
+        <div class="categoria-titulo" id="cat-parrilla" th:if="${categoria == 'todos' or categoria == 'parrilla'}">
             <div class="icono-cat"><i class="fas fa-fire"></i></div>
             <h3>Parrillas</h3>
             <div class="linea"></div>
         </div>
-        <div class="productos-grid">
+        <div class="productos-grid" th:if="${categoria == 'todos' or categoria == 'parrilla'}">
 
-            <div class="producto-card" data-cat="parrilla">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <img th:src="@{/img/menu/combo7.webp}" alt="Chuleta de Cerdo">
                 </div>
@@ -189,11 +189,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 18.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal2">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal2">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="parr1" /><input type="hidden" name="categoria" value="parrilla" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="parrilla">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <img th:src="@{/img/menu/combo8.jpg}" alt="Churrasco">
                 </div>
@@ -204,11 +204,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 18.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal4">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal4">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="parr2" /><input type="hidden" name="categoria" value="parrilla" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="parrilla">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <img th:src="@{/img/menu/combo9.jpg}" alt="Marucha">
                 </div>
@@ -219,11 +219,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 18.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal5">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal5">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="parr3" /><input type="hidden" name="categoria" value="parrilla" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="parrilla">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
                     <img th:src="@{/img/menu/combo10.webp}" alt="1/2 Parrilla Especial">
@@ -234,11 +234,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 46.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal9">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal9">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="parr4" /><input type="hidden" name="categoria" value="parrilla" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="parrilla">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
                     <img th:src="@{/img/menu/combo11.webp}" alt="Parrilla TORI">
@@ -249,12 +249,12 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 70.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal10">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal10">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="parr5" /><input type="hidden" name="categoria" value="parrilla" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
             <!-- Nuevos parrillas -->
-            <div class="producto-card" data-cat="parrilla">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card nuevo">Nuevo</span>
                     <img th:src="@{/img/menu/combo12.jpg}" alt="Anticuchos">
@@ -266,21 +266,21 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 15.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalAnticuchos">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalAnticuchos">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="parr6" /><input type="hidden" name="categoria" value="parrilla" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
         </div>
 
         <!-- ══ COMBOS ══ -->
-        <div class="categoria-titulo" id="cat-combo">
+        <div class="categoria-titulo" id="cat-combo" th:if="${categoria == 'todos' or categoria == 'combo'}">
             <div class="icono-cat"><i class="fas fa-gift"></i></div>
             <h3>Combos Especiales</h3>
             <div class="linea"></div>
         </div>
-        <div class="productos-grid">
+        <div class="productos-grid" th:if="${categoria == 'todos' or categoria == 'combo'}">
 
-            <div class="producto-card" data-cat="combo">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
                     <img th:src="@{/img/menu/combo13.webp}" alt="Combo Familiar">
@@ -292,11 +292,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 72.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalComboFamiliar">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalComboFamiliar">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="combo1" /><input type="hidden" name="categoria" value="combo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="combo">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card nuevo">Nuevo</span>
                     <img th:src="@{/img/card3.webp}" alt="Combo Pareja">
@@ -308,11 +308,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 52.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalComboPareja">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalComboPareja">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="combo2" /><input type="hidden" name="categoria" value="combo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="combo">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <img th:src="@{/img/card4.png}" alt="Combo TORI">
                 </div>
@@ -323,21 +323,21 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 38.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalComboRicos">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalComboTORI">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="combo3" /><input type="hidden" name="categoria" value="combo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
         </div>
 
         <!-- ══ ACOMPAÑAMIENTOS ══ -->
-        <div class="categoria-titulo" id="cat-acompanamiento">
+        <div class="categoria-titulo" id="cat-acompanamiento" th:if="${categoria == 'todos' or categoria == 'acompanamiento'}">
             <div class="icono-cat"><i class="fas fa-bowl-food"></i></div>
             <h3>Acompañamientos</h3>
             <div class="linea"></div>
         </div>
-        <div class="productos-grid">
+        <div class="productos-grid" th:if="${categoria == 'todos' or categoria == 'acompanamiento'}">
 
-            <div class="producto-card" data-cat="acompanamiento">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
                     <img th:src="@{/img/menu/combo14.jpg}" alt="Salchipapa">
@@ -349,11 +349,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 13.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal8">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal8">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="acom1" /><input type="hidden" name="categoria" value="acompanamiento" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="acompanamiento">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <img th:src="@{/img/menu/combo15.jpg}" alt="Papas Fritas">
                 </div>
@@ -364,11 +364,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 8.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalPapas">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalPapas">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="acom2" /><input type="hidden" name="categoria" value="acompanamiento" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="acompanamiento">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card nuevo">Nuevo</span>
                     <img th:src="@{/img/menu/combo16.webp}" alt="Ensalada Fresca">
@@ -380,11 +380,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 9.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalEnsalada">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalEnsalada">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="acom3" /><input type="hidden" name="categoria" value="acompanamiento" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="acompanamiento">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <img th:src="@{/img/menu/combo17.png}" alt="Chaufa de Pollo">
                 </div>
@@ -395,21 +395,21 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 14.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalChaufa">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalChaufa">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="acom4" /><input type="hidden" name="categoria" value="acompanamiento" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
         </div>
 
         <!-- ══ BEBIDAS ══ -->
-        <div class="categoria-titulo" id="cat-bebida">
+        <div class="categoria-titulo" id="cat-bebida" th:if="${categoria == 'todos' or categoria == 'bebida'}">
             <div class="icono-cat"><i class="fas fa-wine-glass"></i></div>
             <h3>Bebidas</h3>
             <div class="linea"></div>
         </div>
-        <div class="productos-grid">
+        <div class="productos-grid" th:if="${categoria == 'todos' or categoria == 'bebida'}">
 
-            <div class="producto-card" data-cat="bebida">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <img th:src="@{/img/menu/bebdidas1.jpg}" alt="Gaseosa">
                 </div>
@@ -419,11 +419,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 4.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalGaseosa">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalGaseosa">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="beb1" /><input type="hidden" name="categoria" value="bebida" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="bebida">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card">Popular</span>
                     <img th:src="@{/img/menu/bebidas2.jpg}" alt="Chicha Morada">
@@ -434,11 +434,11 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 5.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalChicha">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalChicha">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="beb2" /><input type="hidden" name="categoria" value="bebida" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
-            <div class="producto-card" data-cat="bebida">
+            <div class="producto-card">
                 <div class="card-img-wrap">
                     <span class="badge-card nuevo">Nuevo</span>
                     <img th:src="@{/img/menu/bebidas3.webp}" alt="Limonada Frozen">
@@ -449,7 +449,7 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/. 7.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalLimonada">Ver más</button>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalLimonada">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="beb3" /><input type="hidden" name="categoria" value="bebida" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
                 </div>
             </div>
 
@@ -1311,41 +1311,30 @@
             </h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body">
-            <div id="cartEmpty" class="text-center py-5"><i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
+            <div th:if="${cartCount == 0}" class="text-center py-5">
+                <i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
                 <p>Tu carrito está vacío.</p>
             </div>
-            <div id="cartItemsContainer" class="list-group d-none"></div>
-            <div id="cartErrorMessage" class="alert alert-warning d-none" role="alert"></div>
+            <div th:if="${cartCount > 0}">
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-start" th:each="item : ${cart}">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold" th:text="${item.nombre}">Producto</div>
+                            <small th:text="${'Cantidad: ' + item.cantidad}">Cantidad</small>
+                        </div>
+                        <span th:text="${#numbers.formatDecimal(item.total, 1, 'POINT', 2, 'NONE')}">S/. 0.00</span>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="offcanvas-footer p-3 border-top">
-            <div class="d-flex justify-content-between mb-3"><strong>Total:</strong><strong id="cartTotalValue">S/. 0.00</strong></div>
-            <button id="checkoutButton" class="btn btn-primary w-100 mb-2" type="button">Finalizar Compra</button><button
+            <div class="d-flex justify-content-between mb-3"><strong>Total:</strong><strong th:text="${#numbers.formatDecimal(cartTotal, 1, 'POINT', 2, 'NONE')}">S/. 0.00</strong></div>
+            <button class="btn btn-primary w-100 mb-2" type="button">Finalizar Compra</button><button
                 class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">Seguir Comprando</button>
         </div>
     </div>
 
-    <script>
-        function filtrar(cat, btn) {
-            document.querySelectorAll('.filtros button').forEach(b => b.classList.remove('activo'));
-            btn.classList.add('activo');
-            document.querySelectorAll('.producto-card').forEach(card => {
-                card.closest('[class*="col"], .producto-card').style.display = '';
-                if (cat === 'todos' || card.dataset.cat === cat) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
             // Ocultar títulos de categoría vacíos
-            document.querySelectorAll('.categoria-titulo').forEach(titulo => {
-                const grid = titulo.nextElementSibling;
-                if (!grid) return;
-                const visibles = grid.querySelectorAll('.producto-card[style*="flex"], .producto-card:not([style])');
-                titulo.style.display = (cat === 'todos') ? '' : (visibles.length === 0 ? 'none' : '');
-            });
-        }
-    </script>
-
 </body>
 
 </html>

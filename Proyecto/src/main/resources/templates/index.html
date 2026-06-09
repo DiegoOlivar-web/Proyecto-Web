@@ -302,8 +302,8 @@
   </footer>
 <!-- Modal Login Exitoso -->
 <div class="modal fade" id="modalLoginExitoso" tabindex="-1" aria-hidden="true"
-     th:classappend="${loginEstado == 'exitoso'} ? 'show' : ''"
-     th:style="${loginEstado == 'exitoso'} ? 'display:block;' : ''">
+     th:classappend="${loginEstado == 'exitoso'} ? ' show' : ''"
+     th:style="${loginEstado == 'exitoso'} ? ' display:block;' : ''">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
@@ -491,9 +491,6 @@
     </div>
   </div>
 </div>
-  <!-- ========================================== -->
-  <!--        MODALES DE LAS PROMOCIONES          -->
-  <!-- ========================================== -->
 
   <!-- Modal Promo 1: Promo Familiar -->
   <div class="modal fade" id="promoModal1" tabindex="-1" aria-hidden="true">
@@ -694,31 +691,5 @@
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="main.js"></script>
-  <script>
-    window.addEventListener('load', function () {
-      var exitoso = document.getElementById('modalLoginExitoso');
-      var error = document.getElementById('modalLoginError');
-      var regExitoso = document.getElementById('modalRegistroExitoso');
-      var regError = document.getElementById('modalRegistroError');
-      var logoutExitoso = document.getElementById('modalLogoutExitoso');
-
-      if (exitoso && exitoso.classList.contains('show')) {
-        new bootstrap.Modal(exitoso).show();
-      }
-      if (error && error.classList.contains('show')) {
-        new bootstrap.Modal(error).show();
-      }
-      if (regExitoso && regExitoso.classList.contains('show')) {
-        new bootstrap.Modal(regExitoso).show();
-      }
-      if (regError && regError.classList.contains('show')) {
-        new bootstrap.Modal(regError).show();
-      }
-      if (logoutExitoso && logoutExitoso.classList.contains('show')) {
-        new bootstrap.Modal(logoutExitoso).show();
-      }
-    });
-  </script>
 </body>
 </html>
