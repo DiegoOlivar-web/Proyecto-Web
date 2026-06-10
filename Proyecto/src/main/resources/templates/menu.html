@@ -15,10 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 </head>
 
-
-
 <body>
-
     <!-- Navbar Clonada -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -468,33 +465,44 @@
                     <h5 class="modal-title">1/4 Pollo a la Brasa</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <p>El clásico infaltable. Cuarto de pollo rostizado al carbón con sabor ahumado único, acompañado de
-                        papas fritas crujientes y ensalada fresca.</p>
-                    <hr><small><b>Incluye:</b> Bebida refrescante.</small>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Salsa adicional</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Ají de la casa</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="pollo1" />
+                    
+                    <div class="modal-body">
+                        <p>El clásico infaltable. Cuarto de pollo rostizado al carbón con sabor ahumado único, acompañado de papas fritas crujientes y ensalada fresca.</p>
+                        <hr><small><b>Incluye:</b> Bebida refrescante.</small>
+                        <div class="mt-3 mb-2">
+                            <label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Salsa adicional</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Ají de la casa</label>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold">Bebida</label>
+                            <select class="form-select form-select-sm">
+                                <option>Inka Cola / Coca-Cola / Sprite</option>
+                                <option>Chicha morada</option>
+                                <option>Durazno</option>
+                            </select>
+                        </div>
+                        <div class="mb-1">
+                            <label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
+                        </div>
                     </div>
-                    <div class="mb-2"><label class="form-label fw-semibold">Bebida</label>
-                        <select class="form-select form-select-sm">
-                            <option>Inka Cola / Coca-Cola / Sprite</option>
-                            <option>Chicha morada</option>
-                            <option>Durazno</option>
-                        </select>
+                    <div class="modal-footer justify-content-between">
+                        <span class="fw-bold text-danger fs-5">S/. 18.00</span>
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                        </div>
                     </div>
-                    <div class="mb-1"><label class="form-label fw-semibold">Cantidad</label>
-                        <input type="number" class="form-control form-control-sm" value="1" min="1" style="width:80px">
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <span class="fw-bold text-danger fs-5">S/. 18.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -504,33 +512,45 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Chuleta de Cerdo</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Chuleta de Cerdo</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Jugosa chuleta de cerdo sellada a la parrilla, servida con papas fritas y guarnición de
-                        vegetales.</p>
-                    <hr><small><b>Incluye:</b> Bebida.</small>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Salsa adicional</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Ají de la casa</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="chul1" /> <div class="modal-body">
+                        <p>Jugosa chuleta de cerdo sellada a la parrilla, servida con papas fritas y guarnición de vegetales.</p>
+                        <hr><small><b>Incluye:</b> Bebida.</small>
+                        <div class="mt-3 mb-2">
+                            <label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Salsa adicional</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Ají de la casa</label>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold">Bebida</label>
+                            <select class="form-select form-select-sm">
+                                <option>Inka Cola / Coca-Cola / Sprite</option>
+                                <option>Chicha morada</option>
+                                <option>Durazno</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
+                        </div>
                     </div>
-                    <div class="mb-2"><label class="form-label fw-semibold">Bebida</label><select
-                            class="form-select form-select-sm">
-                            <option>Inka Cola / Coca-Cola / Sprite</option>
-                            <option>Chicha morada</option>
-                            <option>Durazno</option>
-                        </select></div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        18.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-footer justify-content-between">
+                        <span class="fw-bold text-danger fs-5">S/. 18.00</span>
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -540,33 +560,47 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Salchipollo</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Salchipollo</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Combinación de trozos de pollo a la brasa y rodajas de salchicha sobre una cama de papas fritas.
-                    </p>
-                    <hr><small><b>Incluye:</b> Bebida.</small>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Salsa adicional</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Ají de la casa</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="pollo2" />
+                    
+                    <div class="modal-body">
+                        <p>Combinación de trozos de pollo a la brasa y rodajas de salchicha sobre una cama de papas fritas.</p>
+                        <hr><small><b>Incluye:</b> Bebida.</small>
+                        <div class="mt-3 mb-2">
+                            <label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Salsa adicional</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Ají de la casa</label>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold">Bebida</label>
+                            <select class="form-select form-select-sm">
+                                <option>Inka Cola / Coca-Cola / Sprite</option>
+                                <option>Chicha morada</option>
+                                <option>Durazno</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
+                        </div>
                     </div>
-                    <div class="mb-2"><label class="form-label fw-semibold">Bebida</label><select
-                            class="form-select form-select-sm">
-                            <option>Inka Cola / Coca-Cola / Sprite</option>
-                            <option>Chicha morada</option>
-                            <option>Durazno</option>
-                        </select></div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        20.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-footer justify-content-between">
+                        <span class="fw-bold text-danger fs-5">S/. 20.00</span>
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -577,32 +611,45 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Churrasco</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Churrasco</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Corte de res tierno y sabroso, cocinado al término ideal en la parrilla.</p>
-                    <hr><small><b>Incluye:</b> Bebida.</small>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Salsa adicional</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Ají de la casa</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="chur1" /> <div class="modal-body">
+                        <p>Corte de res tierno y sabroso, cocinado al término ideal en la parrilla.</p>
+                        <hr><small><b>Incluye:</b> Bebida.</small>
+                        <div class="mt-3 mb-2">
+                            <label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Salsa adicional</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Ají de la casa</label>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold">Bebida</label>
+                            <select class="form-select form-select-sm">
+                                <option>Inka Cola / Coca-Cola / Sprite</option>
+                                <option>Chicha morada</option>
+                                <option>Durazno</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
+                        </div>
                     </div>
-                    <div class="mb-2"><label class="form-label fw-semibold">Bebida</label><select
-                            class="form-select form-select-sm">
-                            <option>Inka Cola / Coca-Cola / Sprite</option>
-                            <option>Chicha morada</option>
-                            <option>Durazno</option>
-                        </select></div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        18.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-footer justify-content-between">
+                        <span class="fw-bold text-danger fs-5">S/. 18.00</span>
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -611,32 +658,45 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Marucha</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Marucha</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Corte parrillero tradicional, apreciado por su suavidad y gran sabor.</p>
-                    <hr><small><b>Incluye:</b> Bebida.</small>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Salsa adicional</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Ají de la casa</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="parr1" /> <div class="modal-body">
+                        <p>Corte parrillero tradicional, apreciado por su suavidad y gran sabor.</p>
+                        <hr><small><b>Incluye:</b> Bebida.</small>
+                        <div class="mt-3 mb-2">
+                            <label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Salsa adicional</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Ají de la casa</label>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold">Bebida</label>
+                            <select class="form-select form-select-sm">
+                                <option>Inka Cola / Coca-Cola / Sprite</option>
+                                <option>Chicha morada</option>
+                                <option>Durazno</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
+                        </div>
                     </div>
-                    <div class="mb-2"><label class="form-label fw-semibold">Bebida</label><select
-                            class="form-select form-select-sm">
-                            <option>Inka Cola / Coca-Cola / Sprite</option>
-                            <option>Chicha morada</option>
-                            <option>Durazno</option>
-                        </select></div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        18.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-footer justify-content-between">
+                        <span class="fw-bold text-danger fs-5">S/. 18.00</span>
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -645,31 +705,43 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Pechuga a la Parrilla</h5><button type="button"
-                        class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Pechuga a la Parrilla</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Filete de pechuga marinado en especias peruanas, cocinado a las brasas. Opción más ligera y
-                        sabrosa.</p>
-                    <hr><small><b>Incluye:</b> Bebida.</small>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Salsa adicional</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="pollo4" />
+                    
+                    <div class="modal-body">
+                        <p>Filete de pechuga marinado en especias peruanas, cocinado a las brasas. Opción más ligera y sabrosa.</p>
+                        <hr><small><b>Incluye:</b> Bebida.</small>
+                        <div class="mt-3 mb-2">
+                            <label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Salsa adicional</label>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold">Bebida</label>
+                            <select class="form-select form-select-sm">
+                                <option>Inka Cola / Coca-Cola / Sprite</option>
+                                <option>Chicha morada</option>
+                                <option>Durazno</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
+                        </div>
                     </div>
-                    <div class="mb-2"><label class="form-label fw-semibold">Bebida</label><select
-                            class="form-select form-select-sm">
-                            <option>Inka Cola / Coca-Cola / Sprite</option>
-                            <option>Chicha morada</option>
-                            <option>Durazno</option>
-                        </select></div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        19.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-footer justify-content-between">
+                        <span class="fw-bold text-danger fs-5">S/. 19.00</span>
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -678,33 +750,47 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Pocho (Pollo + Anticucho)</h5><button type="button"
-                        class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Pocho (Pollo + Anticucho)</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Lo mejor de dos mundos: pollo a la brasa con brochetas de corazón de res maceradas en ají panca.
-                    </p>
-                    <hr><small><b>Incluye:</b> Bebida.</small>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Salsa adicional</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Ají de la casa</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="pollo3" />
+                    
+                    <div class="modal-body">
+                        <p>Lo mejor de dos mundos: pollo a la brasa con brochetas de corazón de res maceradas en ají panca.</p>
+                        <hr><small><b>Incluye:</b> Bebida.</small>
+                        <div class="mt-3 mb-2">
+                            <label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Salsa adicional</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Ají de la casa</label>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold">Bebida</label>
+                            <select class="form-select form-select-sm">
+                                <option>Inka Cola / Coca-Cola / Sprite</option>
+                                <option>Chicha morada</option>
+                                <option>Durazno</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
+                        </div>
                     </div>
-                    <div class="mb-2"><label class="form-label fw-semibold">Bebida</label><select
-                            class="form-select form-select-sm">
-                            <option>Inka Cola / Coca-Cola / Sprite</option>
-                            <option>Chicha morada</option>
-                            <option>Durazno</option>
-                        </select></div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        20.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-footer justify-content-between">
+                        <span class="fw-bold text-danger fs-5">S/. 20.00</span>
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -713,24 +799,32 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Salchipapa</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Salchipapa</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <p>El street food peruano por excelencia. Papas fritas crujientes con salchichas, perfecta para un
-                        antojo rápido.</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Salsa adicional</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="salc1" /> <div class="modal-body">
+                        <p>El street food peruano por excelencia. Papas fritas crujientes con salchichas, perfecta para un antojo rápido.</p>
+                        <div class="mt-3 mb-2">
+                            <label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Salsa adicional</label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
+                        </div>
                     </div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        13.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-footer justify-content-between">
+                        <span class="fw-bold text-danger fs-5">S/. 13.00</span>
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -739,23 +833,32 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">1/2 Parrilla Especial</h5><button type="button"
-                        class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">1/2 Parrilla Especial</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Selección premium de carnes y embutidos al carbón. Se sirve con papas fritas y ensalada.</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Porción adicional de papas</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="parr2" /> <div class="modal-body">
+                        <p>Selección premium de carnes y embutidos al carbón. Se sirve con papas fritas y ensalada.</p>
+                        <div class="mt-3 mb-2">
+                            <label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Porción adicional de papas</label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
+                        </div>
                     </div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        46.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-footer justify-content-between">
+                        <span class="fw-bold text-danger fs-5">S/. 46.00</span>
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -764,26 +867,36 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Parrilla TORI</h5><button type="button"
-                        class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Parrilla TORI</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Nuestra parrilla completa con carnes premium al carbón. Para 3–4 personas. Incluye papas y
-                        ensalada.</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Porción adicional de papas</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Jarra adicional de chicha</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="parr3" /> <div class="modal-body">
+                        <p>Nuestra parrilla completa con carnes premium al carbón. Para 3–4 personas. Incluye papas y ensalada.</p>
+                        <div class="mt-3 mb-2">
+                            <label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Porción adicional de papas</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Jarra adicional de chicha</label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
+                        </div>
                     </div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        70.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-footer justify-content-between">
+                        <span class="fw-bold text-danger fs-5">S/. 70.00</span>
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -792,306 +905,352 @@
     <div class="modal fade" id="modalMedioPollo" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">1/2 Pollo a la Brasa</h5><button type="button"
-                        class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Medio pollo rostizado al carbón con papas fritas y ensalada. Ideal para compartir entre dos.</p>
-                    <hr><small><b>Incluye:</b> Bebida.</small>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Salsa adicional</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="pollo5" />
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">1/2 Pollo a la Brasa</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="mb-2"><label class="form-label fw-semibold">Bebida</label><select
-                            class="form-select form-select-sm">
-                            <option>Inka Cola / Coca-Cola / Sprite</option>
-                            <option>Chicha morada</option>
-                            <option>Durazno</option>
-                        </select></div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        32.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-body">
+                        <p>Medio pollo rostizado al carbón con papas fritas y ensalada. Ideal para compartir entre dos.</p>
+                        <hr><small><b>Incluye:</b> Bebida.</small>
+                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Salsa adicional</label></div>
+                        </div>
+                        <div class="mb-2"><label class="form-label fw-semibold">Bebida</label><select class="form-select form-select-sm">
+                                <option>Inka Cola / Coca-Cola / Sprite</option>
+                                <option>Chicha morada</option>
+                                <option>Durazno</option>
+                            </select></div>
+                        <div><label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 32.00</span>
+                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="modal fade" id="modalPolloEntero" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Pollo Entero a la Brasa</h5><button type="button"
-                        class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Pollo entero dorado al carbón, perfecto para toda la familia. Incluye doble porción de papas y
-                        ensalada.</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Salsa adicional</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Ají de la casa</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="pollo6" />
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Pollo Entero a la Brasa</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        58.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-body">
+                        <p>Pollo entero dorado al carbón, perfecto para toda la familia. Incluye doble porción de papas y ensalada.</p>
+                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Salsa adicional</label></div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Ají de la casa</label></div>
+                        </div>
+                        <div><label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 58.00</span>
+                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="modal fade" id="modalAnticuchos" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Anticuchos</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Brochetas de corazón de res maceradas en ají panca, servidas con papas y choclo. El sabor
-                        auténtico de la calle limeña.</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Salsa adicional</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="prom2" />
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Anticuchos</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                    <div><label class="form-label fw-semibold">Cantidad (porción)</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        15.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-body">
+                        <p>Brochetas de corazón de res maceradas en ají panca, servidas con papas y choclo. El sabor auténtico de la calle limeña.</p>
+                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Salsa adicional</label></div>
+                        </div>
+                        <div><label class="form-label fw-semibold">Cantidad (porción)</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 15.00</span>
+                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="modal fade" id="modalComboFamiliar" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Combo Familiar</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>1 pollo entero + 2 porciones de papas fritas + 2 ensaladas + 1 gaseosa. El combo perfecto para
-                        compartir en familia.</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Bebidas</label><select
-                            class="form-select form-select-sm">
-                            <option>2x Inka Cola</option>
-                            <option>2x Coca-Cola</option>
-                            <option>Mixto</option>
-                        </select></div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        72.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="prom5" />
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Combo Familiar</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>1 pollo entero + 2 porciones de papas fritas + 2 ensaladas + 1 gaseosa. El combo perfecto para compartir en familia.</p>
+                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Bebidas</label><select class="form-select form-select-sm">
+                                <option>2x Inka Cola</option>
+                                <option>2x Coca-Cola</option>
+                                <option>Mixto</option>
+                            </select></div>
+                        <div><label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 72.00</span>
+                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="modal fade" id="modalComboPareja" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Combo Pareja</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>1/2 pollo + 1 chuleta a la parrilla + 2 porciones de papas + 2 bebidas. ¡La cita perfecta!</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Bebidas</label><select
-                            class="form-select form-select-sm">
-                            <option>2x Inka Cola</option>
-                            <option>2x Chicha morada</option>
-                            <option>Mixto</option>
-                        </select></div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        52.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="prom4" />
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Combo Pareja</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>1/2 pollo + 1 chuleta a la parrilla + 2 porciones de papas + 2 bebidas. ¡La cita perfecta!</p>
+                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Bebidas</label><select class="form-select form-select-sm">
+                                <option>2x Inka Cola</option>
+                                <option>2x Chicha morada</option>
+                                <option>Mixto</option>
+                            </select></div>
+                        <div><label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 52.00</span>
+                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="modal fade" id="modalComboTORI" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Combo TORI</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>1/4 pollo + anticuchos + salchipapa + 1 bebida. El favorito de nuestros clientes frecuentes.</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Bebida</label><select
-                            class="form-select form-select-sm">
-                            <option>Inka Cola / Coca-Cola / Sprite</option>
-                            <option>Chicha morada</option>
-                        </select></div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        38.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="prom6" />
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Combo TORI</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>1/4 pollo + anticuchos + salchipapa + 1 bebida. El favorito de nuestros clientes frecuentes.</p>
+                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Bebida</label><select class="form-select form-select-sm">
+                                <option>Inka Cola / Coca-Cola / Sprite</option>
+                                <option>Chicha morada</option>
+                            </select></div>
+                        <div><label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 38.00</span>
+                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="modal fade" id="modalPapas" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Papas Fritas</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Porción generosa de papas fritas doradas y crujientes, sazonadas al punto justo.</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Salsa adicional</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="acom1" />
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Papas Fritas</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 8.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-body">
+                        <p>Porción generosa de papas fritas doradas y crujientes, sazonadas al punto justo.</p>
+                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Salsa adicional</label></div>
+                        </div>
+                        <div><label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 8.00</span>
+                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="modal fade" id="modalEnsalada" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Ensalada Fresca</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Mix de lechugas, tomate, cebolla y palta con aderezo de la casa. La opción más saludable del
-                        menú.</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Aderezo</label><select
-                            class="form-select form-select-sm">
-                            <option>Aderezo de la casa</option>
-                            <option>Aceite de oliva y limón</option>
-                        </select></div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 9.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="acom2" />
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Ensalada Fresca</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Mix de lechugas, tomate, cebolla y palta con aderezo de la casa. La opción más saludable del menú.</p>
+                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Aderezo</label><select class="form-select form-select-sm">
+                                <option>Aderezo de la casa</option>
+                                <option>Aceite de oliva y limón</option>
+                            </select></div>
+                        <div><label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 9.00</span>
+                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="modal fade" id="modalChaufa" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Chaufa de Pollo</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Arroz chaufa con trozos de pollo, vegetales salteados, huevo y salsa de soya. El sabor chifa en
-                        su máxima expresión.</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Extra salsa soya</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    <input type="hidden" name="id" value="acom4" />
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Chaufa de Pollo</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/.
-                        14.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-body">
+                        <p>Arroz chaufa con trozos de pollo, vegetales salteados, huevo y salsa de soya. El sabor chifa en su máxima expresión.</p>
+                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Extra salsa soya</label></div>
+                        </div>
+                        <div><label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 14.00</span>
+                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="modal fade" id="modalGaseosa" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form th:action="@{/cart/add}" method="post" class="mb-0">
+                
+                <input type="hidden" name="id" value="beb1" />
+
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Gaseosa</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Gaseosa</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <p>Gaseosa bien fría en botella de 350ml.</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Sabor</label><select
-                            class="form-select form-select-sm">
+                    <div class="mt-3 mb-2">
+                        <label class="form-label fw-semibold">Sabor</label>
+                        <select class="form-select form-select-sm">
                             <option>Inka Cola</option>
                             <option>Coca-Cola</option>
                             <option>Sprite</option>
-                        </select></div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label fw-semibold">Cantidad</label>
+                        <input type="number" name="cantidad" class="form-control form-control-sm" 
+                               value="1" min="1" style="width:80px" required>
+                    </div>
                 </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 4.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
+                <div class="modal-footer justify-content-between">
+                    <span class="fw-bold text-danger fs-5">S/. 4.00</span>
+                    <div>
+                        <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+</div>
     <div class="modal fade" id="modalChicha" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Chicha Morada</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Preparada en casa con maíz morado, clavo y canela. Refrescante y 100% natural.</p>
-                    <div class="mt-3"><label class="form-label fw-semibold">Tamaño</label><select
-                            class="form-select form-select-sm">
-                            <option>Vaso (300ml)</option>
-                            <option>Jarra (1L)</option>
-                        </select></div>
-                    <div class="mt-2"><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 5.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    
+                    <input type="hidden" name="id" value="beb2" />
+
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Chicha Morada</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <p>Preparada en casa con maíz morado, clavo y canela. Refrescante y 100% natural.</p>
+                        
+                        <div class="mt-3">
+                            <label class="form-label fw-semibold">Tamaño</label>
+                            <select class="form-select form-select-sm">
+                                <option>Vaso (300ml)</option>
+                                <option>Jarra (1L)</option>
+                            </select>
+                        </div>
+                        <div class="mt-2">
+                            <label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" 
+                                value="1" min="1" style="width:80px" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <span class="fw-bold text-danger fs-5">S/. 5.00</span>
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="modal fade" id="modalLimonada" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Limonada Frozen</h5><button type="button" class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Limonada helada con menta y hielo triturado. La bebida del verano peruano.</p>
-                    <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                        <div class="form-check"><input class="form-check-input" type="checkbox"><label
-                                class="form-check-label">Extra menta</label></div>
+                <form th:action="@{/cart/add}" method="post" class="mb-0">
+                    
+                    <input type="hidden" name="id" value="beb3" />
+
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">Limonada Frozen</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                    <div><label class="form-label fw-semibold">Cantidad</label><input type="number"
-                            class="form-control form-control-sm" value="1" min="1" style="width:80px"></div>
-                </div>
-                <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 7.00</span>
-                    <div><button class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button
-                            class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                </div>
+                    <div class="modal-body">
+                        <p>Limonada helada con menta y hielo triturado. La bebida del verano peruano.</p>
+                        <div class="mt-3 mb-2">
+                            <label class="form-label fw-semibold">Extras</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Extra menta</label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control form-control-sm" 
+                                value="1" min="1" style="width:80px" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <span class="fw-bold text-danger fs-5">S/. 7.00</span>
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -1134,7 +1293,7 @@
 
     <!-- Modal Login Exitoso -->
 <div class="modal fade" id="modalLoginExitoso" tabindex="-1" aria-hidden="true"
-     th:classappend="${loginEstado == 'exitoso'} ? 'show' : ''"
+     th:classappend="${loginEstado == 'exitoso'} ? ' show' : ''"
      th:style="${loginEstado == 'exitoso'} ? 'display:block;' : ''">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -1154,7 +1313,7 @@
 
 <!-- Modal Login Error -->
 <div class="modal fade" id="modalLoginError" tabindex="-1" aria-hidden="true"
-     th:classappend="${loginEstado == 'error'} ? 'show' : ''"
+     th:classappend="${loginEstado == 'error'} ? ' show' : ''"
      th:style="${loginEstado == 'error'} ? 'display:block;' : ''">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -1173,7 +1332,7 @@
 </div>
 <!-- Modal Registro Exitoso -->
 <div class="modal fade" id="modalRegistroExitoso" tabindex="-1" aria-hidden="true"
-     th:classappend="${registroEstado == 'exitoso'} ? 'show' : ''"
+     th:classappend="${registroEstado == 'exitoso'} ? ' show' : ''"
      th:style="${registroEstado == 'exitoso'} ? 'display:block;' : ''">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -1193,7 +1352,7 @@
 
 <!-- Modal Registro Error -->
 <div class="modal fade" id="modalRegistroError" tabindex="-1" aria-hidden="true"
-     th:classappend="${registroEstado == 'error'} ? 'show' : ''"
+     th:classappend="${registroEstado == 'error'} ? ' show' : ''"
      th:style="${registroEstado == 'error'} ? 'display:block;' : ''">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -1306,35 +1465,45 @@
 
     <!-- Sidebar Carrito -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
-        <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title" id="offcanvasCartLabel"><i class="fa-solid fa-cart-shopping me-2"></i>Tu Pedido
-            </h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div th:if="${cartCount == 0}" class="text-center py-5">
-                <i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
-                <p>Tu carrito está vacío.</p>
-            </div>
-            <div th:if="${cartCount > 0}">
-                <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between align-items-start" th:each="item : ${cart}">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold" th:text="${item.nombre}">Producto</div>
-                            <small th:text="${'Cantidad: ' + item.cantidad}">Cantidad</small>
-                        </div>
-                        <span th:text="${#numbers.formatDecimal(item.total, 1, 'POINT', 2, 'NONE')}">S/. 0.00</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="offcanvas-footer p-3 border-top">
-            <div class="d-flex justify-content-between mb-3"><strong>Total:</strong><strong th:text="${#numbers.formatDecimal(cartTotal, 1, 'POINT', 2, 'NONE')}">S/. 0.00</strong></div>
-            <button class="btn btn-primary w-100 mb-2" type="button">Finalizar Compra</button><button
-                class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">Seguir Comprando</button>
-        </div>
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title" id="offcanvasCartLabel">
+            <i class="fa-solid fa-cart-shopping me-2"></i>Tu Pedido
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
-
-            // Ocultar títulos de categoría vacíos
+    <div class="offcanvas-body">
+        <div th:if="${cartCount == 0}" class="text-center py-5">
+            <i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
+            <p>Tu carrito está vacío.</p>
+        </div>
+        <div th:if="${cartCount > 0}">
+    <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between align-items-center" th:each="item : ${cart}">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold" th:text="${item.nombre}">Producto</div>
+                <small th:text="${'Cantidad: ' + item.cantidad}">Cantidad</small>
+                <br>
+                <small class="text-muted" th:text="${'S/. ' + #numbers.formatDecimal(item.total, 1, 2)}">0.00</small>
+            </div>
+            
+            <form th:action="@{/cart/eliminar}" method="post" class="mb-0">
+                <input type="hidden" name="idProducto" th:value="${item.id}" />
+                <button type="submit" class="btn btn-sm btn-outline-danger border-0" title="Eliminar del carrito">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </form>
+        </li>
+    </ul>
+</div>
+    </div>
+    <div class="offcanvas-footer p-3 border-top">
+        <div class="d-flex justify-content-between mb-3">
+            <strong>Total:</strong>
+            <strong th:text="${'S/. ' + #numbers.formatDecimal(cartTotal, 1, 2)}">0.00</strong>
+        </div>
+        <button class="btn btn-primary w-100 mb-2" type="button">Finalizar Compra</button>
+        <button class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">Seguir Comprando</button>
+    </div>
+</div>
 </body>
-
 </html>

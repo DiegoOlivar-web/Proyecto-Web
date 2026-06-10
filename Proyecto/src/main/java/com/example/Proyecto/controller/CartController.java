@@ -80,5 +80,23 @@ public class CartController {
 
         return "redirect:/menu?categoria=" + categoria;
     }
+
+    @PostMapping("/cart/eliminar")
+    public String eliminarItem(@RequestParam("idProducto") String idProducto, 
+    HttpSession session, 
+    jakarta.servlet.http.HttpServletRequest request) {
+        // 1. Recuperamos la lista original de objetos CartItem de la sesión
+        @SuppressWarnings("unchecked")
+        List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
+        
+        if (cart != null) {
+            // 2. Eliminamos el objeto cuyo ID coincida con el String recibido (ej. "pollo5")
+            cart.removeIf(item -> item.getId().equals(idProducto));
+        }
+        
+        // 3. Redireccionamos dinámicamente a la página desde donde el usuario clickeó (index o menú)
+        String referer = request.getHeader("Referer");
+        return "redirect:" + (referer != null ? referer : "/");
+    }
 }
 
