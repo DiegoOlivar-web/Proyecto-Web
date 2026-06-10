@@ -300,25 +300,31 @@
       <p class="text-center mb-0 text-white-50" style="font-size:0.82rem;">© 2026 TORI POLLERÍA. Todos los derechos reservados.</p>
     </div>
   </footer>
+
 <!-- Modal Login Exitoso -->
 <div class="modal fade" id="modalLoginExitoso" tabindex="-1" aria-hidden="true"
-     th:classappend="${loginEstado == 'exitoso'} ? 'show' : ''"
-     th:style="${loginEstado == 'exitoso'} ? 'display:block;' : ''">
+     th:classappend="${loginEstado == 'exitoso'} ? ' show' : ''"
+     th:style="${loginEstado == 'exitoso'} ? ' display:block;' : ''">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
         <h5 class="modal-title fw-bold">✅ Bienvenido</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close btn-close-white" 
+                onclick="document.getElementById('modalLoginExitoso').style.display='none'; document.querySelector('.modal-backdrop')?.remove();"></button>
       </div>
       <div class="modal-body text-center py-4">
         <p class="fs-5">¡Hola, <strong th:text="${loginNombre}"></strong>! Has iniciado sesión correctamente.</p>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-success fw-bold px-4" data-bs-dismiss="modal">Continuar</button>
+        <button type="button" class="btn btn-success fw-bold px-4" 
+                onclick="document.getElementById('modalLoginExitoso').style.display='none'; document.querySelector('.modal-backdrop')?.remove();">
+          Continuar
+        </button>
       </div>
     </div>
   </div>
 </div>
+<div th:if="${loginEstado == 'exitoso'}" class="modal-backdrop fade show"></div>
 
 <!-- Modal Login Error -->
 <div class="modal fade" id="modalLoginError" tabindex="-1" aria-hidden="true"
@@ -328,17 +334,20 @@
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
         <h5 class="modal-title fw-bold">❌ Error</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close btn-close-white" 
+                onclick="document.getElementById('modalLoginError').style.display='none'; document.querySelector('.modal-backdrop')?.remove();"></button>
       </div>
       <div class="modal-body text-center py-4">
         <p class="fs-5">Correo o contraseña incorrectos. Intenta de nuevo.</p>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-danger fw-bold px-4" data-bs-dismiss="modal">Intentar de nuevo</button>
+        <button type="button" class="btn btn-danger fw-bold px-4"onclick="document.getElementById('modalLoginError').style.display='none'; document.querySelector('.modal-backdrop')?.remove();">Intentar de nuevo</button>
       </div>
     </div>
   </div>
 </div>
+<div th:if="${loginEstado == 'error'}" class="modal-backdrop fade show"></div>
+
 <!-- Modal Registro Exitoso -->
 <div class="modal fade" id="modalRegistroExitoso" tabindex="-1" aria-hidden="true"
      th:classappend="${registroEstado == 'exitoso'} ? 'show' : ''"
@@ -347,17 +356,20 @@
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
         <h5 class="modal-title fw-bold">✅ Registro exitoso</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close btn-close-white" 
+                onclick="this.closest('.modal').style.display='none'; document.querySelector('.modal-backdrop')?.remove();"></button>
       </div>
       <div class="modal-body text-center py-4">
         <p class="fs-5">¡Tu cuenta fue creada correctamente! Ya puedes iniciar sesión.</p>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-success fw-bold px-4" data-bs-dismiss="modal">Continuar</button>
+        <button type="button" class="btn btn-success fw-bold px-4" 
+                onclick="this.closest('.modal').style.display='none'; document.querySelector('.modal-backdrop')?.remove();">Continuar</button>
       </div>
     </div>
   </div>
 </div>
+<div th:if="${registroEstado == 'exitoso'}" class="modal-backdrop fade show"></div>
 
 <!-- Modal Registro Error -->
 <div class="modal fade" id="modalRegistroError" tabindex="-1" aria-hidden="true"
@@ -367,17 +379,21 @@
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
         <h5 class="modal-title fw-bold">❌ Correo ya registrado</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close btn-close-white" 
+                onclick="this.closest('.modal').style.display='none'; document.querySelector('.modal-backdrop')?.remove();"></button>
       </div>
       <div class="modal-body text-center py-4">
         <p class="fs-5">El correo ingresado ya está registrado. Intenta con otro.</p>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-danger fw-bold px-4" data-bs-dismiss="modal">Intentar de nuevo</button>
+        <button type="button" class="btn btn-danger fw-bold px-4" 
+                onclick="this.closest('.modal').style.display='none'; document.querySelector('.modal-backdrop')?.remove();">Intentar de nuevo</button>
       </div>
     </div>
   </div>
 </div>
+<div th:if="${registroEstado == 'error'}" class="modal-backdrop fade show"></div>
+
 <!-- Modal Logout Exitoso -->
 <div class="modal fade" id="modalLogoutExitoso" tabindex="-1" aria-hidden="true"
      th:classappend="${logoutEstado == 'exitoso'} ? 'show' : ''"
@@ -386,18 +402,22 @@
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
         <h5 class="modal-title fw-bold">Sesión cerrada</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close btn-close-white" 
+                onclick="this.closest('.modal').style.display='none'; document.querySelector('.modal-backdrop')?.remove();"></button>
       </div>
       <div class="modal-body text-center py-4">
         <i class="fa-solid fa-right-from-bracket text-danger mb-3" style="font-size:2.4rem;"></i>
         <p class="fs-5 mb-0">Has cerrado sesión correctamente.</p>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-danger fw-bold px-4" data-bs-dismiss="modal">Continuar</button>
+        <button type="button" class="btn btn-success fw-bold px-4" 
+                onclick="this.closest('.modal').style.display='none'; document.querySelector('.modal-backdrop')?.remove();">Continuar</button>
       </div>
     </div>
   </div>
 </div>
+<div th:if="${logoutEstado == 'exitoso'}" class="modal-backdrop fade show"></div>
+
   <!-- Modal Login -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -491,9 +511,6 @@
     </div>
   </div>
 </div>
-  <!-- ========================================== -->
-  <!--        MODALES DE LAS PROMOCIONES          -->
-  <!-- ========================================== -->
 
   <!-- Modal Promo 1: Promo Familiar -->
   <div class="modal fade" id="promoModal1" tabindex="-1" aria-hidden="true">
@@ -694,31 +711,5 @@
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="main.js"></script>
-  <script>
-    window.addEventListener('load', function () {
-      var exitoso = document.getElementById('modalLoginExitoso');
-      var error = document.getElementById('modalLoginError');
-      var regExitoso = document.getElementById('modalRegistroExitoso');
-      var regError = document.getElementById('modalRegistroError');
-      var logoutExitoso = document.getElementById('modalLogoutExitoso');
-
-      if (exitoso && exitoso.classList.contains('show')) {
-        new bootstrap.Modal(exitoso).show();
-      }
-      if (error && error.classList.contains('show')) {
-        new bootstrap.Modal(error).show();
-      }
-      if (regExitoso && regExitoso.classList.contains('show')) {
-        new bootstrap.Modal(regExitoso).show();
-      }
-      if (regError && regError.classList.contains('show')) {
-        new bootstrap.Modal(regError).show();
-      }
-      if (logoutExitoso && logoutExitoso.classList.contains('show')) {
-        new bootstrap.Modal(logoutExitoso).show();
-      }
-    });
-  </script>
 </body>
 </html>

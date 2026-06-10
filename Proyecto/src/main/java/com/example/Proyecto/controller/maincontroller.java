@@ -13,7 +13,9 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class maincontroller {
     @GetMapping("/menu")
-    public String menu() {
+    public String menu(@RequestParam(required = false, defaultValue = "todos") String categoria,
+                       Model model) {
+        model.addAttribute("categoria", categoria);
         return "menu";
     }
 
