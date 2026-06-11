@@ -19,32 +19,32 @@ public class CartController {
     private static final Map<String, CartItem> PRODUCTOS = new LinkedHashMap<>();
 
     static {
-        PRODUCTOS.put("pollo1", new CartItem("pollo1", "1/4 Pollo a la Brasa", 18.00, 1));
-        PRODUCTOS.put("pollo2", new CartItem("pollo2", "Salchipollo", 20.00, 1));
-        PRODUCTOS.put("pollo3", new CartItem("pollo3", "Pocho (Pollo + Anticucho)", 20.00, 1));
-        PRODUCTOS.put("pollo4", new CartItem("pollo4", "Pechuga a la Parrilla", 19.00, 1));
-        PRODUCTOS.put("pollo5", new CartItem("pollo5", "1/2 Pollo a la Brasa", 32.00, 1));
-        PRODUCTOS.put("pollo6", new CartItem("pollo6", "Pollo Entero a la Brasa", 58.00, 1));
+        PRODUCTOS.put("1", new CartItem("1", "1/4 Pollo a la Brasa", 18.00, 1));
+        PRODUCTOS.put("2", new CartItem("2", "Salchipollo", 20.00, 1));
+        PRODUCTOS.put("3", new CartItem("3", "Pocho (Pollo + Anticucho)", 20.00, 1));
+        PRODUCTOS.put("4", new CartItem("4", "Pechuga a la Parrilla", 19.00, 1));
+        PRODUCTOS.put("5", new CartItem("5", "1/2 Pollo a la Brasa", 32.00, 1));
+        PRODUCTOS.put("6", new CartItem("6", "Pollo Entero a la Brasa", 58.00, 1));
 
-        PRODUCTOS.put("parr1", new CartItem("parr1", "Chuleta de Cerdo", 18.00, 1));
-        PRODUCTOS.put("parr2", new CartItem("parr2", "Churrasco", 18.00, 1));
-        PRODUCTOS.put("parr3", new CartItem("parr3", "Marucha", 18.00, 1));
-        PRODUCTOS.put("parr4", new CartItem("parr4", "1/2 Parrilla Especial", 46.00, 1));
-        PRODUCTOS.put("parr5", new CartItem("parr5", "Parrilla TORI", 70.00, 1));
-        PRODUCTOS.put("parr6", new CartItem("parr6", "Anticuchos", 15.00, 1));
+        PRODUCTOS.put("7", new CartItem("7", "Chuleta de Cerdo", 18.00, 1));
+        PRODUCTOS.put("8", new CartItem("8", "Churrasco", 18.00, 1));
+        PRODUCTOS.put("9", new CartItem("9", "Marucha", 18.00, 1));
+        PRODUCTOS.put("10", new CartItem("10", "1/2 Parrilla Especial", 46.00, 1));
+        PRODUCTOS.put("11", new CartItem("11", "Parrilla TORI", 70.00, 1));
+        PRODUCTOS.put("12", new CartItem("12", "Anticuchos", 15.00, 1));
 
-        PRODUCTOS.put("combo1", new CartItem("combo1", "Combo Familiar", 72.00, 1));
-        PRODUCTOS.put("combo2", new CartItem("combo2", "Combo Pareja", 52.00, 1));
-        PRODUCTOS.put("combo3", new CartItem("combo3", "Combo TORI", 38.00, 1));
+        PRODUCTOS.put("13", new CartItem("13", "Combo Familiar", 72.00, 1));
+        PRODUCTOS.put("14", new CartItem("14", "Combo Pareja", 52.00, 1));
+        PRODUCTOS.put("15", new CartItem("15", "Combo TORI", 38.00, 1));
 
-        PRODUCTOS.put("acom1", new CartItem("acom1", "Salchipapa", 13.00, 1));
-        PRODUCTOS.put("acom2", new CartItem("acom2", "Papas Fritas", 8.00, 1));
-        PRODUCTOS.put("acom3", new CartItem("acom3", "Ensalada Fresca", 9.00, 1));
-        PRODUCTOS.put("acom4", new CartItem("acom4", "Chaufa de Pollo", 14.00, 1));
+        PRODUCTOS.put("16", new CartItem("16", "Salchipapa", 13.00, 1));
+        PRODUCTOS.put("17", new CartItem("17", "Papas Fritas", 8.00, 1));
+        PRODUCTOS.put("18", new CartItem("18", "Ensalada Fresca", 9.00, 1));
+        PRODUCTOS.put("19", new CartItem("19", "Chaufa de Pollo", 14.00, 1));
 
-        PRODUCTOS.put("beb1", new CartItem("beb1", "Gaseosa (350ml)", 4.00, 1));
-        PRODUCTOS.put("beb2", new CartItem("beb2", "Chicha Morada", 5.00, 1));
-        PRODUCTOS.put("beb3", new CartItem("beb3", "Limonada Frozen", 7.00, 1));
+        PRODUCTOS.put("20", new CartItem("20", "Gaseosa (350ml)", 4.00, 1));
+        PRODUCTOS.put("21", new CartItem("21", "Chicha Morada", 5.00, 1));
+        PRODUCTOS.put("22", new CartItem("22", "Limonada Frozen", 7.00, 1));
     }
 
     @PostMapping("/cart/add")

@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 public class logincontroller {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteRepository clienteRepository ;
 
     @PostMapping("/login")
     public String login(@ModelAttribute ClienteEntity cliente, HttpSession session) {
