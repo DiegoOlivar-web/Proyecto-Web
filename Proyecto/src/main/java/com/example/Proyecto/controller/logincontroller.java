@@ -20,15 +20,21 @@ public class logincontroller {
     public String login(@ModelAttribute ClienteEntity cliente, HttpSession session) {
         ClienteEntity existente = clienteRepository.findByCorreo(cliente.getCorreo());
         if (existente != null && existente.getContrasena().equals(cliente.getContrasena())) {
+            // Guardar usuario en sesión
             session.setAttribute("usuarioLogueado", existente);
+            // Redirigir al index con parámetro de éxito
             return "redirect:/?login=exitoso";
         }
+        // Redirigir al index con parámetro de error
         return "redirect:/?login=error";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
+        // Invalidar toda la sesión
         session.invalidate();
+        // Redirigir al index con parámetro de logout
         return "redirect:/?logout=exitoso";
     }
 }
+
