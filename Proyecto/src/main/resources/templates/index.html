@@ -458,203 +458,230 @@
 </div>
 
   <!-- Modal Promo 1: Promo Familiar -->
-  <div class="modal fade" id="promoModal1" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title fw-bold">🔥 Promo Familiar</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <img th:src="@{/img/card1.webp}" class="img-fluid rounded mb-3 w-100" alt="Promo Familiar" style="max-height: 250px; object-fit: cover;" />
-          <h4 class="text-danger fw-bold mb-3">S/. 72.00</h4>
-          <p class="text-muted">Disfruta del auténtico sabor al carbón en la comodidad de tu hogar o en nuestro local con este super combo pensado para toda la familia.</p>
-          <hr />
-          <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
-          <ul class="list-unstyled ms-3">
-            <li><i class="fa-solid fa-check text-success me-2"></i> 1 Pollo entero a la brasa dorado a la perfección</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> Porción familiar de papas fritas crujientes</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> Ensalada fresca familiar (clásica de pollería)</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> 2 Gaseosas medianas a elección</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> Salsas de la casa ilimitadas (ají, mayonesa, mostaza)</li>
-          </ul>
-        </div>
-        <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
-          <a href="#" class="btn btn-danger fw-bold px-4">Ordenar Ahora</a>
-        </div>
+<div class="modal fade" id="promoModal1" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">🔥 Promo Familiar</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <img th:src="@{/img/card1.webp}" class="img-fluid rounded mb-3 w-100" alt="Promo Familiar" style="max-height: 250px; object-fit: cover;" />
+        <h4 class="text-danger fw-bold mb-3">S/. 72.00</h4>
+        <p class="text-muted">Disfruta del auténtico sabor al carbón en la comodidad de tu hogar o en nuestro local con este super combo pensado para toda la familia.</p>
+        <hr />
+        <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
+        <ul class="list-unstyled ms-3">
+          <li><i class="fa-solid fa-check text-success me-2"></i> 1 Pollo entero a la brasa dorado a la perfección</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> Porción familiar de papas fritas crujientes</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> Ensalada fresca familiar</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> 2 Gaseosas medianas a elección</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> Salsas de la casa ilimitadas</li>
+        </ul>
+      </div>
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger fw-bold px-4"
+                onclick="addPromoAndRedirect('promoFamiliar')"> Ordenar Ahora</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal Promo 2: Combo Especial -->
-  <div class="modal fade" id="promoModal2" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title fw-bold">⭐ Combo Especial</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <img th:src="@{/img/card2.webp}" class="img-fluid rounded mb-3 w-100" alt="Combo Especial" style="max-height: 250px; object-fit: cover;" />
-          <h4 class="text-danger fw-bold mb-3">S/. 38.00</h4>
-          <p class="text-muted">Nuestra opción individual más completa. Diseñada para calmar el antojo con la combinación perfecta de fondo, bebida y un dulce final.</p>
-          <hr />
-          <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
-          <ul class="list-unstyled ms-3">
-            <li><i class="fa-solid fa-check text-success me-2"></i> 1/4 de Pollo a la brasa (pechuga o pierna)</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> Porción personal de papas fritas + ensalada</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> 1 Bebida helada a elección</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> 1 Postre del día de la casa</li>
-          </ul>
-        </div>
-        <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
-          <a href="#" class="btn btn-danger fw-bold px-4">Ordenar Ahora</a>
-        </div>
+<!-- Modal Promo 2: Combo Especial -->
+<div class="modal fade" id="promoModal2" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">⭐ Combo Especial</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <img th:src="@{/img/card2.webp}" class="img-fluid rounded mb-3 w-100" alt="Combo Especial" style="max-height: 250px; object-fit: cover;" />
+        <h4 class="text-danger fw-bold mb-3">S/. 38.00</h4>
+        <p class="text-muted">Nuestra opción individual más completa. Diseñada para calmar el antojo con la combinación perfecta de fondo, bebida y un dulce final.</p>
+        <hr />
+        <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
+        <ul class="list-unstyled ms-3">
+          <li><i class="fa-solid fa-check text-success me-2"></i> 1/4 de Pollo a la brasa (pechuga o pierna)</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> Porción personal de papas fritas + ensalada</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> 1 Bebida helada a elección</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> 1 Postre del día de la casa</li>
+        </ul>
+      </div>
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger fw-bold px-4"
+                onclick="addPromoAndRedirect('comboEspecial')"> Ordenar Ahora</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal Promo 3: Combo Pareja -->
-  <div class="modal fade" id="promoModal3" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title fw-bold">💑 Combo Pareja</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <img th:src="@{/img/card3.webp}" class="img-fluid rounded mb-3 w-100" alt="Combo Pareja" style="max-height: 250px; object-fit: cover;" />
-          <h4 class="text-danger fw-bold mb-3">S/. 52.00</h4>
-          <p class="text-muted">¡La cita perfecta para los amantes de las brasas! Combina nuestro tierno pollo con el toque ahumado de una chuleta parrillera de primera.</p>
-          <hr />
-          <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
-          <ul class="list-unstyled ms-3">
-            <li><i class="fa-solid fa-check text-success me-2"></i> 1/2 Pollo a la brasa jugoso</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> 1 Chuleta grande a la parrilla seleccionada</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> 2 Porciones de papas fritas doradas</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> 1 Ensalada mediana para compartir</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> 2 Bebidas personales bien heladas</li>
-          </ul>
-        </div>
-        <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
-          <a href="#" class="btn btn-danger fw-bold px-4">Ordenar Ahora</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Modal Promo 4: Combo TORI -->
-  <div class="modal fade" id="promoModal4" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title fw-bold">🆕 Combo TORI</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <img th:src="@{/img/card4.png}" class="img-fluid rounded mb-3 w-100" alt="Combo Rico's" style="max-height: 250px; object-fit: cover;" />
-          <h4 class="text-danger fw-bold mb-3">S/. 38.00</h4>
-          <p class="text-muted">¿No te decides por un solo plato? El Combo TORI es el favorito absoluto porque junta lo mejor de tres mundos peruanos en una sola bandeja.</p>
-          <hr />
-          <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
-          <ul class="list-unstyled ms-3">
-            <li><i class="fa-solid fa-check text-success me-2"></i> 1/4 de Pollo a la brasa clásico</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> 2 Palitos de anticuchos de corazón bien sazonados</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> Base de salchipapa crujiente</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> 1 Bebida personal a elección</li>
-          </ul>
-        </div>
-        <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
-          <a href="#" class="btn btn-danger fw-bold px-4">Ordenar Ahora</a>
-        </div>
+<!-- Modal Promo 3: Combo Pareja -->
+<div class="modal fade" id="promoModal3" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">💑 Combo Pareja</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <img th:src="@{/img/card3.webp}" class="img-fluid rounded mb-3 w-100" alt="Combo Pareja" style="max-height: 250px; object-fit: cover;" />
+        <h4 class="text-danger fw-bold mb-3">S/. 52.00</h4>
+        <p class="text-muted">¡La cita perfecta para los amantes de las brasas! Combina nuestro tierno pollo con el toque ahumado de una chuleta parrillera de primera.</p>
+        <hr />
+        <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
+        <ul class="list-unstyled ms-3">
+          <li><i class="fa-solid fa-check text-success me-2"></i> 1/2 Pollo a la brasa jugoso</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> 1 Chuleta grande a la parrilla seleccionada</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> 2 Porciones de papas fritas doradas</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> 1 Ensalada mediana para compartir</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> 2 Bebidas personales bien heladas</li>
+        </ul>
+      </div>
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger fw-bold px-4"
+                onclick="addPromoAndRedirect('comboPareja')"> Ordenar Ahora</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal Promo 5: Promo Sanguchazo -->
-  <div class="modal fade" id="promoModal5" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title fw-bold">Promo Sanguchazo</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <img th:src="@{/img/card5.webp}" class="img-fluid rounded mb-3 w-100" alt="Combo TORI" style="max-height: 250px; object-fit: cover;" />
-          <h4 class="text-danger fw-bold mb-3">S/. 25.00</h4>
-          <p class="text-muted">Promo Sanguchazo es el ideal para un gran antojo porque es una versión mejorada de un Sandwich al estilo TORI.</p>
-          <hr />
-          <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
-          <ul class="list-unstyled ms-3">
-            <li><i class="fa-solid fa-check text-success me-2"></i> 1 Sanguchazo al estilo TORI</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> 1 gaseosa de 500 ml</li>
-          </ul>
-        </div>
-        <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
-          <a href="#" class="btn btn-danger fw-bold px-4">Ordenar Ahora</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Modal Promo 6: TORI Burger -->
-  <div class="modal fade" id="promoModal6" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title fw-bold">TORI Burger</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <img th:src="@{/img/card6.webp}" class="img-fluid rounded mb-3 w-100" alt="Combo Rico's" style="max-height: 250px; object-fit: cover;" />
-          <h4 class="text-danger fw-bold mb-3">S/. 30.50</h4>
-          <p class="text-muted">¨Si buscas una hamburguesa bien taypá con la mejora calidad, TORI Burger es para ti. Con ingredientes de alta calidad y a nuestro estilo unico puedes disfrutar de una buena hamburguesa.</p>
-          <hr />
-          <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
-          <ul class="list-unstyled ms-3">
-            <li><i class="fa-solid fa-check text-success me-2"></i>1 Hamburguesa doble con queso cheddar, cebolla blanca y pickles</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i>Papas fritas crugientes</li>
-          </ul>
-        </div>
-        <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
-          <a href="#" class="btn btn-danger fw-bold px-4">Ordenar Ahora</a>
-        </div>
+<!-- Modal Promo 4: Combo TORI -->
+<div class="modal fade" id="promoModal4" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">🆕 Combo TORI</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <img th:src="@{/img/card4.png}" class="img-fluid rounded mb-3 w-100" alt="Combo TORI" style="max-height: 250px; object-fit: cover;" />
+        <h4 class="text-danger fw-bold mb-3">S/. 38.00</h4>
+        <p class="text-muted">¿No te decides por un solo plato? El Combo TORI es el favorito absoluto porque junta lo mejor de tres mundos peruanos en una sola bandeja.</p>
+        <hr />
+        <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
+        <ul class="list-unstyled ms-3">
+          <li><i class="fa-solid fa-check text-success me-2"></i> 1/4 de Pollo a la brasa clásico</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> 2 Palitos de anticuchos de corazón bien sazonados</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> Base de salchipapa crujiente</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> 1 Bebida personal a elección</li>
+        </ul>
+      </div>
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger fw-bold px-4"
+                onclick="addPromoAndRedirect('comboTORI')"> Ordenar Ahora</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal Promo 7: Para Picar -->
-  <div class="modal fade" id="promoModal7" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title fw-bold">Para Picar</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <img th:src="@{/img/card7.jpg}" class="img-fluid rounded mb-3 w-100" alt="Combo Rico's" style="max-height: 250px; object-fit: cover;" />
-          <h4 class="text-danger fw-bold mb-3">S/. 28.00</h4>
-          <p class="text-muted">Esta es la mejor forma de empezar una buena orden o compartir con amigos mientras rompen el hielo.</p>
-          <hr />
-          <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
-          <ul class="list-unstyled ms-3">
-            <li><i class="fa-solid fa-check text-success me-2"></i> 7 tekeños clásicos</li>
-            <li><i class="fa-solid fa-check text-success me-2"></i> Salsa de guacamole</li>
-          </ul>
-        </div>
-        <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
-          <a href="#" class="btn btn-danger fw-bold px-4">Ordenar Ahora</a>
-        </div>
+
+<!-- Modal Promo 5: Promo Sanguchazo -->
+<div class="modal fade" id="promoModal5" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">🥪 Promo Sanguchazo</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <img th:src="@{/img/card5.webp}" class="img-fluid rounded mb-3 w-100" alt="Promo Sanguchazo" style="max-height: 250px; object-fit: cover;" />
+        <h4 class="text-danger fw-bold mb-3">S/. 25.00</h4>
+        <p class="text-muted">Promo Sanguchazo es el ideal para un gran antojo porque es una versión mejorada de un Sandwich al estilo TORI.</p>
+        <hr />
+        <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
+        <ul class="list-unstyled ms-3">
+          <li><i class="fa-solid fa-check text-success me-2"></i> 1 Sanguchazo al estilo TORI</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> 1 gaseosa de 500 ml</li>
+        </ul>
+      </div>
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger fw-bold px-4"
+                onclick="addPromoAndRedirect('promoSanguchazo')"> Ordenar Ahora</button>
       </div>
     </div>
   </div>
+</div>
+
+
+<!-- Modal Promo 6: TORI Burger -->
+<div class="modal fade" id="promoModal6" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">🍔 TORI Burger</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <img th:src="@{/img/card6.webp}" class="img-fluid rounded mb-3 w-100" alt="TORI Burger" style="max-height: 250px; object-fit: cover;" />
+        <h4 class="text-danger fw-bold mb-3">S/. 30.50</h4>
+        <p class="text-muted">Si buscas una hamburguesa bien taypá con la mejor calidad, TORI Burger es para ti. Con ingredientes de alta calidad y a nuestro estilo único puedes disfrutar de una buena hamburguesa.</p>
+        <hr />
+        <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
+        <ul class="list-unstyled ms-3">
+          <li><i class="fa-solid fa-check text-success me-2"></i> 1 Hamburguesa doble con queso cheddar, cebolla blanca y pickles</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> Papas fritas crujientes</li>
+        </ul>
+      </div>
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger fw-bold px-4"
+                onclick="addPromoAndRedirect('toriBurger')"> Ordenar Ahora</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Promo 7: Para Picar -->
+<div class="modal fade" id="promoModal7" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold">🥟 Para Picar</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <img th:src="@{/img/card7.jpg}" class="img-fluid rounded mb-3 w-100" alt="Para Picar" style="max-height: 250px; object-fit: cover;" />
+        <h4 class="text-danger fw-bold mb-3">S/. 28.00</h4>
+        <p class="text-muted">Esta es la mejor forma de empezar una buena orden o compartir con amigos mientras rompen el hielo.</p>
+        <hr />
+        <h6 class="fw-bold"><i class="fa-solid fa-utensils text-danger me-2"></i>¿Qué incluye esta promo?</h6>
+        <ul class="list-unstyled ms-3">
+          <li><i class="fa-solid fa-check text-success me-2"></i> 7 tequeños clásicos</li>
+          <li><i class="fa-solid fa-check text-success me-2"></i> Salsa de guacamole</li>
+        </ul>
+      </div>
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger fw-bold px-4"
+                onclick="addPromoAndRedirect('paraPicar')"> Ordenar Ahora</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function addPromoAndRedirect(productId) {
+    fetch('/cart/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'id=' + productId + '&categoria=combo&cantidad=1'
+    }).then(() => {
+      // Redirigir al menú después de 2 segundos
+      setTimeout(() => {
+        window.location.href = '/menu';
+      }, 2000);
+    });
+  }
+</script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
