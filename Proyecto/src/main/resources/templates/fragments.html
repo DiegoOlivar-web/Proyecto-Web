@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+  <!-- Fragmento Navbar -->
+  <div th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">
+          <img th:src="@{/img/LOGO+2+ROJO.png}" alt="Logo TORI Pollería" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMain">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link fw-bold" th:href="@{/}">🏠 INICIO</a></li>
+            <li class="nav-item"><a class="nav-link fw-bold" th:href="@{/menu}">🍗 MENÚ</a></li>
+            <li class="nav-item"><a class="nav-link fw-bold" th:href="@{/nosotros}">👥 NOSOTROS</a></li>
+
+            <!-- 🎉 PROMOS -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown">
+                🎉 PROMOS
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item fw-bold" href="#promociones">Ver Promociones</a></li>
+              </ul>
+            </li>
+
+            <!-- Condicional de sesión -->
+            <li class="nav-item" th:if="${!sesionActiva}">
+              <a class="nav-link fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">🔐 INICIAR SESIÓN</a>
+            </li>
+            <li class="nav-item dropdown user-session-item" th:if="${sesionActiva}">
+              <a class="nav-link dropdown-toggle fw-bold user-session-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <span class="user-session-avatar"><i class="fa-solid fa-user"></i></span>
+                <span th:text="${usuarioLogueado.nombre}">Usuario</span>
+              </a>
+              <div class="dropdown-menu user-session-menu dropdown-menu-lg-end p-0">
+                <div class="user-session-header">
+                  <span class="user-session-avatar user-session-avatar-lg"><i class="fa-solid fa-user"></i></span>
+                  <div>
+                    <strong th:text="${usuarioLogueado.nombre}">Usuario</strong>
+                    <small th:text="${usuarioLogueado.correo}">correo@ejemplo.com</small>
+                  </div>
+                </div>
+                <div class="user-session-status">
+                  <i class="fa-solid fa-circle-check text-success"></i>
+                  <span>Sesión iniciada</span>
+                </div>
+                <a class="dropdown-item user-session-action" th:href="@{/api/logout}">
+                  <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+                </a>
+              </div>
+            </li>
+          </ul>
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <button class="btn btn-outline-dark position-relative me-2" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasCart">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span class="badge bg-danger ms-1" th:text="${cartCount}">0</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</body>
+</html>
