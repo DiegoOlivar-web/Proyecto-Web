@@ -9,13 +9,21 @@ import com.example.Proyecto.Entity.ClienteEntity;
 
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 public class maincontroller {
+
     @GetMapping("/menu")
     public String menu(@RequestParam(required = false, defaultValue = "todos") String categoria,
+                       HttpSession session,
                        Model model) {
+        // Sesión de usuario
+        ClienteEntity usuarioLogueado = (ClienteEntity) session.getAttribute("usuarioLogueado");
+        model.addAttribute("usuarioLogueado", usuarioLogueado);
+        model.addAttribute("sesionActiva", usuarioLogueado != null);
+
+        // Categoría para filtros del menú
         model.addAttribute("categoria", categoria);
+
         return "menu";
     }
 
@@ -25,10 +33,12 @@ public class maincontroller {
                         @RequestParam(required = false) String logout,
                         HttpSession session,
                         Model model) {
+        // Sesión de usuario
         ClienteEntity usuarioLogueado = (ClienteEntity) session.getAttribute("usuarioLogueado");
         model.addAttribute("usuarioLogueado", usuarioLogueado);
         model.addAttribute("sesionActiva", usuarioLogueado != null);
 
+        // Estados de login, registro y logout
         if (login != null) {
             model.addAttribute("loginEstado", login);
             if (usuarioLogueado != null) {
@@ -41,11 +51,18 @@ public class maincontroller {
         if (logout != null) {
             model.addAttribute("logoutEstado", logout);
         }
+
         return "index";
     }
 
     @GetMapping("/nosotros")
-    public String nosotros() {
+    public String nosotros(HttpSession session, Model model) {
+        // Sesión de usuario
+        ClienteEntity usuarioLogueado = (ClienteEntity) session.getAttribute("usuarioLogueado");
+        model.addAttribute("usuarioLogueado", usuarioLogueado);
+        model.addAttribute("sesionActiva", usuarioLogueado != null);
+
         return "nosotros";
     }
 }
+
