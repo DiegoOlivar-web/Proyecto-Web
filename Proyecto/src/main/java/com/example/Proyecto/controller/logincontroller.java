@@ -1,6 +1,5 @@
 package com.example.Proyecto.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,13 +7,14 @@ import com.example.Proyecto.Entity.ClienteEntity;
 import com.example.Proyecto.repository.ClienteRepository;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class logincontroller {
-
-    @Autowired
-    private ClienteRepository clienteRepository;
+    
+    private final ClienteRepository clienteRepository;
 
     @PostMapping("/login")
     public String login(@ModelAttribute ClienteEntity cliente, HttpSession session) {

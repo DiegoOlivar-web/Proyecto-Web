@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finalizar Pedido — TORI POLLERÍA</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <style>
+    body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; }
+    .card { border: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .text-danger-tori { color: #dc3545; }
+    .btn-danger-tori { background-color: #dc3545; color: white; border-radius: 8px; font-weight: 600; }
+    .btn-danger-tori:hover { background-color: #bd2130; color: white; }
+  </style>
+</head>
+<body>
+
+  <div class="container py-5">
+    <div class="row g-4">
+      
+      <div class="col-lg-5 order-lg-2">
+        <div class="card p-4 mb-4">
+          <h5 class="fw-bold mb-3 text-danger-tori"><i class="fa-solid fa-receipt me-2"></i>Resumen del Pedido</h5>
+          <ul class="list-group list-group-flush mb-3">
+            <li th:each="item : ${cart}" class="list-group-item d-flex justify-content-between align-items-start px-0 bg-transparent">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold text-dark" th:text="${item.nombre}">Nombre del Producto</div>
+                <small class="text-muted" th:text="'Cantidad: ' + ${item.cantidad}">Cantidad: 1</small>
+              </div>
+              <span class="fw-bold text-dark" th:text="'S/. ' + ${#numbers.formatDecimal(item.total, 1, 2)}">S/. 0.00</span>
+            </li>
+          </ul>
+          
+          <div class="d-flex justify-content-between align-items-center border-top pt-3">
+            <span class="fs-5 fw-bold">Monto Total:</span>
+            <span class="fs-4 fw-bold text-danger-tori" th:text="'S/. ' + ${#numbers.formatDecimal(cartTotal, 1, 2)}">S/. 0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7 order-lg-1">
+        <form id="formPedido" th:action="@{/pedido/pagar}" method="post">
+          
+          <div class="card p-4 mb-4">
+            <h5 class="fw-bold mb-3 text-dark"><i class="fa-solid fa-truck-dash text-danger-tori me-2"></i>Dirección de Entrega</h5>
+            
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="radio" name="tipoDireccion" id="dirDefecto" value="defecto" checked onclick="toggleDireccionAlternativa(false)">
+              <label class="form-check-input-label" for="dirDefecto">
+                Enviar a mi dirección registrada: 
+                <strong th:text="${usuarioLogueado.direccion}">Dirección predeterminada</strong>
+              </label>
+            </div>
+            
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="radio" name="tipoDireccion" id="dirAlternativa" value="alternativa" onclick="toggleDireccionAlternativa(true)">
+              <label class="form-check-input-label" for="dirAlternativa">
+                Enviar a una dirección diferente (Delivery diferente)
+              </label>
+            </div>
+
+            <div class="mb-2 collapse" id="wrapperDireccionNueva">
+              <label for="direccionAlternativa" class="form-label small fw-bold">Nueva dirección de destino:</label>
+              <input type="text" class="form-control" id="direccionAlternativa" name="direccionAlternativa" placeholder="Ej: Av. Larco 123, Miraflores">
+            </div>
+          </div>
+
+          <div class="card p-4 mb-4">
+            <h5 class="fw-bold mb-3 text-dark"><i class="fa-solid fa-credit-card text-danger-tori me-2"></i>Modalidad de Pago</h5>
+            
+            <div class="mb-3">
+              <label for="metodoPago" class="form-label small fw-bold">Seleccione método:</label>
+              <select class="form-select" id="metodoPago" name="metodoPago" required onchange="toggleFormularioPago(this.value)">
+                <option value="YAPE_PLIN">Yape / Plin (Pago contraentrega)</option>
+                <option value="EFECTIVO">Efectivo (Pago contraentrega)</option>
+                <option value="TARJETA">Tarjeta de Crédito / Débito</option>
+              </select>
+            </div>
+
+            <div id="camposTarjeta" class="row g-3 collapse">
+              <hr>
+              <div class="col-12">
+                <label class="form-label small fw-bold">Número de Tarjeta</label>
+                <input type="text" id="numTarjeta" class="form-control" placeholder="0000 0000 0000 0000">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Fecha de Vencimiento</label>
+                <input type="text" id="vencTarjeta" class="form-control" placeholder="MM/AA">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">CVV</label>
+                <input type="password" id="cvvTarjeta" class="form-control" placeholder="123">
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3">
+            <button type="button" class="btn btn-danger-tori py-3 w-50 shadow-sm fw-bold" onclick="validarYProcesar()">
+              <i class="fa-solid fa-circle-check me-2"></i>Pagar pedido
+            </button>
+            <a th:href="@{/menu}" class="btn btn-outline-secondary py-3 w-50 fw-bold">
+              <i class="fa-solid fa-circle-xmark me-2"></i>Cancelar Pedido
+            </a>
+          </div>
+
+          <div class="modal fade" id="modalQR" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content border-0 shadow-lg" style="border-radius: 15px;">
+                <div class="modal-header bg-dark text-white" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                  <h5 class="modal-title fw-bold"><i class="fa-solid fa-qrcode me-2 text-warning"></i>Pago con Yape / Plin</h5>
+                </div>
+                <div class="modal-body text-center p-4">
+                  <p class="text-muted small">Escanea el siguiente código QR desde tu aplicación financiera para transferir el monto total.</p>
+                  <img th:src="@{/img/QR-PAGO.png}" alt="Código QR Tori Pollería" class="img-fluid my-3 p-2 border rounded" style="max-width: 220px; background-color: #fff;" />
+                  <div class="alert alert-warning py-2 small fw-bold mb-0">
+                    Monto a transferir: <span class="text-danger-tori fs-6" th:text="'S/. ' + ${#numbers.formatDecimal(cartTotal, 1, 2)}">S/. 0.00</span>
+                  </div>
+                </div>
+                <div class="modal-footer bg-light border-top-0 d-flex justify-content-center p-3" style="border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+                  <div class="row w-100 g-2">
+                    <div class="col-6">
+                      <button type="button" class="btn btn-success w-100 fw-bold py-2" data-bs-toggle="modal" data-bs-target="#modalExito">
+                        <i class="fa-solid fa-circle-check me-2"></i>Pago Realizado
+                      </button>
+                    </div>
+                    <div class="col-6">
+                      <button type="button" class="btn btn-outline-secondary w-100 fw-bold py-2" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-circle-xmark me-2"></i>Cancelar Pago
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="modalExito" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content border-0 shadow-lg" style="border-radius: 15px;">
+                <div class="modal-body text-center p-5">
+                  <div class="text-success mb-3">
+                    <i class="fa-solid fa-circle-check fa-4x"></i>
+                  </div>
+                  <h4 class="fw-bold text-dark mb-3">¡Pedido Realizado!</h4>
+                  <p class="text-muted" style="font-size: 0.95rem;">
+                    Apenas llegue el delivery a su dirección nos comunicaremos al número de teléfono agendado.
+                  </p>
+                </div>
+                <div class="modal-footer bg-light border-top-0 p-3 d-flex justify-content-center" style="border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+                  <button type="submit" class="btn btn-danger-tori px-5 py-2 fw-bold">
+                    Entendido <i class="fa-solid fa-arrow-right ms-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleDireccionAlternativa(mostrar) {
+      const wrapper = document.getElementById('wrapperDireccionNueva');
+      const input = document.getElementById('direccionAlternativa');
+      if (mostrar) {
+        wrapper.classList.add('show');
+        input.setAttribute('required', 'required');
+      } else {
+        wrapper.classList.remove('show');
+        input.removeAttribute('required');
+        input.value = '';
+      }
+    }
+
+    function toggleFormularioPago(metodo) {
+      const camposTarjeta = document.getElementById('camposTarjeta');
+      const inputs = camposTarjeta.querySelectorAll('input');
+      
+      if (metodo === 'TARJETA') {
+        camposTarjeta.classList.add('show');
+        inputs.forEach(input => input.setAttribute('required', 'required'));
+      } else {
+        camposTarjeta.classList.remove('show');
+        inputs.forEach(input => {
+          input.removeAttribute('required');
+          input.value = '';
+        });
+      }
+    }
+
+    // El único script de control: Valida requerimientos lógicos antes de disparar los modales nativos
+    function validarYProcesar() {
+      const form = document.getElementById('formPedido');
+      
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const metodo = document.getElementById('metodoPago').value;
+      
+      // Instanciamos los modales usando la API de Bootstrap 5 de forma directa e idéntica
+      if (metodo === 'YAPE_PLIN') {
+        new bootstrap.Modal(document.getElementById('modalQR')).show();
+      } else if (metodo === 'TARJETA') {
+        const num = document.getElementById('numTarjeta').value.trim();
+        const venc = document.getElementById('vencTarjeta').value.trim();
+        const cvv = document.getElementById('cvvTarjeta').value.trim();
+
+        if (num === '' || venc === '' || cvv === '') {
+          form.reportValidity();
+          return;
+        }
+        new bootstrap.Modal(document.getElementById('modalExito')).show();
+      } else if (metodo === 'EFECTIVO') {
+        new bootstrap.Modal(document.getElementById('modalExito')).show();
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

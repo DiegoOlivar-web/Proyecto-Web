@@ -1,36 +1,30 @@
 package com.example.Proyecto.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "pedido")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class PedidoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String usuario;
+    @Column(name = "cliente_id")
+    private Long clienteId;
 
-    private double total;
+    @Column(name = "direccion_id")
+    private Long direccionId;
 
-    private LocalDateTime fecha;
+    @Column(name = "comprobante_id")
+    private Long comprobanteId;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PedidoItemEntity> items = new ArrayList<>();
+    @Column(name = "fecha_pedido", insertable = false, updatable = false)
+    private LocalDateTime fechaPedido;
 
-    public void addItem(PedidoItemEntity item) {
-        item.setPedido(this);
-        this.items.add(item);
-    }
+    private String estado;
+    private Double total;
 }

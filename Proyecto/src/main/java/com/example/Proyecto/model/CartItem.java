@@ -1,7 +1,8 @@
 package com.example.Proyecto.model;
 
 public class CartItem {
-    private String id;
+    // 1. El atributo ahora es String
+    private String id; 
     private String nombre;
     private double precio;
     private int cantidad;
@@ -9,6 +10,7 @@ public class CartItem {
     public CartItem() {
     }
 
+    // 2. El constructor ahora recibe un String como primer parámetro
     public CartItem(String id, String nombre, double precio, int cantidad) {
         this.id = id;
         this.nombre = nombre;
@@ -16,10 +18,12 @@ public class CartItem {
         this.cantidad = cantidad;
     }
 
+    // 3. El Getter devuelve un String
     public String getId() {
         return id;
     }
 
+    // 4. El Setter recibe un String
     public void setId(String id) {
         this.id = id;
     }
@@ -49,6 +53,6 @@ public class CartItem {
     }
 
     public double getTotal() {
-        return precio * cantidad;
+        return this.precio * this.cantidad;
     }
 }
