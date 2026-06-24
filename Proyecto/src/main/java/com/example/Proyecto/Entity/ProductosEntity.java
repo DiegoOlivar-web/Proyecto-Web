@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 @Entity
-@Table(name = "producto")   // asegura que se mapea a la tabla correcta
+@Table(name = "producto")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,8 +20,9 @@ public class ProductosEntity {
     private String descripcion;
     private double precio;
 
-    @Column(name = "categoria_id")   // asegura que se mapea al campo correcto
-    private Integer categoriaId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id")
+    private CategoriaEntity categoria;
 
     private Boolean disponible = true;
 }

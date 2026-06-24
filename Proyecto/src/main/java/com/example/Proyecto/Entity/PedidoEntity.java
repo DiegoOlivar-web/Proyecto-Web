@@ -13,18 +13,25 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "cliente_id")
-    private Long clienteId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id")
+    private ClienteEntity cliente;
 
-    @Column(name = "direccion_id")
-    private Long direccionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "direccion_id")
+    private DireccionEntity direccion;
 
-    @Column(name = "comprobante_id")
-    private Long comprobanteId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comprobante_id")
+    private ComprobanteEntity comprobante;
 
     @Column(name = "fecha_pedido", insertable = false, updatable = false)
     private LocalDateTime fechaPedido;
 
     private String estado;
     private Double total;
+
+    private LocalDateTime fecha;
+
+    private String usuario;
 }

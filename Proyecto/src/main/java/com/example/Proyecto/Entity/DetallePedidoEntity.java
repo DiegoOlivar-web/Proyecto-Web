@@ -12,11 +12,13 @@ public class DetallePedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "pedido_id")
-    private Long pedidoId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pedido_id")
+    private PedidoEntity pedido;
 
-    @Column(name = "producto_id")
-    private Long productoId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "producto_id")
+    private ProductosEntity producto;
 
     private Integer cantidad;
 

@@ -1,12 +1,16 @@
 package com.example.Proyecto.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.example.Proyecto.Entity.ClienteEntity;
+import com.example.Proyecto.Entity.DireccionEntity;
 import com.example.Proyecto.Entity.PedidoEntity;
 import com.example.Proyecto.Entity.DetallePedidoEntity;
 import com.example.Proyecto.model.CartItem;
+import com.example.Proyecto.repository.DireccionRepository;
+import com.example.Proyecto.repository.ProductoRepository;
 import com.example.Proyecto.repository.PedidoRepository;
 import com.example.Proyecto.repository.DetallePedidoRepository;
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +23,10 @@ public class PedidoController {
     private final PedidoRepository pedidoRepository;
 
     private final DetallePedidoRepository detallePedidoRepository;
+
+    private final ProductoRepository productoRepository;
+
+    private final DireccionRepository direccionRepository;
 
     @PostMapping("/cart/confirmar")
     public String procesarPedido(HttpSession session) {
@@ -39,9 +47,12 @@ public class PedidoController {
 
             // 2. Generamos y guardamos la cabecera del Pedido
             PedidoEntity nuevoPedido = new PedidoEntity();
-            nuevoPedido.setClienteId(usuarioLogueado.getId());
+            nuevoPedido.setCliente(usuarioLogueado);
+            nuevoPedido.setDireccion(obtenerDireccionPedido(usuarioLogueado));
             nuevoPedido.setEstado("PENDIENTE");
             nuevoPedido.setTotal(totalCarrito);
+            nuevoPedido.setFecha(LocalDateTime.now());
+            nuevoPedido.setUsuario(usuarioLogueado.getNombre());
 
             // Si manejas direcciones o comprobantes por defecto, puedes setear sus IDs correspondientes aquí
             
@@ -50,8 +61,9 @@ public class PedidoController {
             // 3. Registramos los detalles de cada producto en la orden comercial
             for (CartItem item : cart) {
                 DetallePedidoEntity detalle = new DetallePedidoEntity();
-                detalle.setPedidoId(pedidoGuardado.getId());
-                detalle.setProductoId(Long.parseLong(item.getId()));
+                detalle.setPedido(pedidoGuardado);
+                productoRepository.findById(Long.parseLong(item.getId()))
+                        .ifPresent(detalle::setProducto);
                 detalle.setCantidad(item.getCantidad());
                 detalle.setPrecioUnitario(item.getPrecio());
                 
@@ -64,5 +76,26 @@ public class PedidoController {
         }
 
         return "redirect:/menu";
+    }
+
+    private DireccionEntity obtenerDireccionPedido(ClienteEntity cliente) {
+        if (cliente.getId() != null) {
+            return direccionRepository.findFirstByCliente_IdOrderByIdAsc(cliente.getId())
+                    .orElseGet(() -> crearDireccionDesdeCliente(cliente));
+        }
+
+        return crearDireccionDesdeCliente(cliente);
+    }
+
+    private DireccionEntity crearDireccionDesdeCliente(ClienteEntity cliente) {
+        if (cliente.getDireccion() == null || cliente.getDireccion().isBlank()) {
+            return null;
+        }
+
+        DireccionEntity direccion = new DireccionEntity();
+        direccion.setCliente(cliente);
+        direccion.setAlias("Principal");
+        direccion.setDireccion(cliente.getDireccion());
+        return direccionRepository.save(direccion);
     }
 }
