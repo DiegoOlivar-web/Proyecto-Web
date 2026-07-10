@@ -18,6 +18,10 @@ public class ClienteEntity {
 
     private String nombre;
 
+    private String apellido;
+
+    private String dni;
+
     private String telefono;
 
     private String correo;
@@ -25,4 +29,17 @@ public class ClienteEntity {
     private String contrasena;
 
     private String direccion;
+
+    private String distrito;
+
+    private String referencia;
+
+    private Boolean activo;
+
+    @PrePersist
+    public void prePersist() {
+        if (activo == null) {
+            activo = true;
+        }
+    }
 }

@@ -23,6 +23,7 @@ public class RegistroController {
             return "redirect:/?registro=error";
         }
         // Guardar nuevo cliente
+        cliente.setActivo(true);
         clienteRepository.save(cliente);
 
         // Guardar en sesión para que el navbar lo reconozca

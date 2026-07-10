@@ -19,7 +19,9 @@ public class logincontroller {
     @PostMapping("/login")
     public String login(@ModelAttribute ClienteEntity cliente, HttpSession session) {
         ClienteEntity existente = clienteRepository.findByCorreo(cliente.getCorreo());
-        if (existente != null && existente.getContrasena().equals(cliente.getContrasena())) {
+        if (existente != null
+                && !Boolean.FALSE.equals(existente.getActivo())
+                && existente.getContrasena().equals(cliente.getContrasena())) {
             // Guardar usuario en sesión
             session.setAttribute("usuarioLogueado", existente);
             // Redirigir al index con parámetro de éxito

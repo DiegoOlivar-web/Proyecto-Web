@@ -8,9 +8,11 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.Proyecto.model.CartItem;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -47,22 +49,54 @@ public class CartController {
         PRODUCTOS.put("22", new CartItem("22", "Limonada Frozen", 7.00, 1));
     }
 
-    @PostMapping("/cart/add")
+    @PostMapping(value = "/cart/add", headers = "!X-Requested-With")
     public String addToCart(
             @RequestParam String id,
             @RequestParam(defaultValue = "1") int cantidad,
             @RequestParam(defaultValue = "todos") String categoria,
             HttpSession session) {
 
+        addItemToCart(id, cantidad, session);
+        return "redirect:/menu?categoria=" + categoria;
+    }
+
+    @PostMapping(value = "/cart/add", headers = "X-Requested-With=XMLHttpRequest")
+    @ResponseBody
+    public Map<String, Object> addToCartAjax(
+            @RequestParam String id,
+            @RequestParam(defaultValue = "1") int cantidad,
+            HttpSession session) {
+
+        List<CartItem> cart = addItemToCart(id, cantidad, session);
+        return cartPayload(cart);
+    }
+
+    @PostMapping(value = "/cart/eliminar", headers = "!X-Requested-With")
+    public String eliminarItem(
+            @RequestParam("idProducto") String idProducto,
+            HttpSession session,
+            HttpServletRequest request) {
+
+        removeItemFromCart(idProducto, session);
+
+        String referer = request.getHeader("Referer");
+        return "redirect:" + (referer != null ? referer : "/");
+    }
+
+    @PostMapping(value = "/cart/eliminar", headers = "X-Requested-With=XMLHttpRequest")
+    @ResponseBody
+    public Map<String, Object> eliminarItemAjax(
+            @RequestParam("idProducto") String idProducto,
+            HttpSession session) {
+
+        List<CartItem> cart = removeItemFromCart(idProducto, session);
+        return cartPayload(cart);
+    }
+
+    private List<CartItem> addItemToCart(String id, int cantidad, HttpSession session) {
+        List<CartItem> cart = getCart(session);
         CartItem producto = PRODUCTOS.get(id);
         if (producto != null) {
-            @SuppressWarnings("unchecked")
-            List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
-            if (cart == null) {
-                cart = new ArrayList<>();
-                session.setAttribute("cart", cart);
-            }
-
             CartItem item = null;
             for (CartItem cartItem : cart) {
                 if (cartItem.getId().equals(id)) {
@@ -77,26 +111,43 @@ public class CartController {
                 cart.add(new CartItem(producto.getId(), producto.getNombre(), producto.getPrecio(), cantidad));
             }
         }
-
-        return "redirect:/menu?categoria=" + categoria;
+        return cart;
     }
 
-    @PostMapping("/cart/eliminar")
-    public String eliminarItem(@RequestParam("idProducto") String idProducto, 
-    HttpSession session, 
-    jakarta.servlet.http.HttpServletRequest request) {
-        // 1. Recuperamos la lista original de objetos CartItem de la sesión
-        @SuppressWarnings("unchecked")
+    private List<CartItem> removeItemFromCart(String idProducto, HttpSession session) {
+        List<CartItem> cart = getCart(session);
+        cart.removeIf(item -> item.getId().equals(idProducto));
+        return cart;
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<CartItem> getCart(HttpSession session) {
         List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
-        
-        if (cart != null) {
-            // 2. Eliminamos el objeto cuyo ID coincida con el String recibido (ej. "pollo5")
-            cart.removeIf(item -> item.getId().equals(idProducto));
+        if (cart == null) {
+            cart = new ArrayList<>();
+            session.setAttribute("cart", cart);
         }
-        
-        // 3. Redireccionamos dinámicamente a la página desde donde el usuario clickeó (index o menú)
-        String referer = request.getHeader("Referer");
-        return "redirect:" + (referer != null ? referer : "/");
+        return cart;
+    }
+
+    private Map<String, Object> cartPayload(List<CartItem> cart) {
+        Map<String, Object> payload = new LinkedHashMap<>();
+        List<Map<String, Object>> items = new ArrayList<>();
+        double total = 0;
+
+        for (CartItem item : cart) {
+            Map<String, Object> itemPayload = new LinkedHashMap<>();
+            itemPayload.put("id", item.getId());
+            itemPayload.put("nombre", item.getNombre());
+            itemPayload.put("cantidad", item.getCantidad());
+            itemPayload.put("total", item.getTotal());
+            items.add(itemPayload);
+            total += item.getTotal();
+        }
+
+        payload.put("cartCount", cart.size());
+        payload.put("cartTotal", total);
+        payload.put("items", items);
+        return payload;
     }
 }
-
