@@ -20,12 +20,12 @@ public class ProyectoApplication {
         return args -> {
             try (Connection connection = dataSource.getConnection()) {
                 if (connection.isValid(5)) {
-                    System.out.println("[DB] Conexión SQLite válida: " + connection.getMetaData().getURL());
+                    System.out.println("[DB] Conexion valida: " + connection.getMetaData().getURL());
                 } else {
-                    System.err.println("[DB] No se pudo validar la conexión SQLite.");
+                    System.err.println("[DB] No se pudo validar la conexion.");
                 }
             } catch (Exception error) {
-                System.err.println("[DB] Error al conectar con SQLite: " + error.getMessage());
+                System.err.println("[DB] Error al conectar con la base de datos: " + error.getMessage());
                 error.printStackTrace();
             }
         };

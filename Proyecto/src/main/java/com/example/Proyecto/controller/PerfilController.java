@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.Proyecto.Entity.ClienteEntity;
 import com.example.Proyecto.repository.ClienteRepository;
+import com.example.Proyecto.service.PasswordService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class PerfilController {
 
     private final ClienteRepository clienteRepository;
+    private final PasswordService passwordService;
 
     @GetMapping("/perfil")
     public String perfil(HttpSession session, Model model) {
@@ -29,6 +31,16 @@ public class PerfilController {
         }
 
         model.addAttribute("perfil", usuario);
+        model.addAttribute("perfilNombre", valorFormulario(usuario.getNombre()));
+        model.addAttribute("perfilApellido", valorFormulario(usuario.getApellido()));
+        model.addAttribute("perfilDni", valorFormulario(usuario.getDni()));
+        model.addAttribute("perfilTelefono", valorFormulario(usuario.getTelefono()));
+        model.addAttribute("perfilDireccion", valorFormulario(usuario.getDireccion()));
+        model.addAttribute("perfilDistrito", valorFormulario(usuario.getDistrito()));
+        model.addAttribute("perfilReferencia", valorFormulario(usuario.getReferencia()));
+        model.addAttribute("perfilResumenDni", valorResumen(usuario.getDni()));
+        model.addAttribute("perfilResumenTelefono", valorResumen(usuario.getTelefono()));
+        model.addAttribute("perfilResumenDireccion", valorResumen(usuario.getDireccion()));
         return "perfil";
     }
 
@@ -77,26 +89,26 @@ public class PerfilController {
             return "redirect:/?login=requerido";
         }
 
-        if (!usuario.getContrasena().equals(contrasenaActual)) {
-            redirectAttributes.addFlashAttribute("perfilError", "La contraseña actual no coincide.");
+        if (!passwordService.matches(contrasenaActual, usuario.getContrasena())) {
+            redirectAttributes.addFlashAttribute("perfilError", "La contrasena actual no coincide.");
             return "redirect:/perfil";
         }
 
         if (!nuevaContrasena.equals(confirmarContrasena)) {
-            redirectAttributes.addFlashAttribute("perfilError", "La nueva contraseña y la confirmación no coinciden.");
+            redirectAttributes.addFlashAttribute("perfilError", "La nueva contrasena y la confirmacion no coinciden.");
             return "redirect:/perfil";
         }
 
-        usuario.setContrasena(nuevaContrasena);
+        usuario.setContrasena(passwordService.hash(nuevaContrasena));
         ClienteEntity actualizado = clienteRepository.save(usuario);
         session.setAttribute("usuarioLogueado", actualizado);
-        redirectAttributes.addFlashAttribute("perfilExito", "Tu contraseña fue actualizada.");
+        redirectAttributes.addFlashAttribute("perfilExito", "Tu contrasena fue actualizada.");
 
         return "redirect:/perfil";
     }
 
     @PostMapping("/perfil/eliminar")
-    public String eliminarCuenta(HttpSession session, RedirectAttributes redirectAttributes) {
+    public String eliminarCuenta(HttpSession session) {
         ClienteEntity usuario = obtenerUsuarioActual(session);
         if (usuario == null) {
             return "redirect:/?login=requerido";
@@ -105,9 +117,7 @@ public class PerfilController {
         usuario.setActivo(false);
         clienteRepository.save(usuario);
         session.invalidate();
-        redirectAttributes.addFlashAttribute("logoutEstado", "cuenta_eliminada");
-
-        return "redirect:/";
+        return "redirect:/?logout=cuenta_eliminada";
     }
 
     private ClienteEntity obtenerUsuarioActual(HttpSession session) {
@@ -130,5 +140,13 @@ public class PerfilController {
             return null;
         }
         return valor.trim();
+    }
+
+    private String valorFormulario(String valor) {
+        return valor == null ? "" : valor;
+    }
+
+    private String valorResumen(String valor) {
+        return valor == null || valor.trim().isEmpty() ? "Pendiente" : valor;
     }
 }

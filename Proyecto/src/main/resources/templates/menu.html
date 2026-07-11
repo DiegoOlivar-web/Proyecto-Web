@@ -37,6 +37,48 @@
     </div>
 
     <main class="container py-3">
+        <div class="categoria-titulo">
+            <div class="icono-cat"><i class="fa-solid fa-utensils"></i></div>
+            <h3 th:text="${tituloCategoria}">Todos los productos</h3>
+            <div class="linea"></div>
+        </div>
+
+        <div class="productos-grid" th:if="${!#lists.isEmpty(productosMenu)}">
+            <div class="producto-card" th:each="producto : ${productosMenu}">
+                <div class="card-img-wrap menu-db-image">
+                    <span class="badge-card" th:if="${producto.disponible}">Disponible</span>
+                    <img th:src="${#strings.isEmpty(producto.imagen) ? '/img/LOGO+2+ROJO.png' : producto.imagen}"
+                    th:alt="${producto.nombre}">
+                </div>
+                <div class="card-info">
+                    <h5 th:text="${producto.nombre}">Producto</h5>
+                    <p class="desc" th:text="${#strings.isEmpty(producto.descripcion) ? 'Producto disponible en TORI.' : producto.descripcion}">
+                        Producto disponible en TORI.
+                    </p>
+                </div>
+                <div class="card-footer-custom">
+                    <span class="precio" th:text="${'S/' + #numbers.formatDecimal(producto.precio, 1, 2)}">S/0.00</span>
+                    <div class="card-actions">
+                        <button type="button" class="btn-ver" data-bs-toggle="modal"
+                                th:attr="data-bs-target=${'#productoModal-' + producto.id}">
+                            Ver mas
+                        </button>
+                        <form th:action="@{/cart/add}" method="post" class="d-inline">
+                            <input type="hidden" name="id" th:value="${producto.id}" />
+                            <input type="hidden" name="categoria" th:value="${categoria}" />
+                            <button type="submit" class="btn btn-success btn-sm">Añadir</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center py-5" th:if="${#lists.isEmpty(productosMenu)}">
+            <i class="fa-solid fa-circle-info fa-2x text-muted mb-3"></i>
+            <p class="text-muted mb-0">No hay productos disponibles en esta categoria.</p>
+        </div>
+
+        <div th:remove="all">
 
         <!-- ══ POLLOS ══ -->
         <div class="categoria-titulo" id="cat-pollo" th:if="${categoria == 'todos' or categoria == 'pollo'}">
@@ -390,7 +432,7 @@
                 </div>
                 <div class="card-footer-custom">
                     <span class="precio">S/14.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalChaufa">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="19" /><input type="hidden" name="categoria" value="acompanamiento" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
+                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalChaufa">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="19" /><input type="hidden" name="categoria" value="acompanamiento" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadirasdas</button></form>
                 </div>
             </div>
 
@@ -450,8 +492,65 @@
 
         </div>
 
+        </div>
     </main>
 
+    <div class="modal fade producto-detalle-modal"
+         th:each="producto : ${productosMenu}"
+         th:id="${'productoModal-' + producto.id}"
+         tabindex="-1"
+         th:attr="aria-labelledby=${'productoModalLabel-' + producto.id}"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content producto-modal-content">
+                <div class="modal-header producto-modal-header">
+                    <div>
+                        <span class="producto-modal-kicker"
+                              th:text="${producto.categoria != null ? producto.categoria.nombre : 'Producto'}">Producto</span>
+                        <h5 class="modal-title" th:id="${'productoModalLabel-' + producto.id}"
+                            th:text="${producto.nombre}">Producto</h5>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body producto-modal-body">
+                    <div class="producto-modal-grid">
+                        <div class="producto-modal-image">
+                            <img th:src="${#strings.isEmpty(producto.imagen) ? '/img/LOGO+2+ROJO.png' : producto.imagen}"
+                                 th:alt="${producto.nombre}">
+                        </div>
+                        <div class="producto-modal-info">
+                            <p th:text="${#strings.isEmpty(producto.descripcion) ? 'Producto disponible en TORI.' : producto.descripcion}">
+                                Producto disponible en TORI.
+                            </p>
+
+                            <div class="producto-modal-meta">
+                                <div>
+                                    <span>Precio</span>
+                                    <strong th:text="${'S/' + #numbers.formatDecimal(producto.precio, 1, 2)}">S/0.00</strong>
+                                </div>
+                                <div>
+                                    <span>Estado</span>
+                                    <strong th:text="${producto.disponible} ? 'Disponible' : 'No disponible'">Disponible</strong>
+                                </div>
+                            </div>
+
+                            <form th:action="@{/cart/add}" method="post" class="producto-modal-form">
+                                <input type="hidden" name="id" th:value="${producto.id}" />
+                                <input type="hidden" name="categoria" th:value="${categoria}" />
+                                <label class="form-label fw-semibold">Cantidad</label>
+                                <div class="producto-modal-actions">
+                                    <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" required>
+                                    <button type="submit" class="btn btn-danger fw-bold">Añadir al pedido</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:remove="all">
     <!-- ══ MODALES DE PRODUCTOS ══ -->
     <!-- Plantilla reutilizable para modales -->
 
@@ -464,7 +563,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="pollo1" />
+                    <input type="hidden" name="id" value="1" />
                     
                     <div class="modal-body">
                         <p>El clásico infaltable. Cuarto de pollo rostizado al carbón con sabor ahumado único, acompañado de papas fritas crujientes y ensalada fresca.</p>
@@ -514,7 +613,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="chul1" /> <div class="modal-body">
+                    <input type="hidden" name="id" value="7" /> <div class="modal-body">
                         <p>Jugosa chuleta de cerdo sellada a la parrilla, servida con papas fritas y guarnición de vegetales.</p>
                         <hr><small><b>Incluye:</b> Bebida.</small>
                         <div class="mt-3 mb-2">
@@ -562,7 +661,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="pollo2" />
+                    <input type="hidden" name="id" value="2" />
                     
                     <div class="modal-body">
                         <p>Combinación de trozos de pollo a la brasa y rodajas de salchicha sobre una cama de papas fritas.</p>
@@ -613,7 +712,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="chur1" /> <div class="modal-body">
+                    <input type="hidden" name="id" value="8" /> <div class="modal-body">
                         <p>Corte de res tierno y sabroso, cocinado al término ideal en la parrilla.</p>
                         <hr><small><b>Incluye:</b> Bebida.</small>
                         <div class="mt-3 mb-2">
@@ -660,7 +759,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="parr1" /> <div class="modal-body">
+                    <input type="hidden" name="id" value="9" /> <div class="modal-body">
                         <p>Corte parrillero tradicional, apreciado por su suavidad y gran sabor.</p>
                         <hr><small><b>Incluye:</b> Bebida.</small>
                         <div class="mt-3 mb-2">
@@ -707,7 +806,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="pollo4" />
+                    <input type="hidden" name="id" value="4" />
                     
                     <div class="modal-body">
                         <p>Filete de pechuga marinado en especias peruanas, cocinado a las brasas. Opción más ligera y sabrosa.</p>
@@ -752,7 +851,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="pollo3" />
+                    <input type="hidden" name="id" value="3" />
                     
                     <div class="modal-body">
                         <p>Lo mejor de dos mundos: pollo a la brasa con brochetas de corazón de res maceradas en ají panca.</p>
@@ -801,7 +900,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="salc1" /> <div class="modal-body">
+                    <input type="hidden" name="id" value="16" /> <div class="modal-body">
                         <p>El street food peruano por excelencia. Papas fritas crujientes con salchichas, perfecta para un antojo rápido.</p>
                         <div class="mt-3 mb-2">
                             <label class="form-label fw-semibold">Extras</label>
@@ -835,7 +934,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="parr2" /> <div class="modal-body">
+                    <input type="hidden" name="id" value="10" /> <div class="modal-body">
                         <p>Selección premium de carnes y embutidos al carbón. Se sirve con papas fritas y ensalada.</p>
                         <div class="mt-3 mb-2">
                             <label class="form-label fw-semibold">Extras</label>
@@ -869,7 +968,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="parr3" /> <div class="modal-body">
+                    <input type="hidden" name="id" value="11" /> <div class="modal-body">
                         <p>Nuestra parrilla completa con carnes premium al carbón. Para 3–4 personas. Incluye papas y ensalada.</p>
                         <div class="mt-3 mb-2">
                             <label class="form-label fw-semibold">Extras</label>
@@ -904,7 +1003,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="pollo5" />
+                    <input type="hidden" name="id" value="5" />
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">1/2 Pollo a la Brasa</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
@@ -935,7 +1034,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="pollo6" />
+                    <input type="hidden" name="id" value="6" />
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">Pollo Entero a la Brasa</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
@@ -961,7 +1060,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="prom2" />
+                    <input type="hidden" name="id" value="12" />
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">Anticuchos</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
@@ -986,7 +1085,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="prom5" />
+                    <input type="hidden" name="id" value="13" />
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">Combo Familiar</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
@@ -1013,7 +1112,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="prom4" />
+                    <input type="hidden" name="id" value="14" />
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">Combo Pareja</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
@@ -1040,7 +1139,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="prom6" />
+                    <input type="hidden" name="id" value="15" />
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">Combo TORI</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
@@ -1066,7 +1165,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="acom1" />
+                    <input type="hidden" name="id" value="17" />
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">Papas Fritas</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
@@ -1091,7 +1190,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="acom2" />
+                    <input type="hidden" name="id" value="18" />
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">Ensalada Fresca</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
@@ -1117,7 +1216,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="acom4" />
+                    <input type="hidden" name="id" value="19" />
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">Chaufa de Pollo</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
@@ -1143,7 +1242,7 @@
         <div class="modal-content">
             <form th:action="@{/cart/add}" method="post" class="mb-0">
                 
-                <input type="hidden" name="id" value="beb1" />
+                <input type="hidden" name="id" value="20" />
 
                 <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title">Gaseosa</h5>
@@ -1181,7 +1280,7 @@
             <div class="modal-content">
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
                     
-                    <input type="hidden" name="id" value="beb2" />
+                    <input type="hidden" name="id" value="21" />
 
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">Chicha Morada</h5>
@@ -1220,7 +1319,7 @@
             <div class="modal-content">
                 <form th:action="@{/cart/add}" method="post" class="mb-0">
                     
-                    <input type="hidden" name="id" value="beb3" />
+                    <input type="hidden" name="id" value="22" />
 
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">Limonada Frozen</h5>
@@ -1253,6 +1352,7 @@
         </div>
     </div>
 
+    </div>
 
     <!-- Footer -->
     <footer>

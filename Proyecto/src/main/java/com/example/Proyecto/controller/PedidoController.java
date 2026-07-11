@@ -34,7 +34,7 @@ public class PedidoController {
         ClienteEntity usuarioLogueado = (ClienteEntity) session.getAttribute("usuarioLogueado");
         
         if (usuarioLogueado == null) {
-            // Si el cliente no se ha autenticado, lo redirigimos al login con un parámetro de aviso
+            // Si el clienteno se ha autenticado, lo redirigimos al login con un parámetro de aviso
             return "redirect:/?login=requerido";
         }
 

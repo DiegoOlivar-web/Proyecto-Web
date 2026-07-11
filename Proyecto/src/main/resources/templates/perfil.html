@@ -40,15 +40,15 @@
                     <div class="perfil-summary-list">
                         <div>
                             <span>DNI</span>
-                            <strong th:text="${perfil.dni != null ? perfil.dni : 'Pendiente'}">Pendiente</strong>
+                            <strong th:text="${perfilResumenDni}">Pendiente</strong>
                         </div>
                         <div>
                             <span>Telefono</span>
-                            <strong th:text="${perfil.telefono != null ? perfil.telefono : 'Pendiente'}">Pendiente</strong>
+                            <strong th:text="${perfilResumenTelefono}">Pendiente</strong>
                         </div>
                         <div>
                             <span>Direccion</span>
-                            <strong th:text="${perfil.direccion != null ? perfil.direccion : 'Pendiente'}">Pendiente</strong>
+                            <strong th:text="${perfilResumenDireccion}">Pendiente</strong>
                         </div>
                     </div>
                 </div>
@@ -67,31 +67,31 @@
                     <form th:action="@{/perfil/actualizar}" method="post" class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">Nombre</label>
-                            <input type="text" name="nombre" class="form-control" th:value="${perfil.nombre}" required>
+                            <input type="text" name="nombre" class="form-control" th:value="${perfilNombre}" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Apellido</label>
-                            <input type="text" name="apellido" class="form-control" th:value="${perfil.apellido}" placeholder="Opcional">
+                            <input type="text" name="apellido" class="form-control" th:value="${perfilApellido}" placeholder="Opcional">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">DNI</label>
-                            <input type="text" name="dni" class="form-control" th:value="${perfil.dni}" inputmode="numeric" maxlength="8" placeholder="12345678">
+                            <input type="text" name="dni" class="form-control" th:value="${perfilDni}" inputmode="numeric" maxlength="8" placeholder="12345678">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Telefono</label>
-                            <input type="tel" name="telefono" class="form-control" th:value="${perfil.telefono}" placeholder="987 654 321">
+                            <input type="tel" name="telefono" class="form-control" th:value="${perfilTelefono}" placeholder="987 654 321">
                         </div>
                         <div class="col-12">
                             <label class="form-label">Direccion principal</label>
-                            <input type="text" name="direccion" class="form-control" th:value="${perfil.direccion}" placeholder="Av. / Calle / Urb. / Numero" required>
+                            <input type="text" name="direccion" class="form-control" th:value="${perfilDireccion}" placeholder="Av. / Calle / Urb. / Numero" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Distrito</label>
-                            <input type="text" name="distrito" class="form-control" th:value="${perfil.distrito}" placeholder="Distrito">
+                            <input type="text" name="distrito" class="form-control" th:value="${perfilDistrito}" placeholder="Distrito">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Referencia</label>
-                            <input type="text" name="referencia" class="form-control" th:value="${perfil.referencia}" placeholder="Frente a, piso, color de puerta...">
+                            <input type="text" name="referencia" class="form-control" th:value="${perfilReferencia}" placeholder="Frente a, piso, color de puerta...">
                         </div>
                         <div class="col-12 d-flex justify-content-end">
                             <button type="submit" class="btn perfil-primary-btn">
@@ -138,7 +138,7 @@
                         <h2>Dar de baja mi cuenta</h2>
                         <p>Tu sesion se cerrara y no podras volver a iniciar sesion con esta cuenta.</p>
                     </div>
-                    <form th:action="@{/perfil/eliminar}" method="post" onsubmit="return confirm('¿Seguro que deseas dar de baja tu cuenta?');">
+                    <form th:action="@{/perfil/eliminar}" method="post" onsubmit="return confirm('Seguro que deseas dar de baja tu cuenta?');">
                         <button type="submit" class="btn btn-outline-danger fw-bold">
                             <i class="fa-solid fa-user-slash"></i>
                             Dar de baja

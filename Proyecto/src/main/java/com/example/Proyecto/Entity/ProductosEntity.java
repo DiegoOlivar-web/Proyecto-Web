@@ -19,6 +19,7 @@ public class ProductosEntity {
     private String nombre;
     private String descripcion;
     private double precio;
+    private String imagen;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id")

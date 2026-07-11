@@ -24,8 +24,9 @@ public class CartAdvice {
         }
 
         double total = cart.stream().mapToDouble(CartItem::getTotal).sum();
+        int cantidadTotal = cart.stream().mapToInt(CartItem::getCantidad).sum();
         model.addAttribute("cart", cart);
-        model.addAttribute("cartCount", cart.size());
+        model.addAttribute("cartCount", cantidadTotal);
         model.addAttribute("cartTotal", total);
     }
 }
