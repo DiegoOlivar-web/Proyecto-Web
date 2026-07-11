@@ -25,7 +25,7 @@ public class PedidoEntity {
     @JoinColumn(name = "comprobante_id")
     private ComprobanteEntity comprobante;
 
-    @Column(name = "fecha_pedido", insertable = false, updatable = false)
+    @Column(name = "fecha_pedido")
     private LocalDateTime fechaPedido;
 
     private String estado;

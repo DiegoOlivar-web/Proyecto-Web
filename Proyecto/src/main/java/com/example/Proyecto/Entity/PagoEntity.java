@@ -34,6 +34,6 @@ public class PagoEntity {
 
     private Double monto;
 
-    @Column(name = "fecha_pago", insertable = false, updatable = false)
+    @Column(name = "fecha_pago")
     private LocalDateTime fechaPago;
 }
