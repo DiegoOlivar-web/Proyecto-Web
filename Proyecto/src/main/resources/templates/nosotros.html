@@ -281,7 +281,7 @@
 
 <!-- Modal Registro -->
 <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
         <h5 class="modal-title fw-bold">📝 Crear Cuenta</h5>
@@ -294,6 +294,13 @@
             <div class="input-group">
               <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
               <input type="text" name="nombre" class="form-control" placeholder="Tu nombre completo" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">DNI</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+              <input type="text" name="dni" class="form-control" inputmode="numeric" maxlength="8" pattern="[0-9]{8}" placeholder="12345678" title="Ingresa 8 digitos" required>
             </div>
           </div>
           <div class="mb-3">

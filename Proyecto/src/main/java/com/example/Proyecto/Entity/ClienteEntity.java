@@ -1,5 +1,7 @@
 package com.example.Proyecto.Entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,10 +38,19 @@ public class ClienteEntity {
 
     private Boolean activo;
 
+    @Column(name = "intentos_fallidos")
+    private Integer intentosFallidos;
+
+    @Column(name = "bloqueado_hasta")
+    private LocalDateTime bloqueadoHasta;
+
     @PrePersist
     public void prePersist() {
         if (activo == null) {
             activo = true;
+        }
+        if (intentosFallidos == null) {
+            intentosFallidos = 0;
         }
     }
 }

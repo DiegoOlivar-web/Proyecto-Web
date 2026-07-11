@@ -5,4 +5,6 @@ import com.example.Proyecto.Entity.ClienteEntity;
 
 public interface ClienteRepository extends JpaRepository<ClienteEntity, Long> {
     ClienteEntity findByCorreo(String correo);
+
+    boolean existsByDni(String dni);
 }

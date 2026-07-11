@@ -4,36 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú — TORI POLLERÍA</title>
-    <!-- Bootstrap 5 & Fuentes -->
+    <title>Menu - TORI POLLERIA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
-        rel="stylesheet" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 </head>
 
 <body>
-    
-   <!-- Navbar desde fragments -->
-<div th:replace="fragments :: navbar"></div>
-    
-    <!-- Hero -->
+    <div th:replace="~{fragments :: navbar}"></div>
+
     <div class="menu-hero">
         <h2>NUESTRA CARTA</h2>
-        <p>Pollo a la brasa, parrillas y más — Todo preparado al carbón con amor</p>
+        <p>Pollo a la brasa, parrillas y mas - todo preparado al carbon con amor</p>
     </div>
 
-    <!-- Filtros -->
     <div class="filtros" id="filtros" aria-label="Categorias del menu">
-        <a th:href="@{/menu(categoria='todos')}" th:classappend="${categoria == 'todos'} ? ' activo' : ''"><i class="fa-solid fa-border-all"></i><span>Todos</span></a>
-        <a th:href="@{/menu(categoria='pollo')}" th:classappend="${categoria == 'pollo'} ? ' activo' : ''"><i class="fa-solid fa-drumstick-bite"></i><span>Pollos</span></a>
-        <a th:href="@{/menu(categoria='parrilla')}" th:classappend="${categoria == 'parrilla'} ? ' activo' : ''"><i class="fa-solid fa-fire-burner"></i><span>Parrillas</span></a>
-        <a th:href="@{/menu(categoria='combo')}" th:classappend="${categoria == 'combo'} ? ' activo' : ''"><i class="fa-solid fa-utensils"></i><span>Combos</span></a>
-        <a th:href="@{/menu(categoria='acompanamiento')}" th:classappend="${categoria == 'acompanamiento'} ? ' activo' : ''">Acompañamientos</a>
-        <a th:href="@{/menu(categoria='bebida')}" th:classappend="${categoria == 'bebida'} ? ' activo' : ''"><i class="fa-solid fa-glass-water"></i><span>Bebidas</span></a>
+        <a th:href="@{/menu(categoria='todos')}" th:classappend="${categoria == 'todos'} ? ' activo' : ''">
+            <i class="fa-solid fa-border-all"></i><span>Todos</span>
+        </a>
+        <a th:href="@{/menu(categoria='pollo')}" th:classappend="${categoria == 'pollo'} ? ' activo' : ''">
+            <i class="fa-solid fa-drumstick-bite"></i><span>Pollos</span>
+        </a>
+        <a th:href="@{/menu(categoria='parrilla')}" th:classappend="${categoria == 'parrilla'} ? ' activo' : ''">
+            <i class="fa-solid fa-fire-burner"></i><span>Parrillas</span>
+        </a>
+        <a th:href="@{/menu(categoria='combo')}" th:classappend="${categoria == 'combo'} ? ' activo' : ''">
+            <i class="fa-solid fa-utensils"></i><span>Combos</span>
+        </a>
+        <a th:href="@{/menu(categoria='acompanamiento')}" th:classappend="${categoria == 'acompanamiento'} ? ' activo' : ''">
+            Acompanamientos
+        </a>
+        <a th:href="@{/menu(categoria='bebida')}" th:classappend="${categoria == 'bebida'} ? ' activo' : ''">
+            <i class="fa-solid fa-glass-water"></i><span>Bebidas</span>
+        </a>
     </div>
 
     <main class="container py-3">
@@ -48,7 +53,7 @@
                 <div class="card-img-wrap menu-db-image">
                     <span class="badge-card" th:if="${producto.disponible}">Disponible</span>
                     <img th:src="${#strings.isEmpty(producto.imagen) ? '/img/LOGO+2+ROJO.png' : producto.imagen}"
-                    th:alt="${producto.nombre}">
+                         th:alt="${producto.nombre}">
                 </div>
                 <div class="card-info">
                     <h5 th:text="${producto.nombre}">Producto</h5>
@@ -59,14 +64,10 @@
                 <div class="card-footer-custom">
                     <span class="precio" th:text="${'S/' + #numbers.formatDecimal(producto.precio, 1, 2)}">S/0.00</span>
                     <div class="card-actions">
-                        <button type="button" class="btn-ver" data-bs-toggle="modal"
-                                th:attr="data-bs-target=${'#productoModal-' + producto.id}">
-                            Ver mas
-                        </button>
                         <form th:action="@{/cart/add}" method="post" class="d-inline">
-                            <input type="hidden" name="id" th:value="${producto.id}" />
-                            <input type="hidden" name="categoria" th:value="${categoria}" />
-                            <button type="submit" class="btn btn-success btn-sm">Añadir</button>
+                            <input type="hidden" name="id" th:value="${producto.id}">
+                            <input type="hidden" name="categoria" th:value="${categoria}">
+                            <button type="submit" class="btn btn-success btn-sm">Anadir</button>
                         </form>
                     </div>
                 </div>
@@ -76,422 +77,6 @@
         <div class="text-center py-5" th:if="${#lists.isEmpty(productosMenu)}">
             <i class="fa-solid fa-circle-info fa-2x text-muted mb-3"></i>
             <p class="text-muted mb-0">No hay productos disponibles en esta categoria.</p>
-        </div>
-
-        <div th:remove="all">
-
-        <!-- ══ POLLOS ══ -->
-        <div class="categoria-titulo" id="cat-pollo" th:if="${categoria == 'todos' or categoria == 'pollo'}">
-            <div class="icono-cat"><i class="fas fa-drumstick-bite"></i></div>
-            <h3>Pollos a la Brasa</h3>
-            <div class="linea"></div>
-        </div>
-        <div class="productos-grid" th:if="${categoria == 'todos' or categoria == 'pollo'}">
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card">Popular</span>
-                    <img th:src="@{/img/menu/combo1.webp    }" alt="1/4 Pollo a la Brasa">
-                </div>
-                <div class="card-info">
-                    <h5>1/4 Pollo a la Brasa</h5>
-                    <p class="desc">Cuarto de pollo rostizado al carbón con papas fritas y ensalada.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/18.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal1">Ver más</button>
-                    <form th:action="@{/cart/add}" method="post" class="d-inline ms-2">
-                        <input type="hidden" name="id" value="1" />
-                        <input type="hidden" name="categoria" value="pollo" />
-                        <button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <img th:src="@{/img/menu/combo2.webp}" alt="Salchipollo">
-                </div>
-                <div class="card-info">
-                    <h5>Salchipollo</h5>
-                    <p class="desc">Trozos de pollo a la brasa y salchicha sobre una cama de papas fritas.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/20.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal3">Ver más</button>
-                    <form th:action="@{/cart/add}" method="post" class="d-inline ms-2">
-                        <input type="hidden" name="id" value="2" />
-                        <input type="hidden" name="categoria" value="pollo" />
-                        <button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card">Popular</span>
-                    <img th:src="@{/img/menu/combo3.webp}" alt="Pocho">
-                </div>
-                <div class="card-info">
-                    <h5>Pocho (Pollo + Anticucho)</h5>
-                    <p class="desc">Pollo a la brasa con brochetas de corazón de res maceradas en ají panca.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/20.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal7">Ver más</button>
-                    <form th:action="@{/cart/add}" method="post" class="d-inline ms-2">
-                        <input type="hidden" name="id" value="3" />
-                        <input type="hidden" name="categoria" value="pollo" />
-                        <button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card nuevo">Nuevo</span>
-                    <img th:src="@{/img/menu/combo4.webp}" alt="Pechuga a la Parrilla">
-                </div>
-                <div class="card-info">
-                    <h5>Pechuga a la Parrilla</h5>
-                    <p class="desc">Filete de pechuga marinado en especias peruanas, cocinado a las brasas. Opción más
-                        ligera.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/19.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal6">Ver más</button>
-                    <form th:action="@{/cart/add}" method="post" class="d-inline ms-2">
-                        <input type="hidden" name="id" value="4" />
-                        <input type="hidden" name="categoria" value="pollo" />
-                        <button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Nuevos productos de pollo -->
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card nuevo">Nuevo</span>
-                    <img th:src="@{/img/menu/combo5.png}" alt="1/2 Pollo a la Brasa">
-                </div>
-                <div class="card-info">
-                    <h5>1/2 Pollo a la Brasa</h5>
-                    <p class="desc">Medio pollo rostizado al carbón con papas fritas y ensalada fresca. Ideal para
-                        compartir.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/32.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalMedioPollo">Ver más</button>
-                    <form th:action="@{/cart/add}" method="post" class="d-inline ms-2">
-                        <input type="hidden" name="id" value="5" />
-                        <input type="hidden" name="categoria" value="pollo" />
-                        <button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <img th:src="@{/img/menu/combo6.jpg}" alt="Pollo Entero">
-                </div>
-                <div class="card-info">
-                    <h5>Pollo Entero a la Brasa</h5>
-                    <p class="desc">Pollo entero dorado al carbón, perfecto para toda la familia. Incluye doble porción
-                        de papas y ensalada.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/58.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalPolloEntero">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="6" /><input type="hidden" name="categoria" value="pollo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- ══ PARRILLAS ══ -->
-        <div class="categoria-titulo" id="cat-parrilla" th:if="${categoria == 'todos' or categoria == 'parrilla'}">
-            <div class="icono-cat"><i class="fas fa-fire"></i></div>
-            <h3>Parrillas</h3>
-            <div class="linea"></div>
-        </div>
-        <div class="productos-grid" th:if="${categoria == 'todos' or categoria == 'parrilla'}">
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <img th:src="@{/img/menu/combo7.webp}" alt="Chuleta de Cerdo">
-                </div>
-                <div class="card-info">
-                    <h5>Chuleta de Cerdo</h5>
-                    <p class="desc">Jugosa chuleta de cerdo sellada a la parrilla, con papas fritas y guarnición de
-                        vegetales.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/18.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal2">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="7" /><input type="hidden" name="categoria" value="parrilla" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <img th:src="@{/img/menu/combo8.jpg}" alt="Churrasco">
-                </div>
-                <div class="card-info">
-                    <h5>Churrasco</h5>
-                    <p class="desc">Corte de res tierno cocinado al término ideal en la parrilla para resaltar su
-                        jugosidad.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/18.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal4">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="8" /><input type="hidden" name="categoria" value="parrilla" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <img th:src="@{/img/menu/combo9.jpg}" alt="Marucha">
-                </div>
-                <div class="card-info">
-                    <h5>Marucha</h5>
-                    <p class="desc">Corte parrillero tradicional, apreciado por su suavidad. Ideal para amantes de la
-                        carne.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/18.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal5">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="9" /><input type="hidden" name="categoria" value="parrilla" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card">Popular</span>
-                    <img th:src="@{/img/menu/combo10.webp}" alt="1/2 Parrilla Especial">
-                </div>
-                <div class="card-info">
-                    <h5>1/2 Parrilla Especial</h5>
-                    <p class="desc">Selección de carnes y embutidos al carbón. Se sirve con papas fritas y ensalada.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/46.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal9">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="10" /><input type="hidden" name="categoria" value="parrilla" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card">Popular</span>
-                    <img th:src="@{/img/menu/combo11.webp}" alt="Parrilla TORI">
-                </div>
-                <div class="card-info">
-                    <h5>Parrilla TORI</h5>
-                    <p class="desc">Nuestra parrilla completa: carnes premium al carbón con papas y ensalada. Para 3–4 personas.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/70.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal10">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="11" /><input type="hidden" name="categoria" value="parrilla" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-            <!-- Nuevos parrillas -->
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card nuevo">Nuevo</span>
-                    <img th:src="@{/img/menu/combo12.jpg}" alt="Anticuchos">
-                </div>
-                <div class="card-info">
-                    <h5>Anticuchos</h5>
-                    <p class="desc">Brochetas de corazón de res maceradas en ají panca, servidas con papas y choclo. El
-                        sabor de la calle limeña.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/15.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalAnticuchos">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="12" /><input type="hidden" name="categoria" value="parrilla" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- ══ COMBOS ══ -->
-        <div class="categoria-titulo" id="cat-combo" th:if="${categoria == 'todos' or categoria == 'combo'}">
-            <div class="icono-cat"><i class="fas fa-gift"></i></div>
-            <h3>Combos Especiales</h3>
-            <div class="linea"></div>
-        </div>
-        <div class="productos-grid" th:if="${categoria == 'todos' or categoria == 'combo'}">
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card">Popular</span>
-                    <img th:src="@{/img/menu/combo13.webp}" alt="Combo Familiar">
-                </div>
-                <div class="card-info">
-                    <h5>Combo Familiar</h5>
-                    <p class="desc">1 pollo entero + 2 porciones de papas + 2 ensaladas + 1 gaseosa. Ideal para
-                        compartir en familia.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/72.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalComboFamiliar">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="13" /><input type="hidden" name="categoria" value="combo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card nuevo">Nuevo</span>
-                    <img th:src="@{/img/card3.webp}" alt="Combo Pareja">
-                </div>
-                <div class="card-info">
-                    <h5>Combo Pareja</h5>
-                    <p class="desc">1/2 pollo + 1 chuleta a la parrilla + 2 porciones de papas + 2 bebidas. ¡La cita
-                        perfecta!</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/52.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalComboPareja">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="14" /><input type="hidden" name="categoria" value="combo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <img th:src="@{/img/card4.png}" alt="Combo TORI">
-                </div>
-                <div class="card-info">
-                    <h5>Combo TORI</h5>
-                    <p class="desc">1/4 pollo + anticuchos + salchipapa + 1 bebida. El favorito de nuestros clientes
-                        frecuentes.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/38.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalComboTORI">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="15" /><input type="hidden" name="categoria" value="combo" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- ══ ACOMPAÑAMIENTOS ══ -->
-        <div class="categoria-titulo" id="cat-acompanamiento" th:if="${categoria == 'todos' or categoria == 'acompanamiento'}">
-            <div class="icono-cat"><i class="fas fa-bowl-food"></i></div>
-            <h3>Acompañamientos</h3>
-            <div class="linea"></div>
-        </div>
-        <div class="productos-grid" th:if="${categoria == 'todos' or categoria == 'acompanamiento'}">
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card">Popular</span>
-                    <img th:src="@{/img/menu/combo14.jpg}" alt="Salchipapa">
-                </div>
-                <div class="card-info">
-                    <h5>Salchipapa</h5>
-                    <p class="desc">El street food peruano por excelencia. Papas fritas crujientes con salchichas.
-                        Perfecta para un antojo rápido.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/13.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modal8">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="16" /><input type="hidden" name="categoria" value="acompanamiento" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <img th:src="@{/img/menu/combo15.jpg}" alt="Papas Fritas">
-                </div>
-                <div class="card-info">
-                    <h5>Papas Fritas</h5>
-                    <p class="desc">Porción generosa de papas fritas doradas y crujientes, sazonadas al punto justo.
-                        Acompañan cualquier plato.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/8.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalPapas">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="17" /><input type="hidden" name="categoria" value="acompanamiento" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card nuevo">Nuevo</span>
-                    <img th:src="@{/img/menu/combo16.webp}" alt="Ensalada Fresca">
-                </div>
-                <div class="card-info">
-                    <h5>Ensalada Fresca</h5>
-                    <p class="desc">Mix de lechugas, tomate, cebolla y palta con aderezo de la casa. La opción más
-                        saludable del menú.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/9.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalEnsalada">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="18" /><input type="hidden" name="categoria" value="acompanamiento" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <img th:src="@{/img/menu/combo17.png}" alt="Chaufa de Pollo">
-                </div>
-                <div class="card-info">
-                    <h5>Chaufa de Pollo</h5>
-                    <p class="desc">Arroz chaufa con trozos de pollo, vegetales salteados, huevo y salsa de soya. El
-                        sabor chifa en su máxima expresión.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/14.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalChaufa">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="19" /><input type="hidden" name="categoria" value="acompanamiento" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadirasdas</button></form>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- ══ BEBIDAS ══ -->
-        <div class="categoria-titulo" id="cat-bebida" th:if="${categoria == 'todos' or categoria == 'bebida'}">
-            <div class="icono-cat"><i class="fas fa-wine-glass"></i></div>
-            <h3>Bebidas</h3>
-            <div class="linea"></div>
-        </div>
-        <div class="productos-grid" th:if="${categoria == 'todos' or categoria == 'bebida'}">
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <img th:src="@{/img/menu/bebdidas1.jpg}" alt="Gaseosa">
-                </div>
-                <div class="card-info">
-                    <h5>Gaseosa (350ml)</h5>
-                    <p class="desc">Inca Kola, Coca-Cola o Sprite bien fría. La compañera ideal de cualquier plato.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/4.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalGaseosa">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="20" /><input type="hidden" name="categoria" value="bebida" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card">Popular</span>
-                    <img th:src="@{/img/menu/bebidas2.jpg}" alt="Chicha Morada">
-                </div>
-                <div class="card-info">
-                    <h5>Chicha Morada</h5>
-                    <p class="desc">Preparada en casa con maíz morado, clavo y canela. Refrescante y 100% natural.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/5.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalChicha">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="21" /><input type="hidden" name="categoria" value="bebida" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-            <div class="producto-card">
-                <div class="card-img-wrap">
-                    <span class="badge-card nuevo">Nuevo</span>
-                    <img th:src="@{/img/menu/bebidas3.webp}" alt="Limonada Frozen">
-                </div>
-                <div class="card-info">
-                    <h5>Limonada Frozen</h5>
-                    <p class="desc">Limonada helada con menta y hielo triturado. La bebida del verano peruano.</p>
-                </div>
-                <div class="card-footer-custom">
-                    <span class="precio">S/7.00</span>
-                    <button class="btn-ver" data-bs-toggle="modal" data-bs-target="#modalLimonada">Ver más</button><form th:action="@{/cart/add}" method="post" class="d-inline ms-2"><input type="hidden" name="id" value="22" /><input type="hidden" name="categoria" value="bebida" /><button type="submit" class="btn btn-success btn-sm">🛒 Añadir</button></form>
-                </div>
-            </div>
-
-        </div>
-
         </div>
     </main>
 
@@ -535,12 +120,12 @@
                             </div>
 
                             <form th:action="@{/cart/add}" method="post" class="producto-modal-form">
-                                <input type="hidden" name="id" th:value="${producto.id}" />
-                                <input type="hidden" name="categoria" th:value="${categoria}" />
+                                <input type="hidden" name="id" th:value="${producto.id}">
+                                <input type="hidden" name="categoria" th:value="${categoria}">
                                 <label class="form-label fw-semibold">Cantidad</label>
                                 <div class="producto-modal-actions">
                                     <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" required>
-                                    <button type="submit" class="btn btn-danger fw-bold">Añadir al pedido</button>
+                                    <button type="submit" class="btn btn-danger fw-bold">Anadir al pedido</button>
                                 </div>
                             </form>
                         </div>
@@ -550,829 +135,24 @@
         </div>
     </div>
 
-    <div th:remove="all">
-    <!-- ══ MODALES DE PRODUCTOS ══ -->
-    <!-- Plantilla reutilizable para modales -->
-
-    <!-- Modal 1: 1/4 Pollo -->
-    <div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">1/4 Pollo a la Brasa</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="1" />
-                    
-                    <div class="modal-body">
-                        <p>El clásico infaltable. Cuarto de pollo rostizado al carbón con sabor ahumado único, acompañado de papas fritas crujientes y ensalada fresca.</p>
-                        <hr><small><b>Incluye:</b> Bebida refrescante.</small>
-                        <div class="mt-3 mb-2">
-                            <label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Salsa adicional</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Ají de la casa</label>
-                            </div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label fw-semibold">Bebida</label>
-                            <select class="form-select form-select-sm">
-                                <option>Inka Cola / Coca-Cola / Sprite</option>
-                                <option>Chicha morada</option>
-                                <option>Durazno</option>
-                            </select>
-                        </div>
-                        <div class="mb-1">
-                            <label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span class="fw-bold text-danger fs-5">S/. 18.00</span>
-                        <div>
-                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 2: Chuleta -->
-    <div class="modal fade" id="modal2" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Chuleta de Cerdo</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="7" /> <div class="modal-body">
-                        <p>Jugosa chuleta de cerdo sellada a la parrilla, servida con papas fritas y guarnición de vegetales.</p>
-                        <hr><small><b>Incluye:</b> Bebida.</small>
-                        <div class="mt-3 mb-2">
-                            <label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Salsa adicional</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Ají de la casa</label>
-                            </div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label fw-semibold">Bebida</label>
-                            <select class="form-select form-select-sm">
-                                <option>Inka Cola / Coca-Cola / Sprite</option>
-                                <option>Chicha morada</option>
-                                <option>Durazno</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span class="fw-bold text-danger fs-5">S/. 18.00</span>
-                        <div>
-                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 3: Salchipollo -->
-    <div class="modal fade" id="modal3" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Salchipollo</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="2" />
-                    
-                    <div class="modal-body">
-                        <p>Combinación de trozos de pollo a la brasa y rodajas de salchicha sobre una cama de papas fritas.</p>
-                        <hr><small><b>Incluye:</b> Bebida.</small>
-                        <div class="mt-3 mb-2">
-                            <label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Salsa adicional</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Ají de la casa</label>
-                            </div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label fw-semibold">Bebida</label>
-                            <select class="form-select form-select-sm">
-                                <option>Inka Cola / Coca-Cola / Sprite</option>
-                                <option>Chicha morada</option>
-                                <option>Durazno</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span class="fw-bold text-danger fs-5">S/. 20.00</span>
-                        <div>
-                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modales 4–10 (misma estructura) -->
-    <!-- Modal 4: Churrasco -->
-    <div class="modal fade" id="modal4" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Churrasco</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="8" /> <div class="modal-body">
-                        <p>Corte de res tierno y sabroso, cocinado al término ideal en la parrilla.</p>
-                        <hr><small><b>Incluye:</b> Bebida.</small>
-                        <div class="mt-3 mb-2">
-                            <label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Salsa adicional</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Ají de la casa</label>
-                            </div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label fw-semibold">Bebida</label>
-                            <select class="form-select form-select-sm">
-                                <option>Inka Cola / Coca-Cola / Sprite</option>
-                                <option>Chicha morada</option>
-                                <option>Durazno</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span class="fw-bold text-danger fs-5">S/. 18.00</span>
-                        <div>
-                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Modal 5: Marucha -->
-    <div class="modal fade" id="modal5" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Marucha</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="9" /> <div class="modal-body">
-                        <p>Corte parrillero tradicional, apreciado por su suavidad y gran sabor.</p>
-                        <hr><small><b>Incluye:</b> Bebida.</small>
-                        <div class="mt-3 mb-2">
-                            <label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Salsa adicional</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Ají de la casa</label>
-                            </div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label fw-semibold">Bebida</label>
-                            <select class="form-select form-select-sm">
-                                <option>Inka Cola / Coca-Cola / Sprite</option>
-                                <option>Chicha morada</option>
-                                <option>Durazno</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span class="fw-bold text-danger fs-5">S/. 18.00</span>
-                        <div>
-                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Modal 6: Pechuga -->
-    <div class="modal fade" id="modal6" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Pechuga a la Parrilla</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="4" />
-                    
-                    <div class="modal-body">
-                        <p>Filete de pechuga marinado en especias peruanas, cocinado a las brasas. Opción más ligera y sabrosa.</p>
-                        <hr><small><b>Incluye:</b> Bebida.</small>
-                        <div class="mt-3 mb-2">
-                            <label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Salsa adicional</label>
-                            </div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label fw-semibold">Bebida</label>
-                            <select class="form-select form-select-sm">
-                                <option>Inka Cola / Coca-Cola / Sprite</option>
-                                <option>Chicha morada</option>
-                                <option>Durazno</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span class="fw-bold text-danger fs-5">S/. 19.00</span>
-                        <div>
-                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Modal 7: Pocho -->
-    <div class="modal fade" id="modal7" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Pocho (Pollo + Anticucho)</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="3" />
-                    
-                    <div class="modal-body">
-                        <p>Lo mejor de dos mundos: pollo a la brasa con brochetas de corazón de res maceradas en ají panca.</p>
-                        <hr><small><b>Incluye:</b> Bebida.</small>
-                        <div class="mt-3 mb-2">
-                            <label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Salsa adicional</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Ají de la casa</label>
-                            </div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label fw-semibold">Bebida</label>
-                            <select class="form-select form-select-sm">
-                                <option>Inka Cola / Coca-Cola / Sprite</option>
-                                <option>Chicha morada</option>
-                                <option>Durazno</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span class="fw-bold text-danger fs-5">S/. 20.00</span>
-                        <div>
-                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Modal 8: Salchipapa -->
-    <div class="modal fade" id="modal8" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Salchipapa</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="16" /> <div class="modal-body">
-                        <p>El street food peruano por excelencia. Papas fritas crujientes con salchichas, perfecta para un antojo rápido.</p>
-                        <div class="mt-3 mb-2">
-                            <label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Salsa adicional</label>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span class="fw-bold text-danger fs-5">S/. 13.00</span>
-                        <div>
-                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Modal 9: 1/2 Parrilla -->
-    <div class="modal fade" id="modal9" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">1/2 Parrilla Especial</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="10" /> <div class="modal-body">
-                        <p>Selección premium de carnes y embutidos al carbón. Se sirve con papas fritas y ensalada.</p>
-                        <div class="mt-3 mb-2">
-                            <label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Porción adicional de papas</label>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span class="fw-bold text-danger fs-5">S/. 46.00</span>
-                        <div>
-                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Modal 10: Parrilla Completa -->
-    <div class="modal fade" id="modal10" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Parrilla TORI</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="11" /> <div class="modal-body">
-                        <p>Nuestra parrilla completa con carnes premium al carbón. Para 3–4 personas. Incluye papas y ensalada.</p>
-                        <div class="mt-3 mb-2">
-                            <label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Porción adicional de papas</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Jarra adicional de chicha</label>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span class="fw-bold text-danger fs-5">S/. 70.00</span>
-                        <div>
-                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modales nuevos -->
-    <div class="modal fade" id="modalMedioPollo" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="5" />
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">1/2 Pollo a la Brasa</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Medio pollo rostizado al carbón con papas fritas y ensalada. Ideal para compartir entre dos.</p>
-                        <hr><small><b>Incluye:</b> Bebida.</small>
-                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Salsa adicional</label></div>
-                        </div>
-                        <div class="mb-2"><label class="form-label fw-semibold">Bebida</label><select class="form-select form-select-sm">
-                                <option>Inka Cola / Coca-Cola / Sprite</option>
-                                <option>Chicha morada</option>
-                                <option>Durazno</option>
-                            </select></div>
-                        <div><label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 32.00</span>
-                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalPolloEntero" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="6" />
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">Pollo Entero a la Brasa</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Pollo entero dorado al carbón, perfecto para toda la familia. Incluye doble porción de papas y ensalada.</p>
-                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Salsa adicional</label></div>
-                            <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Ají de la casa</label></div>
-                        </div>
-                        <div><label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 58.00</span>
-                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalAnticuchos" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="12" />
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">Anticuchos</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Brochetas de corazón de res maceradas en ají panca, servidas con papas y choclo. El sabor auténtico de la calle limeña.</p>
-                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Salsa adicional</label></div>
-                        </div>
-                        <div><label class="form-label fw-semibold">Cantidad (porción)</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 15.00</span>
-                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalComboFamiliar" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="13" />
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">Combo Familiar</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>1 pollo entero + 2 porciones de papas fritas + 2 ensaladas + 1 gaseosa. El combo perfecto para compartir en familia.</p>
-                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Bebidas</label><select class="form-select form-select-sm">
-                                <option>2x Inka Cola</option>
-                                <option>2x Coca-Cola</option>
-                                <option>Mixto</option>
-                            </select></div>
-                        <div><label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 72.00</span>
-                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalComboPareja" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="14" />
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">Combo Pareja</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>1/2 pollo + 1 chuleta a la parrilla + 2 porciones de papas + 2 bebidas. ¡La cita perfecta!</p>
-                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Bebidas</label><select class="form-select form-select-sm">
-                                <option>2x Inka Cola</option>
-                                <option>2x Chicha morada</option>
-                                <option>Mixto</option>
-                            </select></div>
-                        <div><label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 52.00</span>
-                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalComboTORI" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="15" />
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">Combo TORI</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>1/4 pollo + anticuchos + salchipapa + 1 bebida. El favorito de nuestros clientes frecuentes.</p>
-                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Bebida</label><select class="form-select form-select-sm">
-                                <option>Inka Cola / Coca-Cola / Sprite</option>
-                                <option>Chicha morada</option>
-                            </select></div>
-                        <div><label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 38.00</span>
-                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalPapas" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="17" />
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">Papas Fritas</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Porción generosa de papas fritas doradas y crujientes, sazonadas al punto justo.</p>
-                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Salsa adicional</label></div>
-                        </div>
-                        <div><label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 8.00</span>
-                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalEnsalada" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="18" />
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">Ensalada Fresca</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Mix de lechugas, tomate, cebolla y palta con aderezo de la casa. La opción más saludable del menú.</p>
-                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Aderezo</label><select class="form-select form-select-sm">
-                                <option>Aderezo de la casa</option>
-                                <option>Aceite de oliva y limón</option>
-                            </select></div>
-                        <div><label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 9.00</span>
-                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalChaufa" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    <input type="hidden" name="id" value="19" />
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">Chaufa de Pollo</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Arroz chaufa con trozos de pollo, vegetales salteados, huevo y salsa de soya. El sabor chifa en su máxima expresión.</p>
-                        <div class="mt-3 mb-2"><label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Extra salsa soya</label></div>
-                        </div>
-                        <div><label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" value="1" min="1" style="width:80px" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between"><span class="fw-bold text-danger fs-5">S/. 14.00</span>
-                        <div><button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalGaseosa" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <form th:action="@{/cart/add}" method="post" class="mb-0">
-                
-                <input type="hidden" name="id" value="20" />
-
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Gaseosa</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Gaseosa bien fría en botella de 350ml.</p>
-                    <div class="mt-3 mb-2">
-                        <label class="form-label fw-semibold">Sabor</label>
-                        <select class="form-select form-select-sm">
-                            <option>Inka Cola</option>
-                            <option>Coca-Cola</option>
-                            <option>Sprite</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="form-label fw-semibold">Cantidad</label>
-                        <input type="number" name="cantidad" class="form-control form-control-sm" 
-                               value="1" min="1" style="width:80px" required>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <span class="fw-bold text-danger fs-5">S/. 4.00</span>
-                    <div>
-                        <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-    <div class="modal fade" id="modalChicha" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    
-                    <input type="hidden" name="id" value="21" />
-
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">Chicha Morada</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    
-                    <div class="modal-body">
-                        <p>Preparada en casa con maíz morado, clavo y canela. Refrescante y 100% natural.</p>
-                        
-                        <div class="mt-3">
-                            <label class="form-label fw-semibold">Tamaño</label>
-                            <select class="form-select form-select-sm">
-                                <option>Vaso (300ml)</option>
-                                <option>Jarra (1L)</option>
-                            </select>
-                        </div>
-                        <div class="mt-2">
-                            <label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" 
-                                value="1" min="1" style="width:80px" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span class="fw-bold text-danger fs-5">S/. 5.00</span>
-                        <div>
-                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalLimonada" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form th:action="@{/cart/add}" method="post" class="mb-0">
-                    
-                    <input type="hidden" name="id" value="22" />
-
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">Limonada Frozen</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Limonada helada con menta y hielo triturado. La bebida del verano peruano.</p>
-                        <div class="mt-3 mb-2">
-                            <label class="form-label fw-semibold">Extras</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Extra menta</label>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control form-control-sm" 
-                                value="1" min="1" style="width:80px" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span class="fw-bold text-danger fs-5">S/. 7.00</span>
-                        <div>
-                            <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success btn-sm">🛒 Añadir al carrito</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    </div>
-
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row gy-3">
                 <div class="col-12 col-md-4">
-                    <h6>📋 Información Legal</h6>
-                    <a href="#">🔒 Política de Privacidad</a>
-                    <a href="#">🍪 Política de Cookies</a>
-                    <a href="tel:986592177">📞 TEL. 986 592 177</a>
-                    <span class="small text-light d-block mt-1">📍 Ca. José Gálvez 390, Lima 15074</span>
+                    <h6>Informacion Legal</h6>
+                    <a href="#">Politica de Privacidad</a>
+                    <a href="#">Politica de Cookies</a>
+                    <a href="tel:986592177">TEL. 986 592 177</a>
+                    <span class="small text-light d-block mt-1">Ca. Jose Galvez 390, Lima 15074</span>
                 </div>
                 <div class="col-6 col-md-4">
-                    <h6>Navegación</h6>
+                    <h6>Navegacion</h6>
                     <a th:href="@{/}">Inicio</a>
-                    <a th:href="@{/menu}">Menú</a>
+                    <a th:href="@{/menu}">Menu</a>
                     <a th:href="@{/nosotros}">Nosotros</a>
                 </div>
                 <div class="col-6 col-md-4">
-                    <h6>Síguenos</h6>
+                    <h6>Siguenos</h6>
                     <a href="#"><i class="fab fa-facebook me-1"></i> Facebook</a>
                     <a href="#"><i class="fab fa-instagram me-1"></i> Instagram</a>
                     <a href="#"><i class="fab fa-tiktok me-1"></i> TikTok</a>
@@ -1380,233 +160,154 @@
                 </div>
             </div>
 
-      <p class="text-center mb-0 text-white-50" style="font-size:0.82rem;">© 2026 TORI POLLERÍA. Todos los derechos reservados.</p>
+            <p class="text-center mb-0 text-white-50" style="font-size:0.82rem;">(c) 2026 TORI POLLERIA. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-
-    </div>
-    </div>
-    </div>
-
-    <!-- Modal Login Exitoso -->
-<div class="modal fade" id="modalLoginExitoso" tabindex="-1" aria-hidden="true"
-     th:classappend="${loginEstado == 'exitoso'} ? ' show' : ''"
-     th:style="${loginEstado == 'exitoso'} ? 'display:block;' : ''">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-success text-white">
-        <h5 class="modal-title fw-bold">✅ Bienvenido</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body text-center py-4">
-        <p class="fs-5">¡Hola, <strong th:text="${loginNombre}"></strong>! Has iniciado sesión correctamente.</p>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-success fw-bold px-4" data-bs-dismiss="modal">Continuar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Login Error -->
-<div class="modal fade" id="modalLoginError" tabindex="-1" aria-hidden="true"
-     th:classappend="${loginEstado == 'error'} ? ' show' : ''"
-     th:style="${loginEstado == 'error'} ? 'display:block;' : ''">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title fw-bold">❌ Error</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body text-center py-4">
-        <p class="fs-5">Correo o contraseña incorrectos. Intenta de nuevo.</p>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-danger fw-bold px-4" data-bs-dismiss="modal">Intentar de nuevo</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal Registro Exitoso -->
-<div class="modal fade" id="modalRegistroExitoso" tabindex="-1" aria-hidden="true"
-     th:classappend="${registroEstado == 'exitoso'} ? ' show' : ''"
-     th:style="${registroEstado == 'exitoso'} ? 'display:block;' : ''">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-success text-white">
-        <h5 class="modal-title fw-bold">✅ Registro exitoso</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body text-center py-4">
-        <p class="fs-5">¡Tu cuenta fue creada correctamente! Ya puedes iniciar sesión.</p>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-success fw-bold px-4" data-bs-dismiss="modal">Continuar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Registro Error -->
-<div class="modal fade" id="modalRegistroError" tabindex="-1" aria-hidden="true"
-     th:classappend="${registroEstado == 'error'} ? ' show' : ''"
-     th:style="${registroEstado == 'error'} ? 'display:block;' : ''">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title fw-bold">❌ Correo ya registrado</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body text-center py-4">
-        <p class="fs-5">El correo ingresado ya está registrado. Intenta con otro.</p>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-danger fw-bold px-4" data-bs-dismiss="modal">Intentar de nuevo</button>
-      </div>
-    </div>
-  </div>
-</div>
-  <!-- Modal Login -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title">🔐 Iniciar Sesión</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <form th:action="@{/api/login}" method="post">
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Correo Electrónico</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-              <input type="email" name="correo" class="form-control" placeholder="nombre@ejemplo.com" required>
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Iniciar Sesion</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/api/login}" method="post">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Correo Electronico</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                <input type="email" name="correo" class="form-control" placeholder="nombre@ejemplo.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Contrasena</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                <input type="password" name="contrasena" class="form-control" placeholder="********" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-danger w-100 fw-bold py-2">Iniciar Sesion</button>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center bg-light">
+                    <p class="small mb-0">No tienes cuenta?
+                        <a href="#" class="text-danger fw-bold text-decoration-none" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#registerModal">Registrate aqui</a>
+                    </p>
+                </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Contraseña</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-              <input type="password" name="contrasena" class="form-control" placeholder="••••••••" required>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-danger w-100 fw-bold py-2">Iniciar Sesión</button>
-        </form>
-      </div>
-      <div class="modal-footer justify-content-center bg-light">
-        <p class="small mb-0">¿No tienes cuenta? <a href="#" class="text-danger fw-bold text-decoration-none" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#registerModal">Regístrate aquí</a></p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Registro -->
-<div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title fw-bold">📝 Crear Cuenta</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body px-4 py-4">
-        <form th:action="@{/api/registro}" method="post">
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Nombre completo</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-              <input type="text" name="nombre" class="form-control" placeholder="Tu nombre completo" required>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Correo Electrónico</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-              <input type="email" name="correo" class="form-control" placeholder="nombre@ejemplo.com" required>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Teléfono</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
-              <input type="tel" name="telefono" class="form-control" placeholder="987 654 321" required>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Dirección</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
-              <input type="text" name="direccion" class="form-control" placeholder="Tu dirección" required>
-            </div>
-          </div>
-          <div class="mb-4">
-            <label class="form-label fw-semibold">Contraseña</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-              <input type="password" name="contrasena" class="form-control" placeholder="••••••••" required>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-danger w-100 fw-bold py-2">Crear cuenta</button>
-        </form>
-      </div>
-      <div class="modal-footer justify-content-center bg-light">
-        <p class="small mb-0">¿Ya tienes cuenta?
-          <a href="#" class="text-danger fw-bold text-decoration-none"
-             data-bs-dismiss="modal"
-             data-bs-toggle="modal"
-             data-bs-target="#loginModal">Inicia sesión aquí</a>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-    <!-- Sidebar Carrito -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
-    <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title" id="offcanvasCartLabel">
-            <i class="fa-solid fa-cart-shopping me-2"></i>Tu Pedido
-        </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div id="cart-items-container" class="offcanvas-body">
-        <div th:if="${cartCount == 0}" class="text-center py-5">
-            <i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
-            <p>Tu carrito está vacío.</p>
         </div>
-        <div th:if="${cartCount > 0}">
-    <ul class="list-group mb-3">
-        <li class="list-group-item d-flex justify-content-between align-items-center" th:each="item : ${cart}">
-            <div class="ms-2 me-auto">
-                <div class="fw-bold" th:text="${item.nombre}">Producto</div>
-                <small th:text="${'Cantidad: ' + item.cantidad}">Cantidad</small>
-                <br>
-                <small class="text-muted" th:text="${'S/. ' + #numbers.formatDecimal(item.total, 1, 2)}">0.00</small>
+    </div>
+
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title fw-bold">Crear Cuenta</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body px-4 py-4">
+                    <form th:action="@{/api/registro}" method="post">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Nombre completo</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                <input type="text" name="nombre" class="form-control" placeholder="Tu nombre completo" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">DNI</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                                <input type="text" name="dni" class="form-control" inputmode="numeric" maxlength="8" pattern="[0-9]{8}" placeholder="12345678" title="Ingresa 8 digitos" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Correo Electronico</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                <input type="email" name="correo" class="form-control" placeholder="nombre@ejemplo.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Telefono</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                                <input type="tel" name="telefono" class="form-control" placeholder="987 654 321" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Direccion</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
+                                <input type="text" name="direccion" class="form-control" placeholder="Tu direccion" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Contrasena</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                <input type="password" name="contrasena" class="form-control" placeholder="********" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-danger w-100 fw-bold py-2">Crear cuenta</button>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center bg-light">
+                    <p class="small mb-0">Ya tienes cuenta?
+                        <a href="#" class="text-danger fw-bold text-decoration-none" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal">Inicia sesion aqui</a>
+                    </p>
+                </div>
             </div>
-            
-            <form th:action="@{/cart/eliminar}" method="post" class="mb-0">
-                <input type="hidden" name="idProducto" th:value="${item.id}" />
-                <button type="submit" class="btn btn-sm btn-outline-danger border-0" title="Eliminar del carrito">
-                    <i class="fa-solid fa-trash-can"></i>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title" id="offcanvasCartLabel">
+                <i class="fa-solid fa-cart-shopping me-2"></i>Tu Pedido
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div id="cart-items-container" class="offcanvas-body">
+            <div th:if="${cartCount == 0}" class="text-center py-5">
+                <i class="fa-solid fa-bag-shopping fa-3x text-muted mb-3"></i>
+                <p>Tu carrito esta vacio.</p>
+            </div>
+            <div th:if="${cartCount > 0}">
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" th:each="item : ${cart}">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold" th:text="${item.nombre}">Producto</div>
+                            <small th:text="${'Cantidad: ' + item.cantidad}">Cantidad</small>
+                            <br>
+                            <small class="text-muted" th:text="${'S/. ' + #numbers.formatDecimal(item.total, 1, 2)}">0.00</small>
+                        </div>
+                        <form th:action="@{/cart/eliminar}" method="post" class="mb-0">
+                            <input type="hidden" name="idProducto" th:value="${item.id}">
+                            <button type="submit" class="btn btn-sm btn-outline-danger border-0" title="Eliminar del carrito">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="offcanvas-footer p-3 border-top">
+            <div class="d-flex justify-content-between mb-3">
+                <strong>Total:</strong>
+                <strong id="cart-total" th:text="${'S/. ' + #numbers.formatDecimal(cartTotal, 1, 2)}">0.00</strong>
+            </div>
+            <form th:action="@{/cart/confirmar}" method="post" class="w-100 m-0 p-0">
+                <button id="confirm-order-button" type="submit" class="btn btn-danger w-100 fw-bold" th:disabled="${cartCount == 0}">
+                    Confirmar Pedido
                 </button>
             </form>
-        </li>
-    </ul>
-</div>
-    </div>
-    <div class="offcanvas-footer p-3 border-top">
-        <div class="d-flex justify-content-between mb-3">
-            <strong>Total:</strong>
-            <strong id="cart-total" th:text="${'S/. ' + #numbers.formatDecimal(cartTotal, 1, 2)}">0.00</strong>
+            <button class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">Seguir Comprando</button>
         </div>
-        <form th:action="@{/cart/confirmar}" method="post" class="w-100 m-0 p-0">
-            <button id="confirm-order-button" type="submit" class="btn btn-danger w-100 fw-bold" th:disabled="${cartCount == 0}">
-                Confirmar Pedido
-            </button>
-        </form>
-        <button class="btn btn-outline-secondary w-100" data-bs-dismiss="offcanvas">Seguir Comprando</button>
     </div>
-</div>
-<script th:src="@{/js/cart-ajax.js}"></script>
+
+    <script th:src="@{/js/cart-ajax.js}"></script>
 </body>
+
 </html>

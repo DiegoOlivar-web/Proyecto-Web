@@ -293,6 +293,31 @@
 </div>
 <div th:if="${loginEstado == 'error'}" class="modal-backdrop fade show"></div>
 
+<!-- Modal Login Bloqueado -->
+<div class="modal fade" id="modalLoginBloqueado" tabindex="-1" aria-hidden="true"
+     th:classappend="${loginEstado == 'bloqueado'} ? 'show' : ''"
+     th:style="${loginEstado == 'bloqueado'} ? 'display:block;' : ''">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-dark">
+        <h5 class="modal-title fw-bold">Cuenta bloqueada</h5>
+        <button type="button" class="btn-close"
+                onclick="document.getElementById('modalLoginBloqueado').style.display='none'; document.querySelector('.modal-backdrop')?.remove();"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <p class="fs-5">Has superado los 3 intentos. Intenta nuevamente en 10 segundos.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-warning fw-bold px-4"
+                onclick="document.getElementById('modalLoginBloqueado').style.display='none'; document.querySelector('.modal-backdrop')?.remove();">
+          Entendido
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:if="${loginEstado == 'bloqueado'}" class="modal-backdrop fade show"></div>
+
 <!-- Modal Registro Exitoso -->
 <div class="modal fade" id="modalRegistroExitoso" tabindex="-1" aria-hidden="true"
      th:classappend="${registroEstado == 'exitoso'} ? 'show' : ''"
@@ -399,7 +424,7 @@
 
 <!-- Modal Registro -->
 <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
         <h5 class="modal-title fw-bold">📝 Crear Cuenta</h5>
@@ -412,6 +437,13 @@
             <div class="input-group">
               <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
               <input type="text" name="nombre" class="form-control" placeholder="Tu nombre completo" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">DNI</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+              <input type="text" name="dni" class="form-control" inputmode="numeric" maxlength="8" pattern="[0-9]{8}" placeholder="12345678" title="Ingresa 8 digitos" required>
             </div>
           </div>
           <div class="mb-3">
@@ -683,5 +715,64 @@
   }
 </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (() => {
+      const statusModalIds = new Set([
+        'modalLoginExitoso',
+        'modalLoginError',
+        'modalLoginBloqueado',
+        'modalRegistroExitoso',
+        'modalRegistroError',
+        'modalLogoutExitoso'
+      ]);
+
+      const clearStatusParams = () => {
+        const url = new URL(window.location.href);
+        const params = ['login', 'registro', 'logout'];
+        const hasStatusParam = params.some((param) => url.searchParams.has(param));
+
+        if (!hasStatusParam) {
+          return;
+        }
+
+        params.forEach((param) => url.searchParams.delete(param));
+        window.history.replaceState({}, document.title, url.pathname + url.search + url.hash);
+      };
+
+      const cleanModalState = () => {
+        document.querySelectorAll('.modal-backdrop').forEach((backdrop) => backdrop.remove());
+        document.body.classList.remove('modal-open');
+        document.body.style.removeProperty('overflow');
+        document.body.style.removeProperty('padding-right');
+        clearStatusParams();
+      };
+
+      document.addEventListener('click', (event) => {
+        const button = event.target.closest('button');
+
+        if (!button) {
+          return;
+        }
+
+        const modal = button.closest('.modal');
+
+        if (!modal || !statusModalIds.has(modal.id)) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+        modal.removeAttribute('aria-modal');
+        modal.removeAttribute('role');
+        cleanModalState();
+      }, true);
+
+      document.addEventListener('hidden.bs.modal', cleanModalState);
+    })();
+  </script>
 </body>
 </html>
