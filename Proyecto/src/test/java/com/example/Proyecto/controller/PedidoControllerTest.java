@@ -23,6 +23,7 @@ import com.example.Proyecto.Entity.PagoEntity;
 import com.example.Proyecto.Entity.PedidoEntity;
 import com.example.Proyecto.Entity.ProductosEntity;
 import com.example.Proyecto.model.CartItem;
+import com.example.Proyecto.model.CheckoutRequest;
 import com.example.Proyecto.repository.ClienteRepository;
 import com.example.Proyecto.repository.ComprobanteRepository;
 import com.example.Proyecto.repository.DetallePedidoRepository;
@@ -30,6 +31,8 @@ import com.example.Proyecto.repository.DireccionRepository;
 import com.example.Proyecto.repository.PagoRepository;
 import com.example.Proyecto.repository.PedidoRepository;
 import com.example.Proyecto.repository.ProductoRepository;
+import com.example.Proyecto.service.CartService;
+import com.example.Proyecto.service.PedidoService;
 
 class PedidoControllerTest {
 
@@ -66,7 +69,7 @@ class PedidoControllerTest {
         when(detallePedidoRepository.save(any(DetallePedidoEntity.class))).thenAnswer(invocation -> invocation.getArgument(0));
         when(pagoRepository.save(any(PagoEntity.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        PedidoController controller = new PedidoController(
+        PedidoService pedidoService = new PedidoService(
                 pedidoRepository,
                 detallePedidoRepository,
                 productoRepository,
@@ -74,24 +77,27 @@ class PedidoControllerTest {
                 clienteRepository,
                 comprobanteRepository,
                 pagoRepository);
+        CartService cartService = new CartService(productoRepository);
+        PedidoController controller = new PedidoController(pedidoService, cartService);
 
-        String respuesta = controller.procesarPedido(
-                "Andres",
-                "Quispe",
-                "12345678",
-                "987654321",
-                "DELIVERY",
-                "Av. Peru 123",
-                "Los Olivos",
-                "Lima",
-                "Puerta roja",
-                "Llamar al llegar",
-                "BOLETA",
-                "",
-                "",
-                "",
-                "YAPE",
-                session);
+        CheckoutRequest request = new CheckoutRequest();
+        request.setNombre("Andres");
+        request.setApellido("Quispe");
+        request.setDni("12345678");
+        request.setTelefono("987654321");
+        request.setTipoEntrega("DELIVERY");
+        request.setDireccion("Av. Peru 123");
+        request.setDistrito("Los Olivos");
+        request.setCiudad("Lima");
+        request.setReferencia("Puerta roja");
+        request.setIndicaciones("Llamar al llegar");
+        request.setTipoComprobante("BOLETA");
+        request.setNumeroDocumento("");
+        request.setRazonSocial("");
+        request.setDireccionFiscal("");
+        request.setMetodoPago("YAPE");
+
+        String respuesta = controller.procesarPedido(request, session);
 
         ArgumentCaptor<DireccionEntity> direccionCaptor = ArgumentCaptor.forClass(DireccionEntity.class);
         ArgumentCaptor<ComprobanteEntity> comprobanteCaptor = ArgumentCaptor.forClass(ComprobanteEntity.class);

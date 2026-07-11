@@ -514,7 +514,7 @@
       <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-danger fw-bold px-4"
-                onclick="addPromoAndRedirect('promoFamiliar')"> Ordenar Ahora</button>
+                onclick="addPromoAndRedirect('13')"> Ordenar Ahora</button>
       </div>
     </div>
   </div>
@@ -544,7 +544,7 @@
       <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-danger fw-bold px-4"
-                onclick="addPromoAndRedirect('comboEspecial')"> Ordenar Ahora</button>
+                onclick="addPromoAndRedirect('', 'combo')"> Ordenar Ahora</button>
       </div>
     </div>
   </div>
@@ -576,7 +576,7 @@
       <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-danger fw-bold px-4"
-                onclick="addPromoAndRedirect('comboPareja')"> Ordenar Ahora</button>
+                onclick="addPromoAndRedirect('14')"> Ordenar Ahora</button>
       </div>
     </div>
   </div>
@@ -607,7 +607,7 @@
       <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-danger fw-bold px-4"
-                onclick="addPromoAndRedirect('comboTORI')"> Ordenar Ahora</button>
+                onclick="addPromoAndRedirect('15')"> Ordenar Ahora</button>
       </div>
     </div>
   </div>
@@ -636,7 +636,7 @@
       <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-danger fw-bold px-4"
-                onclick="addPromoAndRedirect('promoSanguchazo')"> Ordenar Ahora</button>
+                onclick="addPromoAndRedirect('', 'todos')"> Ordenar Ahora</button>
       </div>
     </div>
   </div>
@@ -665,7 +665,7 @@
       <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-danger fw-bold px-4"
-                onclick="addPromoAndRedirect('toriBurger')"> Ordenar Ahora</button>
+                onclick="addPromoAndRedirect('', 'todos')"> Ordenar Ahora</button>
       </div>
     </div>
   </div>
@@ -694,23 +694,40 @@
       <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-danger fw-bold px-4"
-                onclick="addPromoAndRedirect('paraPicar')"> Ordenar Ahora</button>
+                onclick="addPromoAndRedirect('', 'acompanamiento')"> Ordenar Ahora</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  function addPromoAndRedirect(productId) {
+  function addPromoAndRedirect(productId, categoria = 'combo') {
+    const id = String(productId || '').trim();
+    const menuUrl = '/menu?categoria=' + encodeURIComponent(categoria);
+
+    if (!/^\d+$/.test(id)) {
+      window.location.href = menuUrl;
+      return;
+    }
+
     fetch('/cart/add', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: 'id=' + productId + '&categoria=combo&cantidad=1'
-    }).then(() => {
-      // Redirigir al menú después de 2 segundos
-      setTimeout(() => {
-        window.location.href = '/menu';
-      }, 500);
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: new URLSearchParams({
+        id: id,
+        categoria: categoria,
+        cantidad: '1'
+      })
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error('No se pudo agregar la promo.');
+      }
+      window.location.href = '/checkout';
+    }).catch(() => {
+      window.location.href = menuUrl;
     });
   }
 </script>

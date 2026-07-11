@@ -1,7 +1,5 @@
 package com.example.Proyecto.controller;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.Proyecto.Entity.ClienteEntity;
-import com.example.Proyecto.repository.ClienteRepository;
-import com.example.Proyecto.service.PasswordService;
+import com.example.Proyecto.service.PerfilService;
+import com.example.Proyecto.service.PerfilService.PasswordResultado;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PerfilController {
 
-    private final ClienteRepository clienteRepository;
-    private final PasswordService passwordService;
+    private final PerfilService perfilService;
 
     @GetMapping("/perfil")
     public String perfil(HttpSession session, Model model) {
@@ -61,15 +58,16 @@ public class PerfilController {
             return "redirect:/?login=requerido";
         }
 
-        usuario.setNombre(nombre);
-        usuario.setApellido(limpiar(apellido));
-        usuario.setDni(limpiar(dni));
-        usuario.setTelefono(limpiar(telefono));
-        usuario.setDireccion(direccion);
-        usuario.setDistrito(limpiar(distrito));
-        usuario.setReferencia(limpiar(referencia));
+        ClienteEntity actualizado = perfilService.actualizarPerfil(
+                usuario,
+                nombre,
+                apellido,
+                dni,
+                telefono,
+                direccion,
+                distrito,
+                referencia);
 
-        ClienteEntity actualizado = clienteRepository.save(usuario);
         session.setAttribute("usuarioLogueado", actualizado);
         redirectAttributes.addFlashAttribute("perfilExito", "Tus datos fueron actualizados.");
 
@@ -89,22 +87,27 @@ public class PerfilController {
             return "redirect:/?login=requerido";
         }
 
-        if (!passwordService.matches(contrasenaActual, usuario.getContrasena())) {
-            redirectAttributes.addFlashAttribute("perfilError", "La contrasena actual no coincide.");
-            return "redirect:/perfil";
-        }
+        PasswordResultado resultado = perfilService.cambiarPassword(
+                usuario,
+                contrasenaActual,
+                nuevaContrasena,
+                confirmarContrasena);
 
-        if (!nuevaContrasena.equals(confirmarContrasena)) {
-            redirectAttributes.addFlashAttribute("perfilError", "La nueva contrasena y la confirmacion no coinciden.");
-            return "redirect:/perfil";
-        }
-
-        usuario.setContrasena(passwordService.hash(nuevaContrasena));
-        ClienteEntity actualizado = clienteRepository.save(usuario);
-        session.setAttribute("usuarioLogueado", actualizado);
-        redirectAttributes.addFlashAttribute("perfilExito", "Tu contrasena fue actualizada.");
-
-        return "redirect:/perfil";
+        return switch (resultado.estado()) {
+            case ACTUAL_INVALIDA -> {
+                redirectAttributes.addFlashAttribute("perfilError", "La contrasena actual no coincide.");
+                yield "redirect:/perfil";
+            }
+            case CONFIRMACION_INVALIDA -> {
+                redirectAttributes.addFlashAttribute("perfilError", "La nueva contrasena y la confirmacion no coinciden.");
+                yield "redirect:/perfil";
+            }
+            case EXITO -> {
+                session.setAttribute("usuarioLogueado", resultado.cliente());
+                redirectAttributes.addFlashAttribute("perfilExito", "Tu contrasena fue actualizada.");
+                yield "redirect:/perfil";
+            }
+        };
     }
 
     @PostMapping("/perfil/eliminar")
@@ -114,32 +117,18 @@ public class PerfilController {
             return "redirect:/?login=requerido";
         }
 
-        usuario.setActivo(false);
-        clienteRepository.save(usuario);
+        perfilService.desactivarCuenta(usuario);
         session.invalidate();
         return "redirect:/?logout=cuenta_eliminada";
     }
 
     private ClienteEntity obtenerUsuarioActual(HttpSession session) {
         ClienteEntity usuarioSesion = (ClienteEntity) session.getAttribute("usuarioLogueado");
-        if (usuarioSesion == null || usuarioSesion.getId() == null) {
-            return null;
-        }
-
-        Optional<ClienteEntity> usuario = clienteRepository.findById(usuarioSesion.getId());
-        if (usuario.isEmpty() || Boolean.FALSE.equals(usuario.get().getActivo())) {
-            session.removeAttribute("usuarioLogueado");
-            return null;
-        }
-
-        return usuario.get();
-    }
-
-    private String limpiar(String valor) {
-        if (valor == null || valor.trim().isEmpty()) {
-            return null;
-        }
-        return valor.trim();
+        return perfilService.obtenerUsuarioActivo(usuarioSesion)
+                .orElseGet(() -> {
+                    session.removeAttribute("usuarioLogueado");
+                    return null;
+                });
     }
 
     private String valorFormulario(String valor) {

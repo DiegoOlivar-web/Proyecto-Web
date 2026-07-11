@@ -10,6 +10,7 @@ import org.springframework.mock.web.MockHttpSession;
 
 import com.example.Proyecto.Entity.ClienteEntity;
 import com.example.Proyecto.repository.ClienteRepository;
+import com.example.Proyecto.service.AuthService;
 import com.example.Proyecto.service.PasswordService;
 
 class LoginControllerTest {
@@ -32,7 +33,8 @@ class LoginControllerTest {
         when(passwordService.matches("incorrecta", "hash")).thenReturn(false);
         when(clienteRepository.save(usuario)).thenReturn(usuario);
 
-        logincontroller controller = new logincontroller(clienteRepository, passwordService);
+        AuthService authService = new AuthService(clienteRepository, passwordService);
+        logincontroller controller = new logincontroller(authService);
         MockHttpSession session = new MockHttpSession();
 
         assertEquals("redirect:/?login=error", controller.login(intento, session));

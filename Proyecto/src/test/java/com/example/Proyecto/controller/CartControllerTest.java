@@ -13,6 +13,7 @@ import org.springframework.mock.web.MockHttpSession;
 
 import com.example.Proyecto.Entity.ProductosEntity;
 import com.example.Proyecto.repository.ProductoRepository;
+import com.example.Proyecto.service.CartService;
 
 class CartControllerTest {
 
@@ -26,7 +27,8 @@ class CartControllerTest {
         producto.setDisponible(true);
         when(productoRepository.findById(1L)).thenReturn(Optional.of(producto));
 
-        CartController cartController = new CartController(productoRepository);
+        CartService cartService = new CartService(productoRepository);
+        CartController cartController = new CartController(cartService);
         MockHttpSession session = new MockHttpSession();
 
         Map<String, Object> payload = cartController.addToCartAjax("1", 2, session);

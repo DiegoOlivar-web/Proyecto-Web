@@ -13,6 +13,7 @@ import org.springframework.mock.web.MockHttpSession;
 
 import com.example.Proyecto.Entity.ClienteEntity;
 import com.example.Proyecto.repository.ClienteRepository;
+import com.example.Proyecto.service.AuthService;
 import com.example.Proyecto.service.PasswordService;
 
 class RegistroControllerTest {
@@ -34,7 +35,8 @@ class RegistroControllerTest {
         when(passwordService.hash("secreta")).thenReturn("hash");
         when(clienteRepository.save(any(ClienteEntity.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        RegistroController controller = new RegistroController(clienteRepository, passwordService);
+        AuthService authService = new AuthService(clienteRepository, passwordService);
+        RegistroController controller = new RegistroController(authService);
         MockHttpSession session = new MockHttpSession();
 
         String respuesta = controller.registro(cliente, session);
@@ -54,7 +56,8 @@ class RegistroControllerTest {
         cliente.setCorreo("andres@test.com");
         cliente.setDni("123");
 
-        RegistroController controller = new RegistroController(clienteRepository, passwordService);
+        AuthService authService = new AuthService(clienteRepository, passwordService);
+        RegistroController controller = new RegistroController(authService);
 
         String respuesta = controller.registro(cliente, new MockHttpSession());
 

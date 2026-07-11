@@ -75,7 +75,7 @@ public class PasswordService {
             PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, KEY_BITS);
             return SecretKeyFactory.getInstance(ALGORITHM).generateSecret(spec).getEncoded();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
-            throw new IllegalStateException("No se pudo proteger la contrasena.", ex);
+            throw new IllegalStateException("No se pudo proteger la contraseña.", ex);
         }
     }
 
