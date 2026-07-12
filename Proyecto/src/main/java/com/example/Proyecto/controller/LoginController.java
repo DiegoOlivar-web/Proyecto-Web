@@ -11,14 +11,12 @@ import com.example.Proyecto.service.AuthService;
 import com.example.Proyecto.service.AuthService.LoginResultado;
 
 import jakarta.servlet.http.HttpSession;
-
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/api")
-
-public class logincontroller {
+public class LoginController {
 
     private final AuthService authService;
 
@@ -28,6 +26,9 @@ public class logincontroller {
         return switch (resultado.estado()) {
             case EXITO -> {
                 session.setAttribute("usuarioLogueado", resultado.cliente());
+                if (esAdmin(resultado.cliente())) {
+                    yield "redirect:/admin";
+                }
                 yield "redirect:/?login=exitoso";
             }
             case BLOQUEADO -> "redirect:/?login=bloqueado";
@@ -39,5 +40,9 @@ public class logincontroller {
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/?logout=exitoso";
+    }
+
+    private boolean esAdmin(ClienteEntity cliente) {
+        return cliente != null && "ADMIN".equalsIgnoreCase(cliente.getRol());
     }
 }

@@ -21,7 +21,7 @@ public class AuthService {
     private final PasswordService passwordService;
 
     public LoginResultado login(ClienteEntity credenciales) {
-        ClienteEntity existente = clienteRepository.findByCorreo(credenciales.getCorreo());
+        ClienteEntity existente = clienteRepository.findByCorreo(credenciales.getCorreo()).orElse(null);
         String contrasenaIngresada = credenciales.getContrasena();
         LocalDateTime ahora = LocalDateTime.now();
 
@@ -59,7 +59,7 @@ public class AuthService {
             return new RegistroResultado(RegistroEstado.ERROR, null);
         }
 
-        ClienteEntity existente = clienteRepository.findByCorreo(correo);
+        ClienteEntity existente = clienteRepository.findByCorreo(correo).orElse(null);
         if (existente != null) {
             return new RegistroResultado(RegistroEstado.ERROR, null);
         }

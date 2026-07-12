@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | TORI Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body class="admin-page admin-menu-page">
+    <nav class="navbar navbar-dark topbar py-3">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/admin}">
+                <i class="fa-solid fa-drumstick-bite me-2"></i>TORI - ADMINISTRADOR
+            </a>
+            <div class="d-flex gap-2">
+                <a class="btn btn-warning btn-sm fw-bold" th:href="@{/admin}">
+                    <i class="fa-solid fa-clipboard-list me-1"></i> Pedidos
+                </a>
+                <form th:action="@{/api/logout}" method="get" class="d-inline">
+                    <button type="submit" class="btn btn-outline-light btn-sm">
+                        <i class="fa-solid fa-right-from-bracket me-1"></i> Salir
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        <section class="admin-hero mb-4">
+            <p class="admin-kicker mb-2">GESTION DE CARTA</p>
+            <h1>PRODUCTOS Y PROMOCIONES</h1>
+            <p>Cada producto guardado y disponible aparecera automaticamente en el menu de los clientes.</p>
+        </section>
+
+        <section class="admin-form-panel mb-4">
+            <h2><i class="fa-solid fa-circle-plus"></i>Agregar un producto o promocion</h2>
+            <form th:action="@{/admin/menu}" method="post" enctype="multipart/form-data">
+                <div class="admin-form-grid">
+                    <div class="field field-name">
+                        <label class="form-label">Nombre</label>
+                        <input class="form-control" name="nombre" placeholder="Ej.: Promo familiar TORI" required>
+                    </div>
+                    <div class="field">
+                        <label class="form-label">Precio (S/)</label>
+                        <input class="form-control" name="precio" type="number" step="0.01" min="0.01" required>
+                    </div>
+                    <div class="field">
+                        <label class="form-label">Categoria</label>
+                        <select class="form-select" name="categoriaId" required>
+                            <option value="" selected disabled>Seleccionar</option>
+                            <option th:each="categoria : ${categorias}" th:value="${categoria.id}"
+                                    th:text="${categoria.nombre}">Categoria</option>
+                        </select>
+                    </div>
+                    <div class="field admin-photo-field">
+                        <label class="form-label">Foto</label>
+                        <label class="admin-photo-picker">
+                            <input name="imagen" type="file" accept="image/png,image/jpeg,image/webp" required>
+                            <i class="fa-solid fa-plus"></i>
+                        </label>
+                    </div>
+                    <div class="field field-description">
+                        <label class="form-label">Descripcion</label>
+                        <textarea class="form-control" rows="2" name="descripcion"
+                                  placeholder="Incluye, porciones y detalle de la promocion" required></textarea>
+                    </div>
+                    <div class="admin-form-actions">
+                        <div class="form-check">
+                            <input class="form-check-input" name="disponible" value="true" type="checkbox"
+                                   id="disponible" checked>
+                            <label class="form-check-label" for="disponible">Disponible para comprar</label>
+                        </div>
+                        <button class="btn admin-save-btn" type="submit">
+                            <i class="fa-solid fa-floppy-disk"></i> Guardar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <div class="admin-category-tabs mb-3">
+            <button class="active" type="button" data-filter="todos">Todos</button>
+            <button th:each="categoria : ${categorias}" type="button" data-filter=""
+                    th:attr="data-filter=${categoria.nombre}" th:text="${categoria.nombre}">Categoria</button>
+        </div>
+
+        <section class="admin-table-card">
+            <div class="admin-table-title">
+                <h2>Carta actual</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table admin-products-table align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Producto</th>
+                            <th>Categoria</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th class="text-end">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="producto : ${productos}" th:attr="data-category=${producto.categoria.nombre}">
+                            <td>
+                                <img class="admin-product-img"
+                                     th:src="${#strings.isEmpty(producto.imagen) ? '/img/LOGO+2+ROJO.png' : producto.imagen}"
+                                     th:alt="${producto.nombre}">
+                            </td>
+                            <td>
+                                <strong th:text="${producto.nombre}">Producto</strong>
+                                <small th:text="${producto.descripcion}">Descripcion</small>
+                            </td>
+                            <td th:text="${producto.categoria.nombre}">Categoria</td>
+                            <td class="admin-price" th:text="${'S/' + #numbers.formatDecimal(producto.precio,1,2)}">S/0.00</td>
+                            <td>
+                                <span class="admin-status"
+                                      th:classappend="${producto.disponible} ? ' available' : ' unavailable'"
+                                      th:text="${producto.disponible} ? 'Disponible' : 'No disponible'">Disponible</span>
+                            </td>
+                            <td>
+                                <div class="admin-actions">
+                                    <button type="button" class="btn btn-sm admin-icon-btn edit" data-bs-toggle="modal"
+                                            th:attr="data-bs-target=${'#editarProducto' + producto.id}">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    <form th:action="@{/admin/menu/{id}/eliminar(id=${producto.id})}" method="post"
+                                          onsubmit="return confirm('Seguro que deseas eliminar este producto?');">
+                                        <button type="submit" class="btn btn-sm admin-icon-btn delete">
+                                            <i class="fa-regular fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div th:each="producto : ${productos}" class="modal fade admin-edit-modal"
+         th:id="${'editarProducto' + producto.id}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar producto</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Cerrar"></button>
+                </div>
+                <form th:action="@{/admin/menu}" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" name="id" th:value="${producto.id}">
+                        <div class="admin-edit-grid">
+                            <div class="field edit-name">
+                                <label class="form-label">Nombre</label>
+                                <input class="form-control" name="nombre" th:value="${producto.nombre}" required>
+                            </div>
+                            <div class="field">
+                                <label class="form-label">Precio (S/)</label>
+                                <input class="form-control" name="precio" type="number" step="0.01" min="0.01"
+                                       th:value="${producto.precio}" required>
+                            </div>
+                            <div class="field">
+                                <label class="form-label">Categoria</label>
+                                <select class="form-select" name="categoriaId" required>
+                                    <option th:each="categoria : ${categorias}" th:value="${categoria.id}"
+                                            th:selected="${producto.categoria.id == categoria.id}"
+                                            th:text="${categoria.nombre}">Categoria</option>
+                                </select>
+                            </div>
+                            <div class="field edit-description">
+                                <label class="form-label">Descripcion</label>
+                                <textarea class="form-control" rows="3" name="descripcion"
+                                          th:text="${producto.descripcion}" required></textarea>
+                            </div>
+                            <div class="field edit-photo">
+                                <label class="form-label">Foto (dejalo vacio para mantener la actual)</label>
+                                <img class="admin-edit-preview"
+                                     th:src="${#strings.isEmpty(producto.imagen) ? '/img/LOGO+2+ROJO.png' : producto.imagen}"
+                                     th:alt="${producto.nombre}">
+                                <input class="form-control mt-2" name="imagen" type="file"
+                                       accept="image/png,image/jpeg,image/webp">
+                            </div>
+                            <div class="form-check edit-available">
+                                <input class="form-check-input" name="disponible" value="true" type="checkbox"
+                                       th:id="${'editarDisponible' + producto.id}" th:checked="${producto.disponible}">
+                                <label class="form-check-label" th:for="${'editarDisponible' + producto.id}">
+                                    Disponible para comprar (desmarca si se agoto; el producto se conserva)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn admin-save-btn">
+                            <i class="fa-solid fa-floppy-disk"></i> Guardar cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.admin-category-tabs button').forEach((button) => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter;
+                document.querySelectorAll('.admin-category-tabs button').forEach((item) => item.classList.remove('active'));
+                button.classList.add('active');
+                document.querySelectorAll('.admin-products-table tbody tr').forEach((row) => {
+                    row.hidden = filter !== 'todos' && row.dataset.category !== filter;
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

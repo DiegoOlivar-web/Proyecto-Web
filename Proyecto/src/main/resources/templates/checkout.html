@@ -239,6 +239,122 @@
                             </label>
                         </div>
 
+                        <div class="checkout-payment-details">
+                            <div class="payment-detail active" data-payment-detail="YAPE">
+                                <div class="payment-qr-box">
+                                    <div class="payment-qr payment-qr-yape" aria-hidden="true">
+                                        <span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div>
+                                        <span class="payment-mini-label">Pago movil</span>
+                                        <h3>Yape TORI</h3>
+                                        <p>Escanea el codigo o transfiere al numero del local. Luego ingresa tu numero de operacion.</p>
+                                        <strong>987 654 321</strong>
+                                    </div>
+                                </div>
+                                <div class="row g-3 mt-2">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Numero de operacion</label>
+                                        <input type="text" name="referenciaYape" class="form-control" inputmode="numeric" maxlength="12" data-payment-field data-payment-required placeholder="Ej. 845231">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Celular usado</label>
+                                        <input type="tel" name="celularYape" class="form-control" maxlength="9" data-payment-field data-payment-required placeholder="987654321">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payment-detail d-none" data-payment-detail="PLIN">
+                                <div class="payment-qr-box">
+                                    <div class="payment-qr payment-qr-plin" aria-hidden="true">
+                                        <span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div>
+                                        <span class="payment-mini-label">Billetera digital</span>
+                                        <h3>Plin TORI</h3>
+                                        <p>Realiza el pago con Plin y registra la operacion para confirmar tu pedido.</p>
+                                        <strong>987 654 321</strong>
+                                    </div>
+                                </div>
+                                <div class="row g-3 mt-2">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Numero de operacion</label>
+                                        <input type="text" name="referenciaPlin" class="form-control" inputmode="numeric" maxlength="12" data-payment-field data-payment-required placeholder="Ej. 623948">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Titular</label>
+                                        <input type="text" name="titularPlin" class="form-control" data-payment-field data-payment-required placeholder="Nombre del titular">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payment-detail d-none" data-payment-detail="TARJETA">
+                                <div class="payment-card-layout">
+                                    <div class="payment-card-preview">
+                                        <div class="payment-card-top">
+                                            <span>TORI PAY</span>
+                                            <i class="fa-solid fa-wifi"></i>
+                                        </div>
+                                        <div class="payment-card-chip"></div>
+                                        <strong data-card-preview-number>0000 0000 0000 0000</strong>
+                                        <div class="payment-card-bottom">
+                                            <span data-card-preview-name>TITULAR</span>
+                                            <span data-card-preview-expiry>MM/AA</span>
+                                        </div>
+                                    </div>
+                                    <div class="payment-card-form">
+                                        <div class="row g-3">
+                                            <div class="col-12">
+                                                <label class="form-label">Numero de tarjeta</label>
+                                                <input type="text" name="tarjetaNumero" class="form-control" inputmode="numeric" maxlength="19" autocomplete="cc-number" data-payment-field data-payment-required data-card-number placeholder="0000 0000 0000 0000">
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Nombre del titular</label>
+                                                <input type="text" name="tarjetaTitular" class="form-control" autocomplete="cc-name" data-payment-field data-payment-required data-card-name placeholder="Como aparece en la tarjeta">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Vencimiento</label>
+                                                <input type="text" name="tarjetaVencimiento" class="form-control" inputmode="numeric" maxlength="5" autocomplete="cc-exp" data-payment-field data-payment-required data-card-expiry placeholder="MM/AA">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">CVV</label>
+                                                <input type="password" name="tarjetaCvv" class="form-control" inputmode="numeric" maxlength="4" autocomplete="cc-csc" data-payment-field data-payment-required placeholder="***">
+                                            </div>
+                                        </div>
+                                        <div class="payment-safe-note">
+                                            <i class="fa-solid fa-lock"></i>
+                                            Pago simulado para presentacion. No se guardan datos de tarjeta.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payment-detail d-none" data-payment-detail="EFECTIVO">
+                                <div class="payment-cash-box">
+                                    <div>
+                                        <span class="payment-mini-label">Pago contra entrega</span>
+                                        <h3>Efectivo</h3>
+                                        <p>Indica con cuanto pagaras para que el repartidor lleve el vuelto correcto.</p>
+                                    </div>
+                                    <i class="fa-solid fa-money-bill-wave"></i>
+                                </div>
+                                <div class="row g-3 mt-2">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Pagare con</label>
+                                        <input type="number" name="montoEfectivo" class="form-control" min="0" step="0.10" data-payment-field data-payment-required data-cash-amount placeholder="0.00">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Vuelto estimado</label>
+                                        <input type="text" class="form-control" data-cash-change value="S/. 0.00" readonly>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Nota para el repartidor</label>
+                                        <textarea name="notaEfectivo" class="form-control" rows="2" data-payment-field placeholder="Ej. pagaré con billete de 50."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="checkout-actions">
                             <button type="button" class="checkout-btn checkout-btn-light" data-prev-step="2">
                                 <i class="fa-solid fa-arrow-left"></i>
@@ -287,88 +403,6 @@
         </div>
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const stepPanels = Array.from(document.querySelectorAll('[data-checkout-step]'));
-            const indicators = Array.from(document.querySelectorAll('[data-step-indicator]'));
-            const deliveryFields = document.querySelector('[data-delivery-fields]');
-            const pickupBox = document.querySelector('[data-pickup-box]');
-            const facturaFields = document.querySelector('[data-factura-fields]');
-            const tipoComprobante = document.getElementById('tipoComprobante');
-
-            const showStep = (step) => {
-                stepPanels.forEach((panel) => {
-                    panel.classList.toggle('d-none', panel.dataset.checkoutStep !== String(step));
-                });
-                indicators.forEach((indicator) => {
-                    const value = Number(indicator.dataset.stepIndicator);
-                    indicator.classList.toggle('active', value === step);
-                    indicator.classList.toggle('complete', value < step);
-                });
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            };
-
-            const validateVisibleStep = () => {
-                const activePanel = stepPanels.find((panel) => !panel.classList.contains('d-none'));
-                const fields = activePanel ? Array.from(activePanel.querySelectorAll('input, select, textarea')) : [];
-                const invalid = fields.find((field) => !field.checkValidity());
-                if (invalid) {
-                    invalid.reportValidity();
-                    return false;
-                }
-                return true;
-            };
-
-            document.querySelectorAll('[data-next-step]').forEach((button) => {
-                button.addEventListener('click', () => {
-                    if (validateVisibleStep()) {
-                        showStep(Number(button.dataset.nextStep));
-                    }
-                });
-            });
-
-            document.querySelectorAll('[data-prev-step]').forEach((button) => {
-                button.addEventListener('click', () => showStep(Number(button.dataset.prevStep)));
-            });
-
-            const updateEntrega = () => {
-                const tipo = document.querySelector('input[name="tipoEntrega"]:checked')?.value || 'DELIVERY';
-                const isDelivery = tipo === 'DELIVERY';
-                deliveryFields?.classList.toggle('d-none', !isDelivery);
-                pickupBox?.classList.toggle('d-none', isDelivery);
-                document.querySelectorAll('[data-delivery-field]').forEach((field) => {
-                    field.required = isDelivery;
-                });
-                document.querySelectorAll('.checkout-option').forEach((option) => {
-                    const input = option.querySelector('input');
-                    option.classList.toggle('active', input && input.checked);
-                });
-            };
-
-            const updateComprobante = () => {
-                const isFactura = tipoComprobante?.value === 'FACTURA';
-                facturaFields?.classList.toggle('d-none', !isFactura);
-                document.querySelectorAll('[data-factura-field]').forEach((field) => {
-                    field.required = isFactura;
-                });
-            };
-
-            document.querySelectorAll('input[name="tipoEntrega"]').forEach((input) => {
-                input.addEventListener('change', updateEntrega);
-            });
-            document.querySelectorAll('input[name="metodoPago"]').forEach((input) => {
-                input.addEventListener('change', () => {
-                    document.querySelectorAll('.checkout-payment').forEach((option) => {
-                        const optionInput = option.querySelector('input');
-                        option.classList.toggle('active', optionInput && optionInput.checked);
-                    });
-                });
-            });
-            tipoComprobante?.addEventListener('change', updateComprobante);
-
-            updateEntrega();
-            updateComprobante();
-        });
-    </script>
+    <script th:src="@{/js/checkout.js}"></script>
 </body>
 </html>

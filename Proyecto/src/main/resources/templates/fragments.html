@@ -52,6 +52,9 @@
                 <a class="dropdown-item user-session-profile" th:href="@{/perfil}">
                   <i class="fa-solid fa-id-card"></i> Mi perfil
                 </a>
+                <a class="dropdown-item user-session-profile" th:if="${#strings.equalsIgnoreCase(session.usuarioLogueado.rol, 'ADMIN')}" th:href="@{/admin}">
+                  <i class="fa-solid fa-screwdriver-wrench"></i> Panel admin
+                </a>
                 <a class="dropdown-item user-session-action" th:href="@{/api/logout}">
                   <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
                 </a>
