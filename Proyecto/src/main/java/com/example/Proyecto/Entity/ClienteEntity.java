@@ -2,10 +2,16 @@ package com.example.Proyecto.Entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
 @Entity
 @Table(name = "cliente")
@@ -17,30 +23,12 @@ public class ClienteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String nombre;
-
-    private String apellido;
-
-    private String dni;
-
-    private String telefono;
-
-    private String correo;
-
-    private String contrasena;
-
-    private String direccion;
-
-    private String distrito;
-
-    private String referencia;
-
+    private String nombre, apellido, dni, telefono, correo, contrasena, direccion, distrito, referencia;
     private Boolean activo;
-
+    @Column(name = "rol")
+    private String rol;
     @Column(name = "intentos_fallidos")
     private Integer intentosFallidos;
-
     @Column(name = "bloqueado_hasta")
     private LocalDateTime bloqueadoHasta;
 
@@ -48,9 +36,12 @@ public class ClienteEntity {
     public void prePersist() {
         if (activo == null) {
             activo = true;
-        }
-        if (intentosFallidos == null) {
+        
+        }if (rol == null || rol.isBlank()) {
+            rol = "CLIENTE";
+        
+        }if (intentosFallidos == null) {
             intentosFallidos = 0;
-        }
-    }
+    
+        }}
 }

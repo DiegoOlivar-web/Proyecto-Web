@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos | TORI Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+</head>
+
+<body class="admin-page">
+    <nav class="navbar navbar-dark topbar py-3">
+        <div class="container"><a class="navbar-brand brand" th:href="@{/admin}"><i
+                    class="fa-solid fa-drumstick-bite me-2"></i>TORI · ADMINISTRADOR</a>
+            <div class="d-flex gap-2">
+                <a class="btn btn-admin-nav btn-sm fw-bold" th:href="@{/admin/menu}">
+                    <i class="fa-solid fa-utensils me-1"></i> Menú y promociones
+                </a>
+
+                <form th:action="@{/api/logout}" method="post" class="d-inline">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <button type="submit" class="btn btn-outline-light btn-sm">
+                        <i class="fa-solid fa-right-from-bracket me-1"></i> Salir
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <main class="container py-4">
+        <section class="hero mb-4 d-flex flex-wrap justify-content-between align-items-center gap-3">
+            <div>
+                <p class="text-danger fw-bold mb-1">PANEL DE CONTROL</p>
+                <h1 class="h2 fw-bold mb-1">PEDIDOS RECIBIDOS</h1>
+                <p class="text-muted mb-0">Aquí llegan automáticamente los pedidos confirmados por los clientes.</p>
+            </div>
+            <div class="d-flex gap-2">
+                <div class="stat stat-pending"><strong class="d-block fs-4"
+                        th:text="${pendientes}">0</strong><small>PENDIENTES</small></div>
+                <div class="stat stat-done"><strong class="d-block fs-4"
+                        th:text="${entregados}">0</strong><small>ENTREGADOS</small></div>
+            </div>
+        </section>
+        <article class="card order mb-3" th:each="pedido : ${pedidos}">
+            <header class="order-head card-header py-3 d-flex justify-content-between align-items-center">
+                <div><span class="text-muted small">PEDIDO</span> <strong th:text="${'#' + pedido.id}">#1</strong><span
+                        class="text-muted small ms-3"
+                        th:text="${#temporals.format(pedido.fechaPedido, 'dd/MM/yyyy HH:mm')}"></span></div><span
+                    class="badge rounded-pill px-3 py-2"
+                    th:classappend="${pedido.estado == 'ENTREGADO'} ? ' text-bg-success' : ' text-bg-warning'"
+                    th:text="${pedido.estado}">PENDIENTE</span>
+            </header>
+            <div class="card-body">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <p class="label mb-1">CLIENTE</p>
+                        <h5 th:text="${pedido.cliente.nombre + ' ' + pedido.cliente.apellido}">Cliente</h5>
+                        <p class="mb-0"><i class="fa-solid fa-phone text-danger me-2"></i><span
+                                th:text="${pedido.cliente.telefono}">Teléfono</span></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="label mb-1">ENTREGA</p>
+                        <p class="fw-semibold mb-1"
+                            th:text="${pedido.direccion != null ? pedido.direccion.direccion : 'Recojo en tienda'}">
+                            Dirección</p>
+                        <p class="small text-muted mb-0"
+                            th:text="${pedido.direccion != null ? pedido.direccion.referencia : ''}"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="label mb-1">PRODUCTOS</p>
+                        <div class="detail" th:each="detalle : ${detallesPorPedido[pedido.id]}"><span
+                                th:text="${detalle.cantidad + ' × ' + detalle.producto.nombre}">1 × Producto</span><span
+                                class="float-end" th:text="${'S/' + detalle.precioUnitario}">S/0.00</span></div>
+                        <p class="total text-end mt-2 mb-0"
+                            th:text="${'TOTAL: S/' + #numbers.formatDecimal(pedido.total,1,2)}">TOTAL: S/0.00</p>
+                    </div>
+                </div>
+
+                <div class="border-top mt-3 pt-3 d-flex gap-2 flex-wrap">
+                    <form th:action="@{/admin/pedidos/{id}/estado(id=${pedido.id})}" method="post" class="d-inline">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                        <button class="btn btn-success btn-sm" name="estado" value="ENTREGADO"
+                            th:if="${pedido.estado != 'ENTREGADO'}">
+                            <i class="fa-solid fa-check me-1"></i> Marcar como entregado</button>
+                        <button class="btn btn-outline-secondary btn-sm" name="estado" value="PENDIENTE"
+                            th:if="${pedido.estado == 'ENTREGADO'}">
+                            <i class="fa-solid fa-rotate-left me-1"></i> Regresar a pendiente</button>
+                    </form>
+                    <form th:action="@{/admin/pedidos/{id}/eliminar(id=${pedido.id})}" method="post" class="d-inline"
+                        th:if="${pedido.estado == 'ENTREGADO'}"
+                        onsubmit="return confirm('¿Eliminar este pedido de la lista? El historial se conserva en la base de datos.');">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                        <button class="btn btn-outline-danger btn-sm" type="submit"><i
+                                class="fa-solid fa-trash-can me-1"></i> Eliminar de la lista</button>
+                    </form>
+                </div>
+
+            </div>
+        </article>
+        <section th:if="${#lists.isEmpty(pedidos)}" class="hero text-center py-5 empty"><i
+                class="fa-regular fa-clipboard fa-3x mb-3"></i>
+            <p class="mb-0">Todavía no hay pedidos confirmados.</p>
+        </section>
+    </main>
+</body>
+
+</html>

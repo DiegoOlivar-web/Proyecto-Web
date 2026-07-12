@@ -34,4 +34,6 @@ public class PedidoEntity {
     private LocalDateTime fecha;
 
     private String usuario;
+
+    private Boolean archivado = false;
 }
