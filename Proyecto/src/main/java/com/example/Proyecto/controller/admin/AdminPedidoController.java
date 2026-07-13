@@ -40,4 +40,13 @@ public class AdminPedidoController {
         adminPedidoService.cambiarEstado(id, estado);
         return "redirect:/admin";
     }
+
+    @PostMapping("/pedidos/{id}/eliminar")
+    public String eliminarPedido(@PathVariable Long id, HttpSession session) {
+        if (!adminAuthService.esAdmin(session)) return "redirect:/?login=requerido";
+
+        adminPedidoService.eliminarPedido(id);
+        return "redirect:/admin";
+    }
+
 }

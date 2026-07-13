@@ -15,7 +15,7 @@ public interface ProductoRepository
         FROM ProductosEntity p
         LEFT JOIN FETCH p.categoria
         WHERE p.disponible = true OR p.disponible IS NULL
-        ORDER BY p.id
+        ORDER BY p.id DESC
     """)
     List<ProductosEntity> findDisponiblesConCategoria();
 
@@ -23,7 +23,7 @@ public interface ProductoRepository
         SELECT p
         FROM ProductosEntity p
         LEFT JOIN FETCH p.categoria
-        ORDER BY p.id
+        ORDER BY p.id DESC
     """)
     List<ProductosEntity> findAllConCategoria();
 }

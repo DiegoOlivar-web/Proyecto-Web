@@ -76,12 +76,21 @@
                             th:text="${'TOTAL: S/' + #numbers.formatDecimal(pedido.total,1,2)}">TOTAL: S/0.00</p>
                     </div>
                 </div>
-                <form class="border-top mt-3 pt-3" th:action="@{/admin/pedidos/{id}/estado(id=${pedido.id})}"
-                    method="post"><button class="btn btn-success btn-sm" name="estado" value="ENTREGADO"
-                        th:if="${pedido.estado != 'ENTREGADO'}"><i class="fa-solid fa-check me-1"></i> Marcar como
-                        entregado</button><button class="btn btn-outline-secondary btn-sm" name="estado"
-                        value="PENDIENTE" th:if="${pedido.estado == 'ENTREGADO'}"><i
-                            class="fa-solid fa-rotate-left me-1"></i> Regresar a pendiente</button></form>
+                <div class="border-top mt-3 pt-3 d-flex gap-2 flex-wrap">
+                    <form th:action="@{/admin/pedidos/{id}/estado(id=${pedido.id})}" method="post" class="d-inline">
+                        <button class="btn btn-success btn-sm" name="estado" value="ENTREGADO"
+                            th:if="${pedido.estado != 'ENTREGADO'}"><i class="fa-solid fa-check me-1"></i> Marcar como
+                            entregado</button><button class="btn btn-outline-secondary btn-sm" name="estado"
+                            value="PENDIENTE" th:if="${pedido.estado == 'ENTREGADO'}"><i
+                                class="fa-solid fa-rotate-left me-1"></i> Regresar a pendiente</button>
+                    </form>
+                    <form th:action="@{/admin/pedidos/{id}/eliminar(id=${pedido.id})}" method="post" class="d-inline"
+                        th:if="${pedido.estado == 'ENTREGADO'}"
+                        onsubmit="return confirm('¿Eliminar este pedido de la lista? El historial se conserva en la base de datos.');">
+                        <button class="btn btn-outline-danger btn-sm" type="submit"><i
+                                class="fa-solid fa-trash-can me-1"></i> Eliminar de la lista</button>
+                    </form>
+                </div>
             </div>
         </article>
         <section th:if="${#lists.isEmpty(pedidos)}" class="hero text-center py-5 empty"><i

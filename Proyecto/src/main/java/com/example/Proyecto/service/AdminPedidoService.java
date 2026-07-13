@@ -43,6 +43,13 @@ public class AdminPedidoService {
         });
     }
 
+    public void eliminarPedido(Long id) {
+        pedidoRepository.findById(id).ifPresent(pedido -> {
+            pedido.setArchivado(true);
+            pedidoRepository.save(pedido);
+        });
+    }
+
     public record ResumenPedidos(
             List<PedidoEntity> pedidos,
             Map<Long, List<DetallePedidoEntity>> detallesPorPedido,

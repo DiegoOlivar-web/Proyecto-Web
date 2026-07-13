@@ -53,25 +53,28 @@
                         <select class="form-select" name="categoriaId" required>
                             <option value="" selected disabled>Seleccionar</option>
                             <option th:each="categoria : ${categorias}" th:value="${categoria.id}"
-                                    th:text="${categoria.nombre}">Categoria</option>
+                                th:text="${categoria.nombre}">Categoria</option>
                         </select>
                     </div>
                     <div class="field admin-photo-field">
                         <label class="form-label">Foto</label>
-                        <label class="admin-photo-picker">
-                            <input name="imagen" type="file" accept="image/png,image/jpeg,image/webp" required>
-                            <i class="fa-solid fa-plus"></i>
+                        <label class="admin-photo-picker" id="nuevoImagenBox">
+                            <input name="imagen" type="file" accept="image/png,image/jpeg,image/webp" required
+                                id="nuevoImagenInput">
+                            <img id="nuevoImagenPreview" src="" alt=""
+                                style="display:none; width:100%; height:100%; object-fit:contain;">
+                            <i class="fa-solid fa-plus" id="nuevoImagenPlus"></i>
                         </label>
                     </div>
                     <div class="field field-description">
                         <label class="form-label">Descripcion</label>
                         <textarea class="form-control" rows="2" name="descripcion"
-                                  placeholder="Incluye, porciones y detalle de la promocion" required></textarea>
+                            placeholder="Incluye, porciones y detalle de la promocion" required></textarea>
                     </div>
                     <div class="admin-form-actions">
                         <div class="form-check">
                             <input class="form-check-input" name="disponible" value="true" type="checkbox"
-                                   id="disponible" checked>
+                                id="disponible" checked>
                             <label class="form-check-label" for="disponible">Disponible para comprar</label>
                         </div>
                         <button class="btn admin-save-btn" type="submit">
@@ -85,7 +88,7 @@
         <div class="admin-category-tabs mb-3">
             <button class="active" type="button" data-filter="todos">Todos</button>
             <button th:each="categoria : ${categorias}" type="button" data-filter=""
-                    th:attr="data-filter=${categoria.nombre}" th:text="${categoria.nombre}">Categoria</button>
+                th:attr="data-filter=${categoria.nombre}" th:text="${categoria.nombre}">Categoria</button>
         </div>
 
         <section class="admin-table-card">
@@ -105,31 +108,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="producto : ${productos}" th:attr="data-category=${producto.categoria.nombre}">
+                        <tr th:each="producto : ${productos}"
+                            th:attr="data-category=${producto.categoria != null ? producto.categoria.nombre : 'Sin categoría'}">
                             <td>
                                 <img class="admin-product-img"
-                                     th:src="${#strings.isEmpty(producto.imagen) ? '/img/LOGO+2+ROJO.png' : producto.imagen}"
-                                     th:alt="${producto.nombre}">
+                                    th:src="${#strings.isEmpty(producto.imagen) ? '/img/LOGO+2+ROJO.png' : producto.imagen}"
+                                    th:alt="${producto.nombre}">
                             </td>
                             <td>
                                 <strong th:text="${producto.nombre}">Producto</strong>
                                 <small th:text="${producto.descripcion}">Descripcion</small>
                             </td>
-                            <td th:text="${producto.categoria.nombre}">Categoria</td>
-                            <td class="admin-price" th:text="${'S/' + #numbers.formatDecimal(producto.precio,1,2)}">S/0.00</td>
+                            <td th:text="${producto.categoria != null ? producto.categoria.nombre : 'Sin categoría'}">
+                                Categoria</td>
+                            <td class="admin-price" th:text="${'S/' + #numbers.formatDecimal(producto.precio,1,2)}">
+                                S/0.00</td>
                             <td>
                                 <span class="admin-status"
-                                      th:classappend="${producto.disponible} ? ' available' : ' unavailable'"
-                                      th:text="${producto.disponible} ? 'Disponible' : 'No disponible'">Disponible</span>
+                                    th:classappend="${producto.disponible} ? ' available' : ' unavailable'"
+                                    th:text="${producto.disponible} ? 'Disponible' : 'No disponible'">Disponible</span>
                             </td>
                             <td>
                                 <div class="admin-actions">
                                     <button type="button" class="btn btn-sm admin-icon-btn edit" data-bs-toggle="modal"
-                                            th:attr="data-bs-target=${'#editarProducto' + producto.id}">
+                                        th:attr="data-bs-target=${'#editarProducto' + producto.id}">
                                         <i class="fa-solid fa-pen"></i>
                                     </button>
                                     <form th:action="@{/admin/menu/{id}/eliminar(id=${producto.id})}" method="post"
-                                          onsubmit="return confirm('Seguro que deseas eliminar este producto?');">
+                                        onsubmit="return confirm('Seguro que deseas eliminar este producto?');">
                                         <button type="submit" class="btn btn-sm admin-icon-btn delete">
                                             <i class="fa-regular fa-trash-can"></i>
                                         </button>
@@ -143,14 +149,14 @@
         </section>
     </main>
 
-    <div th:each="producto : ${productos}" class="modal fade admin-edit-modal"
-         th:id="${'editarProducto' + producto.id}" tabindex="-1" aria-hidden="true">
+    <div th:each="producto : ${productos}" class="modal fade admin-edit-modal" th:id="${'editarProducto' + producto.id}"
+        tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Editar producto</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Cerrar"></button>
+                        aria-label="Cerrar"></button>
                 </div>
                 <form th:action="@{/admin/menu}" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
@@ -163,32 +169,34 @@
                             <div class="field">
                                 <label class="form-label">Precio (S/)</label>
                                 <input class="form-control" name="precio" type="number" step="0.01" min="0.01"
-                                       th:value="${producto.precio}" required>
+                                    th:value="${producto.precio}" required>
                             </div>
                             <div class="field">
                                 <label class="form-label">Categoria</label>
                                 <select class="form-select" name="categoriaId" required>
                                     <option th:each="categoria : ${categorias}" th:value="${categoria.id}"
-                                            th:selected="${producto.categoria.id == categoria.id}"
-                                            th:text="${categoria.nombre}">Categoria</option>
+                                        th:selected="${producto.categoria != null and producto.categoria.id == categoria.id}"
+                                        th:text="${categoria.nombre}">Categoria</option>
                                 </select>
                             </div>
                             <div class="field edit-description">
                                 <label class="form-label">Descripcion</label>
                                 <textarea class="form-control" rows="3" name="descripcion"
-                                          th:text="${producto.descripcion}" required></textarea>
+                                    th:text="${producto.descripcion}" required></textarea>
                             </div>
                             <div class="field edit-photo">
-                                <label class="form-label">Foto (dejalo vacio para mantener la actual)</label>
-                                <img class="admin-edit-preview"
-                                     th:src="${#strings.isEmpty(producto.imagen) ? '/img/LOGO+2+ROJO.png' : producto.imagen}"
-                                     th:alt="${producto.nombre}">
-                                <input class="form-control mt-2" name="imagen" type="file"
-                                       accept="image/png,image/jpeg,image/webp">
+                                <label class="admin-photo-picker" th:id="${'editarFotoBox' + producto.id}">
+                                    <input name="imagen" type="file" accept="image/png,image/jpeg,image/webp"
+                                        th:id="${'editarImagenInput' + producto.id}">
+                                    <img th:id="${'editarImagenPreview' + producto.id}"
+                                        th:src="${#strings.isEmpty(producto.imagen) ? '/img/LOGO+2+ROJO.png' : producto.imagen}"
+                                        th:alt="${producto.nombre}">
+                                    <span class="photo-badge"><i class="fa-solid fa-plus"></i></span>
+                                </label>
                             </div>
                             <div class="form-check edit-available">
                                 <input class="form-check-input" name="disponible" value="true" type="checkbox"
-                                       th:id="${'editarDisponible' + producto.id}" th:checked="${producto.disponible}">
+                                    th:id="${'editarDisponible' + producto.id}" th:checked="${producto.disponible}">
                                 <label class="form-check-label" th:for="${'editarDisponible' + producto.id}">
                                     Disponible para comprar (desmarca si se agoto; el producto se conserva)
                                 </label>
@@ -196,7 +204,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-outline-secondary"
+                            data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn admin-save-btn">
                             <i class="fa-solid fa-floppy-disk"></i> Guardar cambios
                         </button>
@@ -216,6 +225,22 @@
                 document.querySelectorAll('.admin-products-table tbody tr').forEach((row) => {
                     row.hidden = filter !== 'todos' && row.dataset.category !== filter;
                 });
+            });
+        });
+
+        document.getElementById('nuevoImagenInput').addEventListener('change', function (e) {
+    if (e.target.files && e.target.files[0]) {
+        document.getElementById('nuevoImagenPreview').src = URL.createObjectURL(e.target.files[0]);
+        document.getElementById('nuevoImagenPreview').style.display = 'block';
+        document.getElementById('nuevoImagenPlus').style.display = 'none';
+    }
+});
+document.querySelectorAll('.admin-edit-modal input[type="file"]').forEach((input) => {
+            input.addEventListener('change', function (e) {
+                if (e.target.files && e.target.files[0]) {
+                    const preview = input.closest('.admin-photo-picker').querySelector('img');
+                    preview.src = URL.createObjectURL(e.target.files[0]);
+                }
             });
         });
     </script>

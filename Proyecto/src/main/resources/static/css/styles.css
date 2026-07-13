@@ -569,16 +569,6 @@ h2, h3, h4 {
   display: block;
   transition: transform 0.35s;
 }
-.producto-card .card-img-wrap.menu-db-image {
-  background: linear-gradient(135deg, #fff2ba, #fff 60%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.producto-card .card-img-wrap.menu-db-image img {
-  object-fit: contain;
-  padding: 1.25rem;
-}
 .producto-card:hover .card-img-wrap img {
   transform: scale(1.07);
 }
@@ -1462,7 +1452,82 @@ footer hr {
   color: #1d1f24;
 }
 .admin-page .topbar {
-  background: #8f0d25;
+  background: #ffea2d;
+}
+.admin-page .topbar,
+.admin-page .topbar .navbar-brand,
+.admin-page .topbar a,
+.admin-page .topbar .btn-outline-light {
+  color: #000 !important;
+  font-weight: 700 !important;
+}
+.admin-page .topbar .btn-outline-light {
+  border-color: #000;
+}
+.admin-page .btn-warning {
+  background: #ffc107;
+  border-color: #ffc107;
+  color: #000;
+}
+.admin-page .btn-warning:hover {
+  background: #e0a800;
+  border-color: #e0a800;
+  color: #000;
+}
+.admin-page .hero {
+  background: #fff;
+  border: 1px solid #e0e4e8;
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  box-shadow: 0 10px 26px rgba(33, 37, 41, 0.07);
+}
+.admin-page .hero.empty {
+  color: #7b8794;
+}
+.admin-page .stat {
+  min-width: 122px;
+  border-radius: 14px;
+  padding: 0.7rem 1.1rem;
+  text-align: center;
+}
+.admin-page .stat-pending {
+  background: #f6ddc4;
+  color: #7a3b1d;
+}
+.admin-page .stat-done {
+  background: #dcf5e3;
+  color: #1f7a3d;
+}
+.admin-page .stat small {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.admin-page .order {
+  border: 0;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(33, 37, 41, 0.08);
+  overflow: hidden;
+}
+.admin-page .order-head {
+  background: #fbf4ee;
+  border-bottom: 1px solid #f0e2d6;
+}
+.admin-page .label {
+  font-size: 0.7rem;
+  color: #8b6655;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.admin-page .detail {
+  border-left: 3px solid #e6b800;
+  padding-left: 10px;
+  margin: 7px 0;
+}
+.admin-page .total {
+  color: #8f0d25;
+  font-weight: 800;
+  font-size: 1.15rem;
 }
 .admin-menu-page main {
   max-width: 1220px;
@@ -1546,6 +1611,8 @@ footer hr {
   border-radius: 8px;
   color: #8f6870;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 .admin-photo-picker input {
   display: none;
@@ -1553,12 +1620,31 @@ footer hr {
 .admin-photo-picker i {
   font-size: 1.55rem;
 }
+.admin-photo-picker img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.admin-photo-picker .photo-badge {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #8f0d25;
+  color: #fff;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
 .admin-form-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  grid-column: 4;
+  grid-column: 1 / -1;
 }
 .admin-save-btn {
   display: inline-flex;
@@ -1706,6 +1792,11 @@ footer hr {
 .admin-edit-grid .edit-photo {
   grid-column: 3;
   grid-row: 2 / span 2;
+}
+.admin-edit-grid .admin-photo-picker {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
 }
 .admin-edit-grid .edit-available {
   grid-column: 1 / span 2;
